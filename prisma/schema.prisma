@@ -1,0 +1,89 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider             = "prisma-client-py"
+  interface            = "sync"
+  recursive_type_depth = 5
+  output               = "./generated"
+}
+
+model Game {
+  id                      Int     @id     @relation(fields: [gameId], references: [id])
+  name                    String  
+  required_age            Int     @default(0)
+  is_free                 Boolean @default(false)
+  detailed_description    String  
+  about_the_game          String
+  short_description       String
+  supported_languages     String
+  header_image            String
+  developers              String
+  publishers              String
+  windows                 Boolean
+  mac                     Boolean
+  linux                   Boolean
+  metacritic              Int
+  release_date?           DateTime
+  coming_soon             Boolean
+  positive                Int
+  negative                Int
+  owners_min              Int
+  owners_max              Int
+  average_2weeks          Int
+  average_forever         Int
+
+}
+
+model Category {
+  id                      Int     @id     @relation(fields: [categoryId], reference: [id])
+  name                    String
+}
+
+model Game-Category {
+  gameId                  Int
+  categoryId              Int
+  @@id([gameId, categoryId])
+}
+
+model Genre {
+  id                      Int             @relation(fields: [genreId], references: [id])
+  name                    String
+}
+
+model Game-Genre {
+  gameId                  Int
+  genreId                 Int
+  @@id([gameId, genreId])
+}
+
+model Developer {
+  name                    String  @id     @relation(fields: [developer], references: [name])
+  amount_games_published  Int
+}
+
+
+
+model ExampleItem {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+}
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  views     Int     @default(0)
+  published Boolean @default(false)
+  author    User?   @relation(fields: [author_id], references: [id])
+  author_id Int?
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
