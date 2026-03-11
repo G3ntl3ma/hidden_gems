@@ -3,7 +3,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 from typing import Iterator
 
-from prisma import Prisma
+from prisma.generated import Prisma
 
 
 def get_db() -> Prisma:

@@ -11,10 +11,10 @@ generator client {
 }
 
 model Game {
-  id                   Int     @id
+  id                   Int       @id
   name                 String
-  required_age         Int     @default(0)
-  is_free              Boolean @default(false)
+  required_age         Int       @default(0)
+  is_free              Boolean   @default(false)
   detailed_description String
   about_the_game       String
   short_description    String
@@ -22,12 +22,12 @@ model Game {
   header_image         String
   developers           String
   publishers           String
-  windows              Boolean @default(false)
-  mac                  Boolean @default(false)
-  linux                Boolean @default(false)
+  windows              Boolean   @default(false)
+  mac                  Boolean   @default(false)
+  linux                Boolean   @default(false)
   metacritic           Int?
   release_date         DateTime?
-  coming_soon          Boolean @default(false)
+  coming_soon          Boolean   @default(false)
   owners_min           Int
   owners_max           Int
   average_2weeks       Int
@@ -74,7 +74,7 @@ model Genre {
 }
 
 model GameGenre {
-  gameId Int
+  gameId  Int
   genreId Int
 
   game  Game  @relation(fields: [gameId], references: [id])
