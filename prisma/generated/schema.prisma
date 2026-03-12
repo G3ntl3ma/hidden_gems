@@ -15,23 +15,23 @@ model Game {
   name                 String
   required_age         Int       @default(0)
   is_free              Boolean   @default(false)
-  detailed_description String
-  about_the_game       String
-  short_description    String
-  supported_languages  String
-  header_image         String
-  developers           String
-  publishers           String
+  detailed_description String?
+  about_the_game       String?
+  short_description    String?
+  supported_languages  String?
+  header_image         String?
+  developers           String?
+  publishers           String?
   windows              Boolean   @default(false)
   mac                  Boolean   @default(false)
   linux                Boolean   @default(false)
   metacritic           Int?
   release_date         DateTime?
   coming_soon          Boolean   @default(false)
-  owners_min           Int
-  owners_max           Int
-  average_2weeks       Int
-  average_forever      Int
+  owners_min           Int       @default(0)
+  owners_max           Int       @default(0)
+  average_2weeks       Int       @default(0)
+  average_forever      Int       @default(0)
 
   // Aggregate review summary (optional, from query_summary)
   reviewNumReviews    Int?
@@ -85,14 +85,14 @@ model GameGenre {
 
 model Developer {
   name                   String @id
-  amount_games_published Int
+  amount_games_published Int    @default(0)
 
   games GameDeveloper[]
 }
 
 model Publisher {
   name                   String @id
-  amount_games_published Int
+  amount_games_published Int    @default(0)
 
   games GamePublisher[]
 }
@@ -118,19 +118,19 @@ model GamePublisher {
 }
 
 model Review {
-  id                       String   @id
+  id                       String    @id
   gameId                   Int
-  authorSteamId            String
-  authorPlaytimeForever    Int
-  authorPlaytimeAtReview   Int
-  authorLastPlayed         DateTime
-  language                 String
-  review                   String
-  votedUp                  Boolean
-  votesUp                  Int
-  votesFunny               Int
-  weightedVoteScore        Float
-  writtenDuringEarlyAccess Boolean
+  authorSteamId            String?
+  authorPlaytimeForever    Int       @default(0)
+  authorPlaytimeAtReview   Int       @default(0)
+  authorLastPlayed         DateTime?
+  language                 String?
+  review                   String?
+  votedUp                  Boolean   @default(false)
+  votesUp                  Int       @default(0)
+  votesFunny               Int       @default(0)
+  weightedVoteScore        Float?
+  writtenDuringEarlyAccess Boolean   @default(false)
 
   game Game @relation(fields: [gameId], references: [id])
 

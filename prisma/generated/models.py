@@ -63,13 +63,13 @@ class Game(bases.BaseGame):
     name: _str
     required_age: _int
     is_free: _bool
-    detailed_description: _str
-    about_the_game: _str
-    short_description: _str
-    supported_languages: _str
-    header_image: _str
-    developers: _str
-    publishers: _str
+    detailed_description: Optional[_str] = None
+    about_the_game: Optional[_str] = None
+    short_description: Optional[_str] = None
+    supported_languages: Optional[_str] = None
+    header_image: Optional[_str] = None
+    developers: Optional[_str] = None
+    publishers: Optional[_str] = None
     windows: _bool
     mac: _bool
     linux: _bool
@@ -1264,16 +1264,16 @@ class Review(bases.BaseReview):
 
     id: _str
     gameId: _int
-    authorSteamId: _str
+    authorSteamId: Optional[_str] = None
     authorPlaytimeForever: _int
     authorPlaytimeAtReview: _int
-    authorLastPlayed: datetime.datetime
-    language: _str
-    review: _str
+    authorLastPlayed: Optional[datetime.datetime] = None
+    language: Optional[_str] = None
+    review: Optional[_str] = None
     votedUp: _bool
     votesUp: _int
     votesFunny: _int
-    weightedVoteScore: _float
+    weightedVoteScore: Optional[_float] = None
     writtenDuringEarlyAccess: _bool
     game: Optional['models.Game'] = None
     timestampCreated: Optional[datetime.datetime] = None
@@ -1447,7 +1447,7 @@ _Game_fields: Dict['types.GameKeys', PartialModelField] = OrderedDict(
         ('detailed_description', {
             'name': 'detailed_description',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -1455,7 +1455,7 @@ _Game_fields: Dict['types.GameKeys', PartialModelField] = OrderedDict(
         ('about_the_game', {
             'name': 'about_the_game',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -1463,7 +1463,7 @@ _Game_fields: Dict['types.GameKeys', PartialModelField] = OrderedDict(
         ('short_description', {
             'name': 'short_description',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -1471,7 +1471,7 @@ _Game_fields: Dict['types.GameKeys', PartialModelField] = OrderedDict(
         ('supported_languages', {
             'name': 'supported_languages',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -1479,7 +1479,7 @@ _Game_fields: Dict['types.GameKeys', PartialModelField] = OrderedDict(
         ('header_image', {
             'name': 'header_image',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -1487,7 +1487,7 @@ _Game_fields: Dict['types.GameKeys', PartialModelField] = OrderedDict(
         ('developers', {
             'name': 'developers',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -1495,7 +1495,7 @@ _Game_fields: Dict['types.GameKeys', PartialModelField] = OrderedDict(
         ('publishers', {
             'name': 'publishers',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -1987,7 +1987,7 @@ _Review_fields: Dict['types.ReviewKeys', PartialModelField] = OrderedDict(
         ('authorSteamId', {
             'name': 'authorSteamId',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -2011,7 +2011,7 @@ _Review_fields: Dict['types.ReviewKeys', PartialModelField] = OrderedDict(
         ('authorLastPlayed', {
             'name': 'authorLastPlayed',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': 'datetime.datetime',
             'is_relational': False,
             'documentation': None,
@@ -2019,7 +2019,7 @@ _Review_fields: Dict['types.ReviewKeys', PartialModelField] = OrderedDict(
         ('language', {
             'name': 'language',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -2027,7 +2027,7 @@ _Review_fields: Dict['types.ReviewKeys', PartialModelField] = OrderedDict(
         ('review', {
             'name': 'review',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_str',
             'is_relational': False,
             'documentation': None,
@@ -2059,7 +2059,7 @@ _Review_fields: Dict['types.ReviewKeys', PartialModelField] = OrderedDict(
         ('weightedVoteScore', {
             'name': 'weightedVoteScore',
             'is_list': False,
-            'optional': False,
+            'optional': True,
             'type': '_float',
             'is_relational': False,
             'documentation': None,

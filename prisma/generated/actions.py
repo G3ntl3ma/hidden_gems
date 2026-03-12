@@ -177,17 +177,6 @@ class GameActions(Generic[_PrismaModelT]):
                 # data to create a Game record
                 'id': 662824084,
                 'name': 'bbehjachib',
-                'detailed_description': 'cadfabfehe',
-                'about_the_game': 'dgiiaaijj',
-                'short_description': 'bfaiacjjfc',
-                'supported_languages': 'eigcfgbif',
-                'header_image': 'bagcfbhiig',
-                'developers': 'cghideieh',
-                'publishers': 'biabhbdai',
-                'owners_min': 836760821,
-                'owners_max': 595337866,
-                'average_2weeks': 790425851,
-                'average_forever': 2111915288,
             },
         )
         ```
@@ -242,35 +231,13 @@ class GameActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a Game record
-                    'id': 1149758321,
-                    'name': 'bgeecijdgg',
-                    'detailed_description': 'bdiicjafbj',
-                    'about_the_game': 'bgehebiafc',
-                    'short_description': 'bghffegacj',
-                    'supported_languages': 'bhghchehcc',
-                    'header_image': 'dcgchcbbf',
-                    'developers': 'bdedcabahc',
-                    'publishers': 'ghfhiafcb',
-                    'owners_min': 744964398,
-                    'owners_max': 1969681615,
-                    'average_2weeks': 1116175964,
-                    'average_forever': 861472101,
+                    'id': 2035015474,
+                    'name': 'dgiiaaijj',
                 },
                 {
                     # data to create a Game record
-                    'id': 1303003706,
-                    'name': 'bgiggdidbf',
-                    'detailed_description': 'caaaedabfc',
-                    'about_the_game': 'bigibebcib',
-                    'short_description': 'bigaiehgcc',
-                    'supported_languages': 'beeifcbebf',
-                    'header_image': 'bgcigfahea',
-                    'developers': 'bcejgaggif',
-                    'publishers': 'idfjadbcc',
-                    'owners_min': 763719779,
-                    'owners_max': 429995104,
-                    'average_2weeks': 1775811865,
-                    'average_forever': 893145566,
+                    'id': 1508029952,
+                    'name': 'eigcfgbif',
                 },
             ],
             skip_duplicates=True,
@@ -324,7 +291,7 @@ class GameActions(Generic[_PrismaModelT]):
         ```py
         game = Game.prisma().delete(
             where={
-                'id': 995405759,
+                'id': 1062517886,
             },
         )
         ```
@@ -376,7 +343,7 @@ class GameActions(Generic[_PrismaModelT]):
         ```py
         game = Game.prisma().find_unique(
             where={
-                'id': 2102736524,
+                'id': 267834847,
             },
         )
         ```
@@ -427,7 +394,7 @@ class GameActions(Generic[_PrismaModelT]):
         ```py
         game = Game.prisma().find_unique_or_raise(
             where={
-                'id': 271520213,
+                'id': 180171308,
             },
         )
         ```
@@ -679,7 +646,7 @@ class GameActions(Generic[_PrismaModelT]):
         ```py
         game = Game.prisma().update(
             where={
-                'id': 456633834,
+                'id': 836760821,
             },
             data={
                 # data to update the Game record to
@@ -736,37 +703,15 @@ class GameActions(Generic[_PrismaModelT]):
         ```py
         game = Game.prisma().upsert(
             where={
-                'id': 2058258651,
+                'id': 595337866,
             },
             data={
                 'create': {
-                    'id': 2058258651,
-                    'name': 'bgiggdidbf',
-                    'detailed_description': 'caaaedabfc',
-                    'about_the_game': 'bigibebcib',
-                    'short_description': 'bigaiehgcc',
-                    'supported_languages': 'beeifcbebf',
-                    'header_image': 'bgcigfahea',
-                    'developers': 'bcejgaggif',
-                    'publishers': 'idfjadbcc',
-                    'owners_min': 763719779,
-                    'owners_max': 429995104,
-                    'average_2weeks': 1775811865,
-                    'average_forever': 893145566,
+                    'id': 595337866,
+                    'name': 'eigcfgbif',
                 },
                 'update': {
-                    'name': 'bgiggdidbf',
-                    'detailed_description': 'caaaedabfc',
-                    'about_the_game': 'bigibebcib',
-                    'short_description': 'bigaiehgcc',
-                    'supported_languages': 'beeifcbebf',
-                    'header_image': 'bgcigfahea',
-                    'developers': 'bcejgaggif',
-                    'publishers': 'idfjadbcc',
-                    'owners_min': 763719779,
-                    'owners_max': 429995104,
-                    'average_2weeks': 1775811865,
-                    'average_forever': 893145566,
+                    'name': 'eigcfgbif',
                 },
             },
         )
@@ -814,7 +759,7 @@ class GameActions(Generic[_PrismaModelT]):
         # update all Game records
         total = Game.prisma().update_many(
             data={
-                'about_the_game': 'bfidgijfjc'
+                'about_the_game': 'hjaecfifb'
             },
             where={}
         )
@@ -1177,7 +1122,7 @@ class CategoryActions(Generic[_PrismaModelT]):
         ```py
         users = Category.prisma().query_raw(
             'SELECT * FROM Category WHERE id = ?',
-            878442065,
+            2111915288,
         )
         ```
         """
@@ -1217,7 +1162,7 @@ class CategoryActions(Generic[_PrismaModelT]):
         ```py
         user = Category.prisma().query_first(
             'SELECT * FROM Category WHERE name = ?',
-            'bghfciaafe',
+            'bbejhfidcb',
         )
         ```
         """
@@ -1256,8 +1201,8 @@ class CategoryActions(Generic[_PrismaModelT]):
         category = Category.prisma().create(
             data={
                 # data to create a Category record
-                'id': 1627576247,
-                'name': 'cafeiaccbc',
+                'id': 1644289366,
+                'name': 'bdiicjafbj',
             },
         )
         ```
@@ -1312,13 +1257,13 @@ class CategoryActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a Category record
-                    'id': 60335757,
-                    'name': 'gieegcbeg',
+                    'id': 1647418052,
+                    'name': 'bghffegacj',
                 },
                 {
                     # data to create a Category record
-                    'id': 1625503827,
-                    'name': 'fcbichhci',
+                    'id': 1767274722,
+                    'name': 'dcgchcbbf',
                 },
             ],
             skip_duplicates=True,
@@ -1372,7 +1317,7 @@ class CategoryActions(Generic[_PrismaModelT]):
         ```py
         category = Category.prisma().delete(
             where={
-                'id': 1266032265,
+                'id': 1343201072,
             },
         )
         ```
@@ -1424,7 +1369,7 @@ class CategoryActions(Generic[_PrismaModelT]):
         ```py
         category = Category.prisma().find_unique(
             where={
-                'id': 93253262,
+                'id': 675780521,
             },
         )
         ```
@@ -1475,7 +1420,7 @@ class CategoryActions(Generic[_PrismaModelT]):
         ```py
         category = Category.prisma().find_unique_or_raise(
             where={
-                'id': 2053047983,
+                'id': 744964398,
             },
         )
         ```
@@ -1727,7 +1672,7 @@ class CategoryActions(Generic[_PrismaModelT]):
         ```py
         category = Category.prisma().update(
             where={
-                'id': 685333180,
+                'id': 1969681615,
             },
             data={
                 # data to update the Category record to
@@ -1784,15 +1729,15 @@ class CategoryActions(Generic[_PrismaModelT]):
         ```py
         category = Category.prisma().upsert(
             where={
-                'id': 127474245,
+                'id': 1116175964,
             },
             data={
                 'create': {
-                    'id': 127474245,
-                    'name': 'fcbichhci',
+                    'id': 1116175964,
+                    'name': 'dcgchcbbf',
                 },
                 'update': {
-                    'name': 'fcbichhci',
+                    'name': 'dcgchcbbf',
                 },
             },
         )
@@ -1840,7 +1785,7 @@ class CategoryActions(Generic[_PrismaModelT]):
         # update all Category records
         total = Category.prisma().update_many(
             data={
-                'name': 'jeijcbhfe'
+                'name': 'igbehcbab'
             },
             where={}
         )
@@ -2203,7 +2148,7 @@ class GameCategoryActions(Generic[_PrismaModelT]):
         ```py
         users = GameCategory.prisma().query_raw(
             'SELECT * FROM GameCategory WHERE gameId = ?',
-            1964990155,
+            1303003706,
         )
         ```
         """
@@ -2243,7 +2188,7 @@ class GameCategoryActions(Generic[_PrismaModelT]):
         ```py
         user = GameCategory.prisma().query_first(
             'SELECT * FROM GameCategory WHERE categoryId = ?',
-            1228891816,
+            1686638315,
         )
         ```
         """
@@ -2282,8 +2227,8 @@ class GameCategoryActions(Generic[_PrismaModelT]):
         gamecategory = GameCategory.prisma().create(
             data={
                 # data to create a GameCategory record
-                'gameId': 255202753,
-                'categoryId': 1223573862,
+                'gameId': 2000430152,
+                'categoryId': 1868141281,
             },
         )
         ```
@@ -2338,13 +2283,13 @@ class GameCategoryActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a GameCategory record
-                    'gameId': 541269159,
-                    'categoryId': 1064846676,
+                    'gameId': 1860847622,
+                    'categoryId': 1448521415,
                 },
                 {
                     # data to create a GameCategory record
-                    'gameId': 508382461,
-                    'categoryId': 1024265714,
+                    'gameId': 1628650740,
+                    'categoryId': 1249606685,
                 },
             ],
             skip_duplicates=True,
@@ -2869,7 +2814,7 @@ class GameCategoryActions(Generic[_PrismaModelT]):
         # update all GameCategory records
         total = GameCategory.prisma().update_many(
             data={
-                'categoryId': 872078403
+                'categoryId': 835903122
             },
             where={}
         )
@@ -3232,7 +3177,7 @@ class GenreActions(Generic[_PrismaModelT]):
         ```py
         users = Genre.prisma().query_raw(
             'SELECT * FROM Genre WHERE id = ?',
-            1874748096,
+            763719779,
         )
         ```
         """
@@ -3272,7 +3217,7 @@ class GenreActions(Generic[_PrismaModelT]):
         ```py
         user = Genre.prisma().query_first(
             'SELECT * FROM Genre WHERE name = ?',
-            'jbgijghgb',
+            'ecjjjfbae',
         )
         ```
         """
@@ -3311,8 +3256,8 @@ class GenreActions(Generic[_PrismaModelT]):
         genre = Genre.prisma().create(
             data={
                 # data to create a Genre record
-                'id': 769267518,
-                'name': 'icadbcehj',
+                'id': 1775811865,
+                'name': 'ijdbeffgg',
             },
         )
         ```
@@ -3367,13 +3312,13 @@ class GenreActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a Genre record
-                    'id': 92728044,
-                    'name': 'deeificjd',
+                    'id': 995405759,
+                    'name': 'cbachdgfce',
                 },
                 {
                     # data to create a Genre record
-                    'id': 1121741130,
-                    'name': 'bejfijgcfb',
+                    'id': 271520213,
+                    'name': 'efggddide',
                 },
             ],
             skip_duplicates=True,
@@ -3427,7 +3372,7 @@ class GenreActions(Generic[_PrismaModelT]):
         ```py
         genre = Genre.prisma().delete(
             where={
-                'id': 208521688,
+                'id': 2058258651,
             },
         )
         ```
@@ -3479,7 +3424,7 @@ class GenreActions(Generic[_PrismaModelT]):
         ```py
         genre = Genre.prisma().find_unique(
             where={
-                'id': 860811569,
+                'id': 1583689592,
             },
         )
         ```
@@ -3530,7 +3475,7 @@ class GenreActions(Generic[_PrismaModelT]):
         ```py
         genre = Genre.prisma().find_unique_or_raise(
             where={
-                'id': 1660932118,
+                'id': 878442065,
             },
         )
         ```
@@ -3782,7 +3727,7 @@ class GenreActions(Generic[_PrismaModelT]):
         ```py
         genre = Genre.prisma().update(
             where={
-                'id': 525761943,
+                'id': 1675280054,
             },
             data={
                 # data to update the Genre record to
@@ -3839,15 +3784,15 @@ class GenreActions(Generic[_PrismaModelT]):
         ```py
         genre = Genre.prisma().upsert(
             where={
-                'id': 736209796,
+                'id': 1627576247,
             },
             data={
                 'create': {
-                    'id': 736209796,
-                    'name': 'bejfijgcfb',
+                    'id': 1627576247,
+                    'name': 'efggddide',
                 },
                 'update': {
-                    'name': 'bejfijgcfb',
+                    'name': 'efggddide',
                 },
             },
         )
@@ -3895,7 +3840,7 @@ class GenreActions(Generic[_PrismaModelT]):
         # update all Genre records
         total = Genre.prisma().update_many(
             data={
-                'name': 'ejdjahicb'
+                'name': 'cafeiaccbc'
             },
             where={}
         )
@@ -4258,7 +4203,7 @@ class GameGenreActions(Generic[_PrismaModelT]):
         ```py
         users = GameGenre.prisma().query_raw(
             'SELECT * FROM GameGenre WHERE gameId = ?',
-            639686562,
+            60335757,
         )
         ```
         """
@@ -4298,7 +4243,7 @@ class GameGenreActions(Generic[_PrismaModelT]):
         ```py
         user = GameGenre.prisma().query_first(
             'SELECT * FROM GameGenre WHERE genreId = ?',
-            654007347,
+            684462146,
         )
         ```
         """
@@ -4337,8 +4282,8 @@ class GameGenreActions(Generic[_PrismaModelT]):
         gamegenre = GameGenre.prisma().create(
             data={
                 # data to create a GameGenre record
-                'gameId': 1905261552,
-                'genreId': 78746985,
+                'gameId': 1625503827,
+                'genreId': 521827728,
             },
         )
         ```
@@ -4393,13 +4338,13 @@ class GameGenreActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a GameGenre record
-                    'gameId': 1398328302,
-                    'genreId': 856000655,
+                    'gameId': 1266032265,
+                    'genreId': 93253262,
                 },
                 {
                     # data to create a GameGenre record
-                    'gameId': 1452336924,
-                    'genreId': 1573199653,
+                    'gameId': 2053047983,
+                    'genreId': 685333180,
                 },
             ],
             skip_duplicates=True,
@@ -4924,7 +4869,7 @@ class GameGenreActions(Generic[_PrismaModelT]):
         # update all GameGenre records
         total = GameGenre.prisma().update_many(
             data={
-                'genreId': 2013903098
+                'genreId': 127474245
             },
             where={}
         )
@@ -5287,7 +5232,7 @@ class DeveloperActions(Generic[_PrismaModelT]):
         ```py
         users = Developer.prisma().query_raw(
             'SELECT * FROM Developer WHERE name = ?',
-            'faajgfadf',
+            'jeijcbhfe',
         )
         ```
         """
@@ -5327,7 +5272,7 @@ class DeveloperActions(Generic[_PrismaModelT]):
         ```py
         user = Developer.prisma().query_first(
             'SELECT * FROM Developer WHERE amount_games_published = ?',
-            1800624392,
+            1964990155,
         )
         ```
         """
@@ -5366,8 +5311,7 @@ class DeveloperActions(Generic[_PrismaModelT]):
         developer = Developer.prisma().create(
             data={
                 # data to create a Developer record
-                'name': 'cahhaghecf',
-                'amount_games_published': 1672112838,
+                'name': 'bcciijbibg',
             },
         )
         ```
@@ -5422,13 +5366,11 @@ class DeveloperActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a Developer record
-                    'name': 'jcgghhgdj',
-                    'amount_games_published': 1447624116,
+                    'name': 'cffcachfd',
                 },
                 {
                     # data to create a Developer record
-                    'name': 'bhdiaidiaf',
-                    'amount_games_published': 340946258,
+                    'name': 'bccdfhdigc',
                 },
             ],
             skip_duplicates=True,
@@ -5482,7 +5424,7 @@ class DeveloperActions(Generic[_PrismaModelT]):
         ```py
         developer = Developer.prisma().delete(
             where={
-                'name': 'gabahhhjf',
+                'name': 'febcgjbfj',
             },
         )
         ```
@@ -5534,7 +5476,7 @@ class DeveloperActions(Generic[_PrismaModelT]):
         ```py
         developer = Developer.prisma().find_unique(
             where={
-                'name': 'cjagadcjg',
+                'name': 'bageiegghg',
             },
         )
         ```
@@ -5585,7 +5527,7 @@ class DeveloperActions(Generic[_PrismaModelT]):
         ```py
         developer = Developer.prisma().find_unique_or_raise(
             where={
-                'name': 'bifficggej',
+                'name': 'faidicegb',
             },
         )
         ```
@@ -5837,7 +5779,7 @@ class DeveloperActions(Generic[_PrismaModelT]):
         ```py
         developer = Developer.prisma().update(
             where={
-                'name': 'bgbbaajbic',
+                'name': 'bacecgfhbe',
             },
             data={
                 # data to update the Developer record to
@@ -5894,15 +5836,13 @@ class DeveloperActions(Generic[_PrismaModelT]):
         ```py
         developer = Developer.prisma().upsert(
             where={
-                'name': 'eegghdhjb',
+                'name': 'ihcahiead',
             },
             data={
                 'create': {
-                    'name': 'eegghdhjb',
-                    'amount_games_published': 340946258,
+                    'name': 'ihcahiead',
                 },
                 'update': {
-                    'amount_games_published': 340946258,
                 },
             },
         )
@@ -5950,7 +5890,7 @@ class DeveloperActions(Generic[_PrismaModelT]):
         # update all Developer records
         total = Developer.prisma().update_many(
             data={
-                'amount_games_published': 300568396
+                'amount_games_published': 1874748096
             },
             where={}
         )
@@ -6313,7 +6253,7 @@ class PublisherActions(Generic[_PrismaModelT]):
         ```py
         users = Publisher.prisma().query_raw(
             'SELECT * FROM Publisher WHERE name = ?',
-            'gdcgcgagj',
+            'jbgijghgb',
         )
         ```
         """
@@ -6353,7 +6293,7 @@ class PublisherActions(Generic[_PrismaModelT]):
         ```py
         user = Publisher.prisma().query_first(
             'SELECT * FROM Publisher WHERE amount_games_published = ?',
-            1724011690,
+            769267518,
         )
         ```
         """
@@ -6392,8 +6332,7 @@ class PublisherActions(Generic[_PrismaModelT]):
         publisher = Publisher.prisma().create(
             data={
                 # data to create a Publisher record
-                'name': 'ehabfhegh',
-                'amount_games_published': 1209209912,
+                'name': 'icadbcehj',
             },
         )
         ```
@@ -6448,13 +6387,11 @@ class PublisherActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a Publisher record
-                    'name': 'bfdgheeegf',
-                    'amount_games_published': 424218998,
+                    'name': 'jchciaee',
                 },
                 {
                     # data to create a Publisher record
-                    'name': 'cbcfgdcdhf',
-                    'amount_games_published': 536951780,
+                    'name': 'deeificjd',
                 },
             ],
             skip_duplicates=True,
@@ -6508,7 +6445,7 @@ class PublisherActions(Generic[_PrismaModelT]):
         ```py
         publisher = Publisher.prisma().delete(
             where={
-                'name': 'jcehcdchh',
+                'name': 'bbcbhebbda',
             },
         )
         ```
@@ -6560,7 +6497,7 @@ class PublisherActions(Generic[_PrismaModelT]):
         ```py
         publisher = Publisher.prisma().find_unique(
             where={
-                'name': 'bgcbjdhjcc',
+                'name': 'bejfijgcfb',
             },
         )
         ```
@@ -6611,7 +6548,7 @@ class PublisherActions(Generic[_PrismaModelT]):
         ```py
         publisher = Publisher.prisma().find_unique_or_raise(
             where={
-                'name': 'bieiidcabj',
+                'name': 'caifcbgii',
             },
         )
         ```
@@ -6863,7 +6800,7 @@ class PublisherActions(Generic[_PrismaModelT]):
         ```py
         publisher = Publisher.prisma().update(
             where={
-                'name': 'bjcbfcieaa',
+                'name': 'igaibbfgj',
             },
             data={
                 # data to update the Publisher record to
@@ -6920,15 +6857,13 @@ class PublisherActions(Generic[_PrismaModelT]):
         ```py
         publisher = Publisher.prisma().upsert(
             where={
-                'name': 'cbaaechiej',
+                'name': 'bggajdcbbi',
             },
             data={
                 'create': {
-                    'name': 'cbaaechiej',
-                    'amount_games_published': 536951780,
+                    'name': 'bggajdcbbi',
                 },
                 'update': {
-                    'amount_games_published': 536951780,
                 },
             },
         )
@@ -6976,7 +6911,7 @@ class PublisherActions(Generic[_PrismaModelT]):
         # update all Publisher records
         total = Publisher.prisma().update_many(
             data={
-                'amount_games_published': 849140046
+                'amount_games_published': 525761943
             },
             where={}
         )
@@ -7339,7 +7274,7 @@ class GameDeveloperActions(Generic[_PrismaModelT]):
         ```py
         users = GameDeveloper.prisma().query_raw(
             'SELECT * FROM GameDeveloper WHERE gameId = ?',
-            928152175,
+            736209796,
         )
         ```
         """
@@ -7379,7 +7314,7 @@ class GameDeveloperActions(Generic[_PrismaModelT]):
         ```py
         user = GameDeveloper.prisma().query_first(
             'SELECT * FROM GameDeveloper WHERE developerName = ?',
-            'chdadcaga',
+            'ejdjahicb',
         )
         ```
         """
@@ -7418,8 +7353,8 @@ class GameDeveloperActions(Generic[_PrismaModelT]):
         gamedeveloper = GameDeveloper.prisma().create(
             data={
                 # data to create a GameDeveloper record
-                'gameId': 982848517,
-                'developerName': 'fbahdheji',
+                'gameId': 639686562,
+                'developerName': 'gfeaahdeh',
             },
         )
         ```
@@ -7474,13 +7409,13 @@ class GameDeveloperActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a GameDeveloper record
-                    'gameId': 2117488267,
-                    'developerName': 'beabjeejdg',
+                    'gameId': 1905261552,
+                    'developerName': 'hihegjif',
                 },
                 {
                     # data to create a GameDeveloper record
-                    'gameId': 1297607553,
-                    'developerName': 'fbjeiiffa',
+                    'gameId': 1398328302,
+                    'developerName': 'ifgaaagff',
                 },
             ],
             skip_duplicates=True,
@@ -8005,7 +7940,7 @@ class GameDeveloperActions(Generic[_PrismaModelT]):
         # update all GameDeveloper records
         total = GameDeveloper.prisma().update_many(
             data={
-                'developerName': 'jhgidcgbf'
+                'developerName': 'befcddgjce'
             },
             where={}
         )
@@ -8368,7 +8303,7 @@ class GamePublisherActions(Generic[_PrismaModelT]):
         ```py
         users = GamePublisher.prisma().query_raw(
             'SELECT * FROM GamePublisher WHERE gameId = ?',
-            1696425492,
+            1573199653,
         )
         ```
         """
@@ -8408,7 +8343,7 @@ class GamePublisherActions(Generic[_PrismaModelT]):
         ```py
         user = GamePublisher.prisma().query_first(
             'SELECT * FROM GamePublisher WHERE publisherName = ?',
-            'bgjcgchib',
+            'cabdjadaji',
         )
         ```
         """
@@ -8447,8 +8382,8 @@ class GamePublisherActions(Generic[_PrismaModelT]):
         gamepublisher = GamePublisher.prisma().create(
             data={
                 # data to create a GamePublisher record
-                'gameId': 1023081650,
-                'publisherName': 'dchgibach',
+                'gameId': 500965035,
+                'publisherName': 'biaagcedjc',
             },
         )
         ```
@@ -8503,13 +8438,13 @@ class GamePublisherActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a GamePublisher record
-                    'gameId': 527748992,
-                    'publisherName': 'cacjdfhejh',
+                    'gameId': 2077067425,
+                    'publisherName': 'bghcbbcidi',
                 },
                 {
                     # data to create a GamePublisher record
-                    'gameId': 1318597118,
-                    'publisherName': 'cbccbbcdfb',
+                    'gameId': 926677639,
+                    'publisherName': 'beehgcebbg',
                 },
             ],
             skip_duplicates=True,
@@ -9034,7 +8969,7 @@ class GamePublisherActions(Generic[_PrismaModelT]):
         # update all GamePublisher records
         total = GamePublisher.prisma().update_many(
             data={
-                'publisherName': 'bacejedaca'
+                'publisherName': 'bhdiaidiaf'
             },
             where={}
         )
@@ -9397,7 +9332,7 @@ class ReviewActions(Generic[_PrismaModelT]):
         ```py
         users = Review.prisma().query_raw(
             'SELECT * FROM Review WHERE id = ?',
-            'bhbhdahfaj',
+            'deajegcfi',
         )
         ```
         """
@@ -9437,7 +9372,7 @@ class ReviewActions(Generic[_PrismaModelT]):
         ```py
         user = Review.prisma().query_first(
             'SELECT * FROM Review WHERE gameId = ?',
-            1598124042,
+            601077795,
         )
         ```
         """
@@ -9476,19 +9411,8 @@ class ReviewActions(Generic[_PrismaModelT]):
         review = Review.prisma().create(
             data={
                 # data to create a Review record
-                'id': 'ibhgcdbgd',
-                'gameId': 1030557336,
-                'authorSteamId': 'bbdbfcfihd',
-                'authorPlaytimeForever': 210666198,
-                'authorPlaytimeAtReview': 1276057943,
-                'authorLastPlayed': datetime.datetime.utcnow(),
-                'language': 'heffgjdei',
-                'review': 'dahihgbeb',
-                'votedUp': True,
-                'votesUp': 1526854643,
-                'votesFunny': 958077104,
-                'weightedVoteScore': 1513050921.20467,
-                'writtenDuringEarlyAccess': False,
+                'id': 'cjagadcjg',
+                'gameId': 1855826649,
             },
         )
         ```
@@ -9543,35 +9467,13 @@ class ReviewActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a Review record
-                    'id': 'bbidjbbjaa',
-                    'gameId': 1589704933,
-                    'authorSteamId': 'bcedehfiji',
-                    'authorPlaytimeForever': 1369828971,
-                    'authorPlaytimeAtReview': 1678593480,
-                    'authorLastPlayed': datetime.datetime.utcnow(),
-                    'language': 'eadfcbbcb',
-                    'review': 'geihgahba',
-                    'votedUp': False,
-                    'votesUp': 1468890740,
-                    'votesFunny': 629039005,
-                    'weightedVoteScore': 1214168082.89861,
-                    'writtenDuringEarlyAccess': True,
+                    'id': 'bgbbaajbic',
+                    'gameId': 446673791,
                 },
                 {
                     # data to create a Review record
-                    'id': 'jfegcaafh',
-                    'gameId': 1214809950,
-                    'authorSteamId': 'baehicaajf',
-                    'authorPlaytimeForever': 1302734860,
-                    'authorPlaytimeAtReview': 893052245,
-                    'authorLastPlayed': datetime.datetime.utcnow(),
-                    'language': 'ciaaiddag',
-                    'review': 'fejggijff',
-                    'votedUp': True,
-                    'votesUp': 2098299345,
-                    'votesFunny': 245900342,
-                    'weightedVoteScore': 811863863.138880,
-                    'writtenDuringEarlyAccess': False,
+                    'id': 'daafgidjg',
+                    'gameId': 632626069,
                 },
             ],
             skip_duplicates=True,
@@ -9625,7 +9527,7 @@ class ReviewActions(Generic[_PrismaModelT]):
         ```py
         review = Review.prisma().delete(
             where={
-                'id': 'bbihggdcji',
+                'id': 'bhceabbgja',
             },
         )
         ```
@@ -9677,7 +9579,7 @@ class ReviewActions(Generic[_PrismaModelT]):
         ```py
         review = Review.prisma().find_unique(
             where={
-                'id': 'hgjgibdgd',
+                'id': 'ehabfhegh',
             },
         )
         ```
@@ -9728,7 +9630,7 @@ class ReviewActions(Generic[_PrismaModelT]):
         ```py
         review = Review.prisma().find_unique_or_raise(
             where={
-                'id': 'bcbecjfice',
+                'id': 'bcajcajjbc',
             },
         )
         ```
@@ -9980,7 +9882,7 @@ class ReviewActions(Generic[_PrismaModelT]):
         ```py
         review = Review.prisma().update(
             where={
-                'id': 'bacbebhjjd',
+                'id': 'bfdgheeegf',
             },
             data={
                 # data to update the Review record to
@@ -10037,37 +9939,15 @@ class ReviewActions(Generic[_PrismaModelT]):
         ```py
         review = Review.prisma().upsert(
             where={
-                'id': 'dfbfaddhe',
+                'id': 'ececbijji',
             },
             data={
                 'create': {
-                    'id': 'dfbfaddhe',
-                    'gameId': 1214809950,
-                    'authorSteamId': 'baehicaajf',
-                    'authorPlaytimeForever': 1302734860,
-                    'authorPlaytimeAtReview': 893052245,
-                    'authorLastPlayed': datetime.datetime.utcnow(),
-                    'language': 'ciaaiddag',
-                    'review': 'fejggijff',
-                    'votedUp': True,
-                    'votesUp': 2098299345,
-                    'votesFunny': 245900342,
-                    'weightedVoteScore': 811863863.138880,
-                    'writtenDuringEarlyAccess': False,
+                    'id': 'ececbijji',
+                    'gameId': 632626069,
                 },
                 'update': {
-                    'gameId': 1214809950,
-                    'authorSteamId': 'baehicaajf',
-                    'authorPlaytimeForever': 1302734860,
-                    'authorPlaytimeAtReview': 893052245,
-                    'authorLastPlayed': datetime.datetime.utcnow(),
-                    'language': 'ciaaiddag',
-                    'review': 'fejggijff',
-                    'votedUp': True,
-                    'votesUp': 2098299345,
-                    'votesFunny': 245900342,
-                    'weightedVoteScore': 811863863.138880,
-                    'writtenDuringEarlyAccess': False,
+                    'gameId': 632626069,
                 },
             },
         )

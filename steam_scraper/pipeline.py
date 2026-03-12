@@ -3,9 +3,7 @@ from __future__ import annotations
 import csv
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Iterable
-
-from prisma.generated import Prisma
+from typing import Any, Iterable, TYPE_CHECKING
 
 from api.db import db_session
 from steam_scraper.config import get_api_config, get_paths_config
@@ -21,6 +19,11 @@ from steam_scraper.parsers import (
 
 STORE_APPDETAILS_PATH = "/api/appdetails"
 STORE_REVIEWS_PATH_TEMPLATE = "/appreviews/{appid}"
+
+if TYPE_CHECKING:
+    from prisma import Prisma  # pragma: no cover
+else:
+    Prisma = Any  # type: ignore
 
 
 def _read_appids(csv_path: str) -> list[int]:
@@ -107,6 +110,9 @@ def _fetch_reviews(
         if not page_reviews:
             break
         all_reviews.extend(page_reviews)
+        if len(all_reviews) >= 100:
+            all_reviews = all_reviews[:100]
+            break
 
         next_cursor = raw.get("cursor")
         if not isinstance(next_cursor, str):
@@ -332,11 +338,14 @@ def _upsert_game(db: Prisma, record: dict[str, Any]) -> None:
         "reviewTotalReviews": record.get("reviewTotalReviews"),
     }
 
+    create_data = {k: v for k, v in game_data.items() if v is not None}
+    update_data = {k: v for k, v in game_data.items() if v is not None}
+
     db.game.upsert(
         where={"id": record["id"]},
         data={
-            "create": game_data,
-            "update": game_data,
+            "create": create_data,
+            "update": update_data,
         },
     )
 
@@ -346,11 +355,13 @@ def _upsert_reviews(db: Prisma, reviews: list[dict[str, Any]]) -> None:
     Insert or update Review rows for a single game.
     """
     for r in reviews:
+        create_data = {k: v for k, v in r.items() if v is not None}
+        update_data = {k: v for k, v in r.items() if v is not None}
         db.review.upsert(
             where={"id": r["id"]},
             data={
-                "create": r,
-                "update": r,
+                "create": create_data,
+                "update": update_data,
             },
         )
 

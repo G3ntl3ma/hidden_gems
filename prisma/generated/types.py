@@ -1136,12 +1136,23 @@ class GameOptionalCreateInput(TypedDict, total=False):
     """Optional arguments to the Game create method"""
     required_age: _int
     is_free: _bool
+    detailed_description: Optional[_str]
+    about_the_game: Optional[_str]
+    short_description: Optional[_str]
+    supported_languages: Optional[_str]
+    header_image: Optional[_str]
+    developers: Optional[_str]
+    publishers: Optional[_str]
     windows: _bool
     mac: _bool
     linux: _bool
     metacritic: Optional[_int]
     release_date: Optional[datetime.datetime]
     coming_soon: _bool
+    owners_min: _int
+    owners_max: _int
+    average_2weeks: _int
+    average_forever: _int
     reviewNumReviews: Optional[_int]
     reviewScore: Optional[_int]
     reviewScoreDesc: Optional[_str]
@@ -1159,17 +1170,6 @@ class GameCreateInput(GameOptionalCreateInput):
     """Required arguments to the Game create method"""
     id: _int
     name: _str
-    detailed_description: _str
-    about_the_game: _str
-    short_description: _str
-    supported_languages: _str
-    header_image: _str
-    developers: _str
-    publishers: _str
-    owners_min: _int
-    owners_max: _int
-    average_2weeks: _int
-    average_forever: _int
 
 
 # TODO: remove this in favour of without explicit relations
@@ -1179,12 +1179,23 @@ class GameOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     """Optional arguments to the Game create method, without relations"""
     required_age: _int
     is_free: _bool
+    detailed_description: Optional[_str]
+    about_the_game: Optional[_str]
+    short_description: Optional[_str]
+    supported_languages: Optional[_str]
+    header_image: Optional[_str]
+    developers: Optional[_str]
+    publishers: Optional[_str]
     windows: _bool
     mac: _bool
     linux: _bool
     metacritic: Optional[_int]
     release_date: Optional[datetime.datetime]
     coming_soon: _bool
+    owners_min: _int
+    owners_max: _int
+    average_2weeks: _int
+    average_forever: _int
     reviewNumReviews: Optional[_int]
     reviewScore: Optional[_int]
     reviewScoreDesc: Optional[_str]
@@ -1197,17 +1208,6 @@ class GameCreateWithoutRelationsInput(GameOptionalCreateWithoutRelationsInput):
     """Required arguments to the Game create method, without relations"""
     id: _int
     name: _str
-    detailed_description: _str
-    about_the_game: _str
-    short_description: _str
-    supported_languages: _str
-    header_image: _str
-    developers: _str
-    publishers: _str
-    owners_min: _int
-    owners_max: _int
-    average_2weeks: _int
-    average_forever: _int
 
 class GameConnectOrCreateWithoutRelationsInput(TypedDict):
     create: 'GameCreateWithoutRelationsInput'
@@ -1241,13 +1241,13 @@ class GameUpdateInput(TypedDict, total=False):
     name: _str
     required_age: Union[AtomicIntInput, _int]
     is_free: _bool
-    detailed_description: _str
-    about_the_game: _str
-    short_description: _str
-    supported_languages: _str
-    header_image: _str
-    developers: _str
-    publishers: _str
+    detailed_description: Optional[_str]
+    about_the_game: Optional[_str]
+    short_description: Optional[_str]
+    supported_languages: Optional[_str]
+    header_image: Optional[_str]
+    developers: Optional[_str]
+    publishers: Optional[_str]
     windows: _bool
     mac: _bool
     linux: _bool
@@ -1277,13 +1277,13 @@ class GameUpdateManyMutationInput(TypedDict, total=False):
     name: _str
     required_age: Union[AtomicIntInput, _int]
     is_free: _bool
-    detailed_description: _str
-    about_the_game: _str
-    short_description: _str
-    supported_languages: _str
-    header_image: _str
-    developers: _str
-    publishers: _str
+    detailed_description: Optional[_str]
+    about_the_game: Optional[_str]
+    short_description: Optional[_str]
+    supported_languages: Optional[_str]
+    header_image: Optional[_str]
+    developers: Optional[_str]
+    publishers: Optional[_str]
     windows: _bool
     mac: _bool
     linux: _bool
@@ -2711,13 +2711,13 @@ class GameWhereInput(TypedDict, total=False):
     name: Union[_str, 'types.StringFilter']
     required_age: Union[_int, 'types.IntFilter']
     is_free: Union[_bool, 'types.BooleanFilter']
-    detailed_description: Union[_str, 'types.StringFilter']
-    about_the_game: Union[_str, 'types.StringFilter']
-    short_description: Union[_str, 'types.StringFilter']
-    supported_languages: Union[_str, 'types.StringFilter']
-    header_image: Union[_str, 'types.StringFilter']
-    developers: Union[_str, 'types.StringFilter']
-    publishers: Union[_str, 'types.StringFilter']
+    detailed_description: Union[None, _str, 'types.StringFilter']
+    about_the_game: Union[None, _str, 'types.StringFilter']
+    short_description: Union[None, _str, 'types.StringFilter']
+    supported_languages: Union[None, _str, 'types.StringFilter']
+    header_image: Union[None, _str, 'types.StringFilter']
+    developers: Union[None, _str, 'types.StringFilter']
+    publishers: Union[None, _str, 'types.StringFilter']
     windows: Union[_bool, 'types.BooleanFilter']
     mac: Union[_bool, 'types.BooleanFilter']
     linux: Union[_bool, 'types.BooleanFilter']
@@ -2753,13 +2753,13 @@ class GameWhereInputRecursive1(TypedDict, total=False):
     name: Union[_str, 'types.StringFilter']
     required_age: Union[_int, 'types.IntFilter']
     is_free: Union[_bool, 'types.BooleanFilter']
-    detailed_description: Union[_str, 'types.StringFilter']
-    about_the_game: Union[_str, 'types.StringFilter']
-    short_description: Union[_str, 'types.StringFilter']
-    supported_languages: Union[_str, 'types.StringFilter']
-    header_image: Union[_str, 'types.StringFilter']
-    developers: Union[_str, 'types.StringFilter']
-    publishers: Union[_str, 'types.StringFilter']
+    detailed_description: Union[None, _str, 'types.StringFilter']
+    about_the_game: Union[None, _str, 'types.StringFilter']
+    short_description: Union[None, _str, 'types.StringFilter']
+    supported_languages: Union[None, _str, 'types.StringFilter']
+    header_image: Union[None, _str, 'types.StringFilter']
+    developers: Union[None, _str, 'types.StringFilter']
+    publishers: Union[None, _str, 'types.StringFilter']
     windows: Union[_bool, 'types.BooleanFilter']
     mac: Union[_bool, 'types.BooleanFilter']
     linux: Union[_bool, 'types.BooleanFilter']
@@ -2795,13 +2795,13 @@ class GameWhereInputRecursive2(TypedDict, total=False):
     name: Union[_str, 'types.StringFilter']
     required_age: Union[_int, 'types.IntFilter']
     is_free: Union[_bool, 'types.BooleanFilter']
-    detailed_description: Union[_str, 'types.StringFilter']
-    about_the_game: Union[_str, 'types.StringFilter']
-    short_description: Union[_str, 'types.StringFilter']
-    supported_languages: Union[_str, 'types.StringFilter']
-    header_image: Union[_str, 'types.StringFilter']
-    developers: Union[_str, 'types.StringFilter']
-    publishers: Union[_str, 'types.StringFilter']
+    detailed_description: Union[None, _str, 'types.StringFilter']
+    about_the_game: Union[None, _str, 'types.StringFilter']
+    short_description: Union[None, _str, 'types.StringFilter']
+    supported_languages: Union[None, _str, 'types.StringFilter']
+    header_image: Union[None, _str, 'types.StringFilter']
+    developers: Union[None, _str, 'types.StringFilter']
+    publishers: Union[None, _str, 'types.StringFilter']
     windows: Union[_bool, 'types.BooleanFilter']
     mac: Union[_bool, 'types.BooleanFilter']
     linux: Union[_bool, 'types.BooleanFilter']
@@ -2837,13 +2837,13 @@ class GameWhereInputRecursive3(TypedDict, total=False):
     name: Union[_str, 'types.StringFilter']
     required_age: Union[_int, 'types.IntFilter']
     is_free: Union[_bool, 'types.BooleanFilter']
-    detailed_description: Union[_str, 'types.StringFilter']
-    about_the_game: Union[_str, 'types.StringFilter']
-    short_description: Union[_str, 'types.StringFilter']
-    supported_languages: Union[_str, 'types.StringFilter']
-    header_image: Union[_str, 'types.StringFilter']
-    developers: Union[_str, 'types.StringFilter']
-    publishers: Union[_str, 'types.StringFilter']
+    detailed_description: Union[None, _str, 'types.StringFilter']
+    about_the_game: Union[None, _str, 'types.StringFilter']
+    short_description: Union[None, _str, 'types.StringFilter']
+    supported_languages: Union[None, _str, 'types.StringFilter']
+    header_image: Union[None, _str, 'types.StringFilter']
+    developers: Union[None, _str, 'types.StringFilter']
+    publishers: Union[None, _str, 'types.StringFilter']
     windows: Union[_bool, 'types.BooleanFilter']
     mac: Union[_bool, 'types.BooleanFilter']
     linux: Union[_bool, 'types.BooleanFilter']
@@ -2879,13 +2879,13 @@ class GameWhereInputRecursive4(TypedDict, total=False):
     name: Union[_str, 'types.StringFilter']
     required_age: Union[_int, 'types.IntFilter']
     is_free: Union[_bool, 'types.BooleanFilter']
-    detailed_description: Union[_str, 'types.StringFilter']
-    about_the_game: Union[_str, 'types.StringFilter']
-    short_description: Union[_str, 'types.StringFilter']
-    supported_languages: Union[_str, 'types.StringFilter']
-    header_image: Union[_str, 'types.StringFilter']
-    developers: Union[_str, 'types.StringFilter']
-    publishers: Union[_str, 'types.StringFilter']
+    detailed_description: Union[None, _str, 'types.StringFilter']
+    about_the_game: Union[None, _str, 'types.StringFilter']
+    short_description: Union[None, _str, 'types.StringFilter']
+    supported_languages: Union[None, _str, 'types.StringFilter']
+    header_image: Union[None, _str, 'types.StringFilter']
+    developers: Union[None, _str, 'types.StringFilter']
+    publishers: Union[None, _str, 'types.StringFilter']
     windows: Union[_bool, 'types.BooleanFilter']
     mac: Union[_bool, 'types.BooleanFilter']
     linux: Union[_bool, 'types.BooleanFilter']
@@ -9203,13 +9203,13 @@ GameGenreRelationalFieldKeys = Literal[
 
 class DeveloperOptionalCreateInput(TypedDict, total=False):
     """Optional arguments to the Developer create method"""
+    amount_games_published: _int
     games: 'GameDeveloperCreateManyNestedWithoutRelationsInput'
 
 
 class DeveloperCreateInput(DeveloperOptionalCreateInput):
     """Required arguments to the Developer create method"""
     name: _str
-    amount_games_published: _int
 
 
 # TODO: remove this in favour of without explicit relations
@@ -9217,12 +9217,12 @@ class DeveloperCreateInput(DeveloperOptionalCreateInput):
 
 class DeveloperOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     """Optional arguments to the Developer create method, without relations"""
+    amount_games_published: _int
 
 
 class DeveloperCreateWithoutRelationsInput(DeveloperOptionalCreateWithoutRelationsInput):
     """Required arguments to the Developer create method, without relations"""
     name: _str
-    amount_games_published: _int
 
 class DeveloperConnectOrCreateWithoutRelationsInput(TypedDict):
     create: 'DeveloperCreateWithoutRelationsInput'
@@ -10640,13 +10640,13 @@ DeveloperRelationalFieldKeys = Literal[
 
 class PublisherOptionalCreateInput(TypedDict, total=False):
     """Optional arguments to the Publisher create method"""
+    amount_games_published: _int
     games: 'GamePublisherCreateManyNestedWithoutRelationsInput'
 
 
 class PublisherCreateInput(PublisherOptionalCreateInput):
     """Required arguments to the Publisher create method"""
     name: _str
-    amount_games_published: _int
 
 
 # TODO: remove this in favour of without explicit relations
@@ -10654,12 +10654,12 @@ class PublisherCreateInput(PublisherOptionalCreateInput):
 
 class PublisherOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     """Optional arguments to the Publisher create method, without relations"""
+    amount_games_published: _int
 
 
 class PublisherCreateWithoutRelationsInput(PublisherOptionalCreateWithoutRelationsInput):
     """Required arguments to the Publisher create method, without relations"""
     name: _str
-    amount_games_published: _int
 
 class PublisherConnectOrCreateWithoutRelationsInput(TypedDict):
     create: 'PublisherCreateWithoutRelationsInput'
@@ -14982,6 +14982,17 @@ GamePublisherRelationalFieldKeys = Literal[
 class ReviewOptionalCreateInput(TypedDict, total=False):
     """Optional arguments to the Review create method"""
     gameId: _int
+    authorSteamId: Optional[_str]
+    authorPlaytimeForever: _int
+    authorPlaytimeAtReview: _int
+    authorLastPlayed: Optional[datetime.datetime]
+    language: Optional[_str]
+    review: Optional[_str]
+    votedUp: _bool
+    votesUp: _int
+    votesFunny: _int
+    weightedVoteScore: Optional[_float]
+    writtenDuringEarlyAccess: _bool
     game: 'GameCreateNestedWithoutRelationsInput'
     timestampCreated: Optional[datetime.datetime]
     timestampUpdated: Optional[datetime.datetime]
@@ -14990,17 +15001,6 @@ class ReviewOptionalCreateInput(TypedDict, total=False):
 class ReviewCreateInput(ReviewOptionalCreateInput):
     """Required arguments to the Review create method"""
     id: _str
-    authorSteamId: _str
-    authorPlaytimeForever: _int
-    authorPlaytimeAtReview: _int
-    authorLastPlayed: datetime.datetime
-    language: _str
-    review: _str
-    votedUp: _bool
-    votesUp: _int
-    votesFunny: _int
-    weightedVoteScore: _float
-    writtenDuringEarlyAccess: _bool
 
 
 # TODO: remove this in favour of without explicit relations
@@ -15009,6 +15009,17 @@ class ReviewCreateInput(ReviewOptionalCreateInput):
 class ReviewOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     """Optional arguments to the Review create method, without relations"""
     gameId: _int
+    authorSteamId: Optional[_str]
+    authorPlaytimeForever: _int
+    authorPlaytimeAtReview: _int
+    authorLastPlayed: Optional[datetime.datetime]
+    language: Optional[_str]
+    review: Optional[_str]
+    votedUp: _bool
+    votesUp: _int
+    votesFunny: _int
+    weightedVoteScore: Optional[_float]
+    writtenDuringEarlyAccess: _bool
     timestampCreated: Optional[datetime.datetime]
     timestampUpdated: Optional[datetime.datetime]
 
@@ -15016,17 +15027,6 @@ class ReviewOptionalCreateWithoutRelationsInput(TypedDict, total=False):
 class ReviewCreateWithoutRelationsInput(ReviewOptionalCreateWithoutRelationsInput):
     """Required arguments to the Review create method, without relations"""
     id: _str
-    authorSteamId: _str
-    authorPlaytimeForever: _int
-    authorPlaytimeAtReview: _int
-    authorLastPlayed: datetime.datetime
-    language: _str
-    review: _str
-    votedUp: _bool
-    votesUp: _int
-    votesFunny: _int
-    weightedVoteScore: _float
-    writtenDuringEarlyAccess: _bool
 
 class ReviewConnectOrCreateWithoutRelationsInput(TypedDict):
     create: 'ReviewCreateWithoutRelationsInput'
@@ -15057,16 +15057,16 @@ ReviewWhereUniqueInput = _ReviewWhereUnique_id_Input
 class ReviewUpdateInput(TypedDict, total=False):
     """Optional arguments for updating a record"""
     id: _str
-    authorSteamId: _str
+    authorSteamId: Optional[_str]
     authorPlaytimeForever: Union[AtomicIntInput, _int]
     authorPlaytimeAtReview: Union[AtomicIntInput, _int]
-    authorLastPlayed: datetime.datetime
-    language: _str
-    review: _str
+    authorLastPlayed: Optional[datetime.datetime]
+    language: Optional[_str]
+    review: Optional[_str]
     votedUp: _bool
     votesUp: Union[AtomicIntInput, _int]
     votesFunny: Union[AtomicIntInput, _int]
-    weightedVoteScore: Union[AtomicFloatInput, _float]
+    weightedVoteScore: Optional[Union[AtomicFloatInput, _float]]
     writtenDuringEarlyAccess: _bool
     game: 'GameUpdateOneWithoutRelationsInput'
     timestampCreated: Optional[datetime.datetime]
@@ -15076,16 +15076,16 @@ class ReviewUpdateInput(TypedDict, total=False):
 class ReviewUpdateManyMutationInput(TypedDict, total=False):
     """Arguments for updating many records"""
     id: _str
-    authorSteamId: _str
+    authorSteamId: Optional[_str]
     authorPlaytimeForever: Union[AtomicIntInput, _int]
     authorPlaytimeAtReview: Union[AtomicIntInput, _int]
-    authorLastPlayed: datetime.datetime
-    language: _str
-    review: _str
+    authorLastPlayed: Optional[datetime.datetime]
+    language: Optional[_str]
+    review: Optional[_str]
     votedUp: _bool
     votesUp: Union[AtomicIntInput, _int]
     votesFunny: Union[AtomicIntInput, _int]
-    weightedVoteScore: Union[AtomicFloatInput, _float]
+    weightedVoteScore: Optional[Union[AtomicFloatInput, _float]]
     writtenDuringEarlyAccess: _bool
     timestampCreated: Optional[datetime.datetime]
     timestampUpdated: Optional[datetime.datetime]
@@ -16386,16 +16386,16 @@ class ReviewWhereInput(TypedDict, total=False):
     """Review arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     gameId: Union[_int, 'types.IntFilter']
-    authorSteamId: Union[_str, 'types.StringFilter']
+    authorSteamId: Union[None, _str, 'types.StringFilter']
     authorPlaytimeForever: Union[_int, 'types.IntFilter']
     authorPlaytimeAtReview: Union[_int, 'types.IntFilter']
-    authorLastPlayed: Union[datetime.datetime, 'types.DateTimeFilter']
-    language: Union[_str, 'types.StringFilter']
-    review: Union[_str, 'types.StringFilter']
+    authorLastPlayed: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    language: Union[None, _str, 'types.StringFilter']
+    review: Union[None, _str, 'types.StringFilter']
     votedUp: Union[_bool, 'types.BooleanFilter']
     votesUp: Union[_int, 'types.IntFilter']
     votesFunny: Union[_int, 'types.IntFilter']
-    weightedVoteScore: Union[_float, 'types.FloatFilter']
+    weightedVoteScore: Union[None, _float, 'types.FloatFilter']
     writtenDuringEarlyAccess: Union[_bool, 'types.BooleanFilter']
     game: 'GameRelationFilter'
     timestampCreated: Union[None, datetime.datetime, 'types.DateTimeFilter']
@@ -16412,16 +16412,16 @@ class ReviewWhereInputRecursive1(TypedDict, total=False):
     """Review arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     gameId: Union[_int, 'types.IntFilter']
-    authorSteamId: Union[_str, 'types.StringFilter']
+    authorSteamId: Union[None, _str, 'types.StringFilter']
     authorPlaytimeForever: Union[_int, 'types.IntFilter']
     authorPlaytimeAtReview: Union[_int, 'types.IntFilter']
-    authorLastPlayed: Union[datetime.datetime, 'types.DateTimeFilter']
-    language: Union[_str, 'types.StringFilter']
-    review: Union[_str, 'types.StringFilter']
+    authorLastPlayed: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    language: Union[None, _str, 'types.StringFilter']
+    review: Union[None, _str, 'types.StringFilter']
     votedUp: Union[_bool, 'types.BooleanFilter']
     votesUp: Union[_int, 'types.IntFilter']
     votesFunny: Union[_int, 'types.IntFilter']
-    weightedVoteScore: Union[_float, 'types.FloatFilter']
+    weightedVoteScore: Union[None, _float, 'types.FloatFilter']
     writtenDuringEarlyAccess: Union[_bool, 'types.BooleanFilter']
     game: 'GameRelationFilter'
     timestampCreated: Union[None, datetime.datetime, 'types.DateTimeFilter']
@@ -16438,16 +16438,16 @@ class ReviewWhereInputRecursive2(TypedDict, total=False):
     """Review arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     gameId: Union[_int, 'types.IntFilter']
-    authorSteamId: Union[_str, 'types.StringFilter']
+    authorSteamId: Union[None, _str, 'types.StringFilter']
     authorPlaytimeForever: Union[_int, 'types.IntFilter']
     authorPlaytimeAtReview: Union[_int, 'types.IntFilter']
-    authorLastPlayed: Union[datetime.datetime, 'types.DateTimeFilter']
-    language: Union[_str, 'types.StringFilter']
-    review: Union[_str, 'types.StringFilter']
+    authorLastPlayed: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    language: Union[None, _str, 'types.StringFilter']
+    review: Union[None, _str, 'types.StringFilter']
     votedUp: Union[_bool, 'types.BooleanFilter']
     votesUp: Union[_int, 'types.IntFilter']
     votesFunny: Union[_int, 'types.IntFilter']
-    weightedVoteScore: Union[_float, 'types.FloatFilter']
+    weightedVoteScore: Union[None, _float, 'types.FloatFilter']
     writtenDuringEarlyAccess: Union[_bool, 'types.BooleanFilter']
     game: 'GameRelationFilter'
     timestampCreated: Union[None, datetime.datetime, 'types.DateTimeFilter']
@@ -16464,16 +16464,16 @@ class ReviewWhereInputRecursive3(TypedDict, total=False):
     """Review arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     gameId: Union[_int, 'types.IntFilter']
-    authorSteamId: Union[_str, 'types.StringFilter']
+    authorSteamId: Union[None, _str, 'types.StringFilter']
     authorPlaytimeForever: Union[_int, 'types.IntFilter']
     authorPlaytimeAtReview: Union[_int, 'types.IntFilter']
-    authorLastPlayed: Union[datetime.datetime, 'types.DateTimeFilter']
-    language: Union[_str, 'types.StringFilter']
-    review: Union[_str, 'types.StringFilter']
+    authorLastPlayed: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    language: Union[None, _str, 'types.StringFilter']
+    review: Union[None, _str, 'types.StringFilter']
     votedUp: Union[_bool, 'types.BooleanFilter']
     votesUp: Union[_int, 'types.IntFilter']
     votesFunny: Union[_int, 'types.IntFilter']
-    weightedVoteScore: Union[_float, 'types.FloatFilter']
+    weightedVoteScore: Union[None, _float, 'types.FloatFilter']
     writtenDuringEarlyAccess: Union[_bool, 'types.BooleanFilter']
     game: 'GameRelationFilter'
     timestampCreated: Union[None, datetime.datetime, 'types.DateTimeFilter']
@@ -16490,16 +16490,16 @@ class ReviewWhereInputRecursive4(TypedDict, total=False):
     """Review arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     gameId: Union[_int, 'types.IntFilter']
-    authorSteamId: Union[_str, 'types.StringFilter']
+    authorSteamId: Union[None, _str, 'types.StringFilter']
     authorPlaytimeForever: Union[_int, 'types.IntFilter']
     authorPlaytimeAtReview: Union[_int, 'types.IntFilter']
-    authorLastPlayed: Union[datetime.datetime, 'types.DateTimeFilter']
-    language: Union[_str, 'types.StringFilter']
-    review: Union[_str, 'types.StringFilter']
+    authorLastPlayed: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    language: Union[None, _str, 'types.StringFilter']
+    review: Union[None, _str, 'types.StringFilter']
     votedUp: Union[_bool, 'types.BooleanFilter']
     votesUp: Union[_int, 'types.IntFilter']
     votesFunny: Union[_int, 'types.IntFilter']
-    weightedVoteScore: Union[_float, 'types.FloatFilter']
+    weightedVoteScore: Union[None, _float, 'types.FloatFilter']
     writtenDuringEarlyAccess: Union[_bool, 'types.BooleanFilter']
     game: 'GameRelationFilter'
     timestampCreated: Union[None, datetime.datetime, 'types.DateTimeFilter']
