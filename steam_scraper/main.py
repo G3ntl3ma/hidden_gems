@@ -33,6 +33,12 @@ def main() -> None:
         default=0,
         help="Skip the first N appids (useful for resuming)",
     )
+    parser.add_argument(
+        "--resume",
+        dest="resume",
+        action="store_true",
+        help="Skip appids already present in DB and/or existing output CSV",
+    )
     args = parser.parse_args()
 
     run_pipeline(
@@ -40,6 +46,7 @@ def main() -> None:
         output_csv=args.output_csv,
         limit=args.limit,
         offset=args.offset,
+        resume=args.resume,
     )
 
 

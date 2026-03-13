@@ -290,6 +290,8 @@ def parse_reviews_list(appid: int, raw_json: Any) -> list[dict[str, Any]]:
     if not isinstance(reviews_raw, list):
         return []
 
+    MAX_INT = 2_147_483_647
+
     parsed: list[dict[str, Any]] = []
     for r in reviews_raw:
         if not isinstance(r, dict):
@@ -329,8 +331,8 @@ def parse_reviews_list(appid: int, raw_json: Any) -> list[dict[str, Any]]:
                 "language": r.get("language") or "",
                 "review": r.get("review") or "",
                 "votedUp": bool(r.get("voted_up")),
-                "votesUp": _intval(r.get("votes_up"), 0),
-                "votesFunny": _intval(r.get("votes_funny"), 0),
+                "votesUp": min(_intval(r.get("votes_up"), 0), MAX_INT),
+                "votesFunny": min(_intval(r.get("votes_funny"), 0), MAX_INT),
                 "weightedVoteScore": _floatval(r.get("weighted_vote_score"), 0.0),
                 "writtenDuringEarlyAccess": bool(r.get("written_during_early_access")),
                 "timestampCreated": datetime.fromtimestamp(ts_created) if ts_created > 0 else None,

@@ -43,6 +43,47 @@ def _read_appids(csv_path: str) -> list[int]:
     return appids
 
 
+def _read_existing_game_ids_from_csv(csv_path: str) -> set[int]:
+    path = Path(csv_path)
+    if not path.exists():
+        return set()
+    ids: set[int] = set()
+    with path.open("r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            raw = row.get("id")
+            if not raw:
+                continue
+            try:
+                ids.add(int(raw))
+            except ValueError:
+                continue
+    return ids
+
+
+def _read_existing_game_ids_from_db(db: Prisma) -> set[int]:
+    """
+    Fetch all existing Game IDs from the DB.
+
+    prisma-client-py doesn't support `select=...` on `find_many()`, so we page
+    through results and read the `id` field from each model instance.
+    """
+    ids: set[int] = set()
+    take = 1000
+    skip = 0
+    while True:
+        rows = db.game.find_many(take=take, skip=skip)
+        if not rows:
+            break
+        for r in rows:
+            try:
+                ids.add(int(getattr(r, "id")))
+            except Exception:
+                continue
+        skip += len(rows)
+    return ids
+
+
 def _fetch_store_appdetails(http: HttpClient, appid: int) -> StoreParsed | None:
     cfg = get_api_config()
     base = cfg.store_base_url.rstrip("/")
@@ -430,6 +471,7 @@ def run_pipeline(
     output_csv: str | None = None,
     limit: int | None = None,
     offset: int = 0,
+    resume: bool = False,
 ) -> None:
     paths_cfg = get_paths_config()
     csv_in = appids_csv or paths_cfg.appids_csv
@@ -439,8 +481,6 @@ def run_pipeline(
     all_appids = _read_appids(csv_in)
     if offset:
         all_appids = all_appids[offset:]
-    if limit is not None:
-        all_appids = all_appids[:limit]
 
     http = HttpClient()
     steamspy = SteamSpyClient()
@@ -451,49 +491,67 @@ def run_pipeline(
     reviews_path = Path(reviews_out)
     reviews_path.parent.mkdir(parents=True, exist_ok=True)
 
-    with (
-        db_session() as db,
-        csv_path.open("w", encoding="utf-8", newline="") as f_out,
-        reviews_path.open("w", encoding="utf-8", newline="") as f_reviews,
-    ):
-        writer = csv.DictWriter(f_out, fieldnames=_csv_headers())
-        writer.writeheader()
+    # For resume runs, append to existing CSVs instead of truncating them.
+    # Write headers only when creating a new/empty file.
+    games_exists = csv_path.exists() and csv_path.stat().st_size > 0
+    reviews_exists = reviews_path.exists() and reviews_path.stat().st_size > 0
+    games_mode = "a" if resume and games_exists else "w"
+    reviews_mode = "a" if resume and reviews_exists else "w"
 
-        reviews_writer = csv.DictWriter(f_reviews, fieldnames=_review_csv_headers())
-        reviews_writer.writeheader()
+    with db_session() as db:
+        if resume:
+            processed = set()
+            processed |= _read_existing_game_ids_from_db(db)
+            processed |= _read_existing_game_ids_from_csv(csv_out)
+            all_appids = [a for a in all_appids if a not in processed]
 
-        for idx, appid in enumerate(all_appids, start=1):
-            store_parsed = _fetch_store_appdetails(http, appid)
-            steamspy_parsed = _fetch_steamspy_appdetails(steamspy, appid)
-            reviews_summary, reviews_list = _fetch_reviews(http, appid)
+        if limit is not None:
+            all_appids = all_appids[:limit]
 
-            record = _merge_record(appid, store_parsed, steamspy_parsed, reviews_summary)
+        with (
+            csv_path.open(games_mode, encoding="utf-8", newline="") as f_out,
+            reviews_path.open(reviews_mode, encoding="utf-8", newline="") as f_reviews,
+        ):
+            writer = csv.DictWriter(f_out, fieldnames=_csv_headers())
+            if games_mode == "w":
+                writer.writeheader()
 
-            # Persist to DB
-            _upsert_game(db, record)
-            if reviews_list:
-                _upsert_reviews(db, reviews_list)
+            reviews_writer = csv.DictWriter(f_reviews, fieldnames=_review_csv_headers())
+            if reviews_mode == "w":
+                reviews_writer.writeheader()
 
-            # Maintain relations if we have store data.
-            if store_parsed is not None:
-                _ensure_developer_relations(db, appid, store_parsed.developers)
-                _ensure_publisher_relations(db, appid, store_parsed.publishers)
-                _ensure_category_relations(db, appid, store_parsed.categories)
-                _ensure_genre_relations(db, appid, store_parsed.genres)
+            for idx, appid in enumerate(all_appids, start=1):
+                store_parsed = _fetch_store_appdetails(http, appid)
+                steamspy_parsed = _fetch_steamspy_appdetails(steamspy, appid)
+                reviews_summary, reviews_list = _fetch_reviews(http, appid)
 
-            # CSV row: ensure release_date is serializable.
-            row = dict(record)
-            rd = row.get("release_date")
-            if isinstance(rd, datetime):
-                row["release_date"] = rd.date().isoformat()
-            writer.writerow(row)
+                record = _merge_record(appid, store_parsed, steamspy_parsed, reviews_summary)
 
-            # Write reviews to separate CSV, normalizing datetimes.
-            for review in reviews_list:
-                r_row = dict(review)
-                for key in ("authorLastPlayed", "timestampCreated", "timestampUpdated"):
-                    val = r_row.get(key)
-                    if isinstance(val, datetime):
-                        r_row[key] = val.isoformat()
-                reviews_writer.writerow(r_row)
+                # Persist to DB
+                _upsert_game(db, record)
+                if reviews_list:
+                    _upsert_reviews(db, reviews_list)
+
+                # Maintain relations if we have store data.
+                if store_parsed is not None:
+                    _ensure_developer_relations(db, appid, store_parsed.developers)
+                    _ensure_publisher_relations(db, appid, store_parsed.publishers)
+                    _ensure_category_relations(db, appid, store_parsed.categories)
+                    _ensure_genre_relations(db, appid, store_parsed.genres)
+
+                # CSV row: ensure release_date is serializable.
+                row = dict(record)
+                rd = row.get("release_date")
+                if isinstance(rd, datetime):
+                    row["release_date"] = rd.date().isoformat()
+                writer.writerow(row)
+
+                # Write reviews to separate CSV, normalizing datetimes.
+                for review in reviews_list:
+                    r_row = dict(review)
+                    for key in ("authorLastPlayed", "timestampCreated", "timestampUpdated"):
+                        val = r_row.get(key)
+                        if isinstance(val, datetime):
+                            r_row[key] = val.isoformat()
+                    reviews_writer.writerow(r_row)
 
