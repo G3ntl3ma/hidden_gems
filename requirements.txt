@@ -6,4 +6,8 @@ python-dotenv
 requests
 prisma
 joblib
+nltk
+matplotlib
+seaborn
+umap-learn
 
