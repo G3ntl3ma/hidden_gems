@@ -1,114 +1,282 @@
-# Hidden Gems — Python ML Starter
+# Hidden Gems
 
-Starter project scaffold with:
+Find underrated Steam games by combining NLP, clustering, and anomaly detection.
 
-- `api/`: database + external API connectors
-- `models/`: training / inference code
-- `view/`: Streamlit dashboard
-- `prisma/`: Prisma schema for SQLite (Prisma Client Python)
+- **api/** — Database (Prisma + SQLite) and external API clients
+- **models/** — Analysis pipeline (EDA, sentiment, topic modeling, clustering, hidden-gem scoring)
+- **view/** — Streamlit dashboard with interactive analysis
+- **prisma/** — Prisma schema and generated Python client
+- **steam_scraper/** — Steam Store + SteamSpy + reviews ingestion pipeline
+
+---
 
 ## Quickstart
 
-Create a virtual environment, install dependencies:
+**1. Virtual environment and dependencies**
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Copy env vars:
+**2. Environment**
 
 ```bash
 cp .env.example .env
 ```
 
-Generate Prisma client + create local SQLite DB:
+Set `DATABASE_URL` to a local SQLite file (required for Prisma):
 
 ```bash
-# 1) Ensure .env has a local SQLite URL
-echo 'DATABASE_URL="file:./dev.db"' >> .env
-
-# 2) Push the Prisma schema to the local DB (Prisma 5.x)
-npx prisma@5.17.0 db push --schema prisma/schema.prisma
+# In .env
+DATABASE_URL="file:./dev.db"
 ```
 
-Run the dashboard:
+**3. Database and Prisma client**
+
+```bash
+npx prisma@5.17.0 db push --schema prisma/schema.prisma
+source .venv/bin/activate && python -m prisma generate --schema prisma/schema.prisma
+```
+
+**4. Run the dashboard**
 
 ```bash
 streamlit run view/app.py
 ```
 
-## Training a model (CSV)
+---
 
-```bash
-python -m models.train --csv path/to/data.csv --target target_column
-```
+## Steam data pipeline
 
-## Exporting all Steam appids to CSV
+### Step 1: Export all Steam app IDs
 
-Set your Steam Web API key in an environment variable:
-
-```bash
-export STEAM_WEB_API_KEY="your_steam_web_api_key_here"
-```
-
-Then run the export script from the project root:
+Requires `STEAM_WEB_API_KEY` in `.env` or the environment.
 
 ```bash
 python scripts/export_steam_appids.py
 ```
 
-This will create a `steam_appids.csv` file in the project root containing a single column `appid` with all appids returned by the Steam `IStoreService/GetAppList` endpoint.
+Creates `steam_appids.csv` in the project root (one `appid` per row).
 
-## Scraping full Steam game data (CSV + local DB)
+### Step 2: Scrape game data and reviews
 
-The project includes a scraper that:
+The scraper uses:
 
-- Reads all appids from `steam_appids.csv`
-- Calls:
-  - Steam Store appdetails: `https://store.steampowered.com/api/appdetails?appids={appid}`
-  - SteamSpy appdetails: `https://steamspy.com/api.php?request=appdetails&appid={appid}` ([docs](https://steamspy.com/api.php?appdetails&appid=440))
-  - Steam Store review summary: `https://store.steampowered.com/appreviews/{appid}?cursor=*&json=1&...`
-- Merges the results
-- Writes:
-  - `steam_games_full.csv` in the project root
-  - Rows into the Prisma-managed SQLite DB (`dev.db`) using the existing schema in `prisma/schema.prisma`
+- **Steam Store** — appdetails (name, developers, publishers, categories, genres, etc.) and review summaries + up to 100 reviews per game
+- **SteamSpy** — owners, average playtime
 
-To run the scraper:
+Outputs:
+
+- **steam_games_full.csv** — one row per game
+- **steam_reviews_full.csv** — one row per review (max 100 per game)
+- **Prisma DB** (`dev.db`) — `Game`, `Review`, and related tables
+
+**Run (first time or full run):**
 
 ```bash
-
-# push the db 
-prisma db push --schema prisma/schema.prisma
-# From the project root, with the virtualenv activated
-python -m steam_scraper.main --limit 100   # small test batch
-
-# Or run for all appids
 python -m steam_scraper.main
 ```
 
-## Migrating data from local SQLite to Turso/libsql
+**Resume** (skip games already in the DB or in the games CSV; appends to CSVs):
 
-After running the scraper, all data lives in the local SQLite file referenced by
-`DATABASE_URL` (e.g. `file:./dev.db`). To move this data into a remote Turso/libsql
-database (such as `libsql://hidden-gems-test-g3ntl3ma.aws-eu-west-1.turso.io`),
-you can:
+```bash
+python -m steam_scraper.main --resume
+```
 
-1. Dump the local SQLite database to SQL:
+**Options:**
 
-   ```bash
-   sqlite3 dev.db ".dump" > dump.sql
-   ```
+| Option | Description |
+|--------|-------------|
+| `--limit N` | Process only N appids (e.g. `--limit 100` for testing) |
+| `--offset N` | Skip the first N appids in the list |
+| `--resume` | Skip appids already in DB / `steam_games_full.csv` and append to CSVs |
+| `--appid-csv PATH` | Input CSV of appids (default: `steam_appids.csv`) |
+| `--output-csv PATH` | Output games CSV (default: `steam_games_full.csv`) |
 
-2. Use any libsql-compatible client or shell that accepts the `libsql://` URL
-   to import `dump.sql`. For example, with a generic libsql shell:
+Example:
 
-   ```bash
-   libsql-shell "libsql://hidden-gems-test-g3ntl3ma.aws-eu-west-1.turso.io"
-   # inside the shell:
-   .read dump.sql
-   ```
+```bash
+python -m steam_scraper.main --resume --limit 500
+```
 
-This leaves Prisma + the Python client using the local SQLite file for development,
-while your Turso instance holds a copy of the same schema and data for remote use.
+### Step 3: Clean collected datasets
+
+Run a post-collection cleaning pass to remove unusable rows, normalize text, and
+generate a quality report:
+
+```bash
+python scripts/clean_collected_data.py
+```
+
+Default outputs:
+
+- **steam_games_clean.csv** — cleaned game rows (invalid/empty rows removed, fields normalized)
+- **steam_reviews_clean.csv** — cleaned review rows (tokenless/invalid/duplicate reviews removed)
+- **data_quality_report.json** — counters and warnings about detected data quality issues
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--games-in PATH` | Input raw games CSV (default: `steam_games_full.csv`) |
+| `--reviews-in PATH` | Input raw reviews CSV (default: `steam_reviews_full.csv`) |
+| `--games-out PATH` | Output cleaned games CSV (default: `steam_games_clean.csv`) |
+| `--reviews-out PATH` | Output cleaned reviews CSV (default: `steam_reviews_clean.csv`) |
+| `--report-out PATH` | Output quality report JSON (default: `data_quality_report.json`) |
+
+---
+
+## Analysis pipeline
+
+Once data collection is complete (i.e. `steam_games_full.csv` and `steam_reviews_full.csv` exist in the project root), the analysis pipeline is ready to use.
+
+### Option A: Streamlit dashboard (recommended)
+
+The easiest way to run the full pipeline is the interactive dashboard. It loads the CSVs, runs every analysis step, and shows the results across five tabs.
+
+```bash
+streamlit run view/app.py
+```
+
+Navigate to **Analysis** in the sidebar. The page has five tabs:
+
+| Tab | What it does |
+|-----|--------------|
+| **EDA Overview** | Descriptive statistics, missing-data audit, review-score distribution, platform support, ownership tiers, correlation heatmap |
+| **Sentiment** | VADER sentiment analysis on every review, compound-score histogram, sentiment split by vote direction, per-game aggregation table |
+| **Topics** | LDA or NMF topic modeling on English reviews (configurable number of topics and method), top words per topic, per-game topic averages |
+| **Clusters** | Feature matrix (game metadata + sentiment + topic features, scaled), K-Means with elbow/silhouette plots, DBSCAN, hierarchical clustering, 2-D scatter (PCA or UMAP) colored by cluster |
+| **Hidden Gems** | Quality score, visibility score, combined hidden-gem ranking, quality-vs-visibility scatter plot, Isolation Forest anomaly detection |
+
+Results are cached after the first run so switching tabs is instant.
+
+### Option B: Python scripts / notebooks
+
+Every analysis module can be imported and used directly.
+
+**1. Exploratory Data Analysis** (`models/eda.py`)
+
+```python
+import pandas as pd
+from models.eda import numeric_summary, missing_data_audit, correlation_matrix
+
+games = pd.read_csv("steam_games_full.csv")
+print(numeric_summary(games))
+print(missing_data_audit(games))
+print(correlation_matrix(games))
+```
+
+**2. Sentiment Analysis** (`models/sentiment.py`)
+
+Uses VADER (rule-based, no training needed). The VADER lexicon is downloaded automatically on first run.
+
+```python
+from models.sentiment import add_sentiment_to_reviews, aggregate_sentiment_per_game
+
+reviews = pd.read_csv("steam_reviews_full.csv")
+
+# Add sentiment_neg/neu/pos/compound columns to each review
+reviews_with_sentiment = add_sentiment_to_reviews(reviews)
+
+# Roll up to one row per game: mean, median, std, positive ratio, avg review length
+per_game = aggregate_sentiment_per_game(reviews_with_sentiment)
+print(per_game)
+```
+
+**3. Topic Modeling** (`models/topic_model.py`)
+
+Runs TF-IDF then LDA or NMF to discover latent topics in review text. Works best with English-language reviews.
+
+```python
+from models.topic_model import build_review_topics_pipeline
+
+reviews = pd.read_csv("steam_reviews_full.csv")
+english = reviews[reviews["language"].str.lower() == "english"]
+
+result = build_review_topics_pipeline(english, n_topics=8, method="lda")
+
+# Top words per topic
+for tid, words in result["top_words"].items():
+    print(f"Topic {tid}: {', '.join(words)}")
+
+# Per-game topic averages (one row per game, one column per topic)
+print(result["game_topics"])
+```
+
+**4. Clustering** (`models/clustering.py`)
+
+Builds a feature matrix from game metadata + sentiment + topic features, then runs clustering algorithms.
+
+```python
+from models.clustering import build_feature_matrix, run_kmeans, run_dbscan, reduce_pca
+
+games = pd.read_csv("steam_games_full.csv")
+
+# per_game and game_topics come from steps 2 and 3 above
+merged_df, X, feature_names = build_feature_matrix(games, per_game, result["game_topics"])
+
+# K-Means with automatic elbow/silhouette evaluation
+km = run_kmeans(X)
+print("Best silhouette:", max(km["silhouettes"]))
+
+# DBSCAN (noise points = potential outliers)
+db = run_dbscan(X, eps=1.5, min_samples=2)
+print(f"Clusters: {db['n_clusters']}, noise: {db['n_noise']}")
+
+# 2-D PCA for plotting
+X_2d, pca = reduce_pca(X)
+```
+
+**5. Hidden-Gem Scoring** (`models/hidden_gems.py`)
+
+Composite score combining quality signals (sentiment, positive ratio, playtime) with inverse-visibility signals (low owner count, few reviews, no metacritic).
+
+```python
+from models.hidden_gems import compute_hidden_gem_score, detect_anomalies
+
+# Merge games with per-game sentiment first
+enriched = games.merge(per_game, left_on="id", right_on="gameId", how="left")
+
+gems = compute_hidden_gem_score(enriched)
+print(gems.head(10))  # top 10 hidden gems
+
+# Isolation Forest anomaly detection on the feature matrix
+anomaly_labels = detect_anomalies(X)  # 1 = normal, -1 = outlier
+```
+
+### Analysis modules overview
+
+```
+models/
+  eda.py           Descriptive stats, missing-data audit, correlations, distributions
+  sentiment.py     VADER sentiment per review, aggregated per game
+  topic_model.py   TF-IDF + LDA/NMF topic modeling, per-game topic distributions
+  clustering.py    Feature engineering, K-Means, DBSCAN, hierarchical, PCA, UMAP
+  hidden_gems.py   Quality/visibility scoring, Isolation Forest anomaly detection
+```
+
+---
+
+## Migrating local DB to Turso / libsql
+
+Data is stored in the SQLite file from `DATABASE_URL` (e.g. `dev.db`). To copy it to a remote Turso (libsql) instance:
+
+**1. Dump SQLite**
+
+```bash
+sqlite3 dev.db ".dump" > dump.sql
+```
+
+**2. Import into Turso**
+
+Use a libsql-compatible client with your `libsql://...` URL and run the SQL (e.g. `.read dump.sql` in the Turso shell). Prisma and the scraper keep using the local `dev.db`; Turso holds a separate copy for remote use.
+
+---
+
+## Troubleshooting
+
+- **Prisma "url must start with file:"** — Set `DATABASE_URL="file:./dev.db"` in `.env` (SQLite only).
+- **"Client hasn't been generated yet"** — Run `python -m prisma generate --schema prisma/schema.prisma` with the venv activated.
+- **CSV overwritten on resume** — Use `--resume` so the scraper appends to existing games/reviews CSVs instead of overwriting.
