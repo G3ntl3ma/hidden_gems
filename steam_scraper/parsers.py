@@ -48,6 +48,31 @@ def _parse_release_date(release_info: dict[str, Any] | None) -> tuple[datetime |
     return None, coming_soon
 
 
+def _parse_required_age(value: Any) -> int:
+    """
+    Parse Steam's required_age field, which can be an int or a string like "18+".
+    """
+    if value is None:
+        return 0
+    if isinstance(value, int):
+        return max(0, min(value, 21))
+    s = str(value).strip()
+    if not s:
+        return 0
+    try:
+        return max(0, min(int(s), 21))
+    except ValueError:
+        pass
+    # e.g. "18+" -> strip trailing non-digits and parse
+    digits = re.sub(r"[^0-9].*$", "", s)
+    if digits:
+        try:
+            return max(0, min(int(digits), 21))
+        except ValueError:
+            pass
+    return 0
+
+
 def parse_store_appdetails(appid: int, raw_json: Any) -> StoreParsed | None:
     """
     Parse the Steam Store appdetails response for a single app.
@@ -75,7 +100,7 @@ def parse_store_appdetails(appid: int, raw_json: Any) -> StoreParsed | None:
         return None
 
     name = _strip_html(data.get("name") or "")
-    required_age = int(data.get("required_age") or 0)
+    required_age = _parse_required_age(data.get("required_age"))
     is_free = bool(data.get("is_free"))
     detailed_description = _strip_html(data.get("detailed_description") or "")
     about_the_game = _strip_html(data.get("about_the_game") or "")
