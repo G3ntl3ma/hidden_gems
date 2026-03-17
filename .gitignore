@@ -1,19 +1,52 @@
+# --- Environment / secrets ---
 .env
+.env.*
 .venv/
 venv/
+
+# --- Python ---
 __pycache__/
 *.py[cod]
+*.egg-info/
+dist/
+build/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-.DS_Store
+.tox/
+.coverage
+.coverage.*
+htmlcov/
 
-# SQLite
+# --- OS / editors ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- SQLite ---
 *.db
 *.db-journal
+
+# --- Data files (never track CSVs) ---
 *.csv
 
-# Model artifacts
+# --- Logs ---
+*.log
+
+# --- Model / analysis artifacts ---
 models/artifacts/*
 !models/artifacts/.gitkeep
+mlruns/
+**/*.pkl
+**/*.joblib
+**/*.parquet
+**/*.feather
+**/*.onnx
+**/*.pt
+**/*.pth
 
+# --- Prisma (generated code) ---
+prisma/generated/
