@@ -99,6 +99,8 @@ def clean_games_dataframe(games_df: pd.DataFrame) -> tuple[pd.DataFrame, dict[st
         "supported_languages",
         "developers",
         "publishers",
+        "genre_names",
+        "category_names",
         "header_image",
         "reviewScoreDesc",
         "store_status",

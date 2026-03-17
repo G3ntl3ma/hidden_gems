@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-03-14T10:06:32",
+  "generated_at": "2026-03-16T07:57:33",
   "games": {
-    "input_rows": 9,
+    "input_rows": 158561,
     "rows_with_invalid_id": 0,
     "rows_with_empty_key_text": 0,
     "required_age_coerced_or_clamped": 0,
@@ -17,30 +17,30 @@
     "reviewTotalPositive_coerced_or_clamped": 0,
     "reviewTotalNegative_coerced_or_clamped": 0,
     "reviewTotalReviews_coerced_or_clamped": 0,
-    "reviewScore_coerced_or_clamped": 0,
+    "reviewScore_coerced_or_clamped": 4,
     "owners_range_inverted_rows": 0,
-    "release_date_invalid": 0,
+    "release_date_invalid": 2,
     "duplicate_game_ids": 0,
-    "output_rows": 9,
+    "output_rows": 158561,
     "rows_dropped_total": 0
   },
   "reviews": {
-    "input_rows": 271,
+    "input_rows": 1825329,
     "rows_with_invalid_review_id": 0,
     "rows_with_invalid_game_id": 0,
     "rows_with_unknown_game_id": 0,
     "timestampUpdated_invalid": 0,
     "timestampCreated_invalid": 0,
-    "duplicate_review_ids": 103,
-    "rows_with_tokenless_review": 2,
+    "duplicate_review_ids": 1399961,
+    "rows_with_tokenless_review": 13817,
     "authorPlaytimeForever_coerced_or_clamped": 0,
     "authorPlaytimeAtReview_coerced_or_clamped": 0,
     "votesUp_coerced_or_clamped": 0,
     "votesFunny_coerced_or_clamped": 0,
     "weightedVoteScore_invalid": 0,
     "authorLastPlayed_invalid": 0,
-    "output_rows": 215,
-    "rows_dropped_total": 56
+    "output_rows": 1090651,
+    "rows_dropped_total": 734678
   },
   "warnings": [
     "More than 10% of review rows were dropped during cleaning.",

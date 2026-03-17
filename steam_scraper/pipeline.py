@@ -185,6 +185,8 @@ def _merge_record(
         "header_image": "",
         "developers": "",
         "publishers": "",
+        "genre_names": "",
+        "category_names": "",
         "windows": False,
         "mac": False,
         "linux": False,
@@ -213,6 +215,18 @@ def _merge_record(
 
     if store_parsed is not None:
         record.update(store_parsed.game_data)
+        genre_names = [
+            str(g.get("name", "")).strip()
+            for g in store_parsed.genres
+            if str(g.get("name", "")).strip()
+        ]
+        category_names = [
+            str(c.get("name", "")).strip()
+            for c in store_parsed.categories
+            if str(c.get("name", "")).strip()
+        ]
+        record["genre_names"] = "; ".join(dict.fromkeys(genre_names))
+        record["category_names"] = "; ".join(dict.fromkeys(category_names))
         record["store_status"] = "ok"
 
     if steamspy_parsed is not None:
@@ -420,6 +434,8 @@ def _csv_headers() -> list[str]:
         "header_image",
         "developers",
         "publishers",
+        "genre_names",
+        "category_names",
         "windows",
         "mac",
         "linux",

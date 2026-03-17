@@ -73,6 +73,9 @@ Outputs:
 - **steam_reviews_full.csv** — one row per review (max 100 per game)
 - **Prisma DB** (`dev.db`) — `Game`, `Review`, and related tables
 
+`steam_games_full.csv` now includes `genre_names` and `category_names` as
+semicolon-separated fields for dashboard filtering.
+
 **Run (first time or full run):**
 
 ```bash
@@ -116,6 +119,31 @@ Default outputs:
 - **steam_reviews_clean.csv** — cleaned review rows (tokenless/invalid/duplicate reviews removed)
 - **data_quality_report.json** — counters and warnings about detected data quality issues
 
+`steam_games_clean.csv` preserves `genre_names` and `category_names`.
+
+### Step 4: Precompute analysis artifacts (recommended)
+
+Precompute expensive analysis results (sentiment, topics, feature matrix,
+hidden-gem scores, anomaly labels) so Streamlit restarts do not recompute
+everything:
+
+```bash
+python scripts/precompute_analysis.py
+```
+
+Default output directory:
+
+- **.cache/analysis/** — pickled artifacts + `manifest.json` used for stale-cache checks
+
+Useful options:
+
+| Option | Description |
+|--------|-------------|
+| `--games-in PATH` | Input cleaned games CSV (default: `steam_games_clean.csv`) |
+| `--reviews-in PATH` | Input cleaned reviews CSV (default: `steam_reviews_clean.csv`) |
+| `--cache-dir PATH` | Artifact directory (default: `.cache/analysis`) |
+| `--force` | Recompute even if manifest is still fresh |
+
 **Options:**
 
 | Option | Description |
@@ -130,11 +158,14 @@ Default outputs:
 
 ## Analysis pipeline
 
-Once data collection is complete (i.e. `steam_games_full.csv` and `steam_reviews_full.csv` exist in the project root), the analysis pipeline is ready to use.
+Before running analysis, complete the data flow in order:
+`collect -> clean -> analyze`.
+Run `python scripts/clean_collected_data.py` after scraping, then ensure
+`steam_games_clean.csv` and `steam_reviews_clean.csv` exist in the project root.
 
 ### Option A: Streamlit dashboard (recommended)
 
-The easiest way to run the full pipeline is the interactive dashboard. It loads the CSVs, runs every analysis step, and shows the results across five tabs.
+The easiest way to run the full pipeline is the interactive dashboard. It loads the cleaned CSVs, runs every analysis step, and shows the results across five tabs.
 
 ```bash
 streamlit run view/app.py
@@ -150,7 +181,11 @@ Navigate to **Analysis** in the sidebar. The page has five tabs:
 | **Clusters** | Feature matrix (game metadata + sentiment + topic features, scaled), K-Means with elbow/silhouette plots, DBSCAN, hierarchical clustering, 2-D scatter (PCA or UMAP) colored by cluster |
 | **Hidden Gems** | Quality score, visibility score, combined hidden-gem ranking, quality-vs-visibility scatter plot, Isolation Forest anomaly detection |
 
-Results are cached after the first run so switching tabs is instant.
+Results are loaded from precomputed artifacts when available and up to date.
+If artifacts are missing or stale, the dashboard recomputes and refreshes them.
+
+The **Hidden Gems** tab also includes filters and sorting controls for release
+date, genres, categories, platforms, and score ranges.
 
 ### Option B: Python scripts / notebooks
 
@@ -162,7 +197,7 @@ Every analysis module can be imported and used directly.
 import pandas as pd
 from models.eda import numeric_summary, missing_data_audit, correlation_matrix
 
-games = pd.read_csv("steam_games_full.csv")
+games = pd.read_csv("steam_games_clean.csv")
 print(numeric_summary(games))
 print(missing_data_audit(games))
 print(correlation_matrix(games))
@@ -175,7 +210,7 @@ Uses VADER (rule-based, no training needed). The VADER lexicon is downloaded aut
 ```python
 from models.sentiment import add_sentiment_to_reviews, aggregate_sentiment_per_game
 
-reviews = pd.read_csv("steam_reviews_full.csv")
+reviews = pd.read_csv("steam_reviews_clean.csv")
 
 # Add sentiment_neg/neu/pos/compound columns to each review
 reviews_with_sentiment = add_sentiment_to_reviews(reviews)
@@ -192,7 +227,7 @@ Runs TF-IDF then LDA or NMF to discover latent topics in review text. Works best
 ```python
 from models.topic_model import build_review_topics_pipeline
 
-reviews = pd.read_csv("steam_reviews_full.csv")
+reviews = pd.read_csv("steam_reviews_clean.csv")
 english = reviews[reviews["language"].str.lower() == "english"]
 
 result = build_review_topics_pipeline(english, n_topics=8, method="lda")
@@ -212,7 +247,7 @@ Builds a feature matrix from game metadata + sentiment + topic features, then ru
 ```python
 from models.clustering import build_feature_matrix, run_kmeans, run_dbscan, reduce_pca
 
-games = pd.read_csv("steam_games_full.csv")
+games = pd.read_csv("steam_games_clean.csv")
 
 # per_game and game_topics come from steps 2 and 3 above
 merged_df, X, feature_names = build_feature_matrix(games, per_game, result["game_topics"])

@@ -1,0 +1,30 @@
+{
+  "generated_at_utc": "2026-03-17T10:54:28.151337+00:00",
+  "inputs": {
+    "games_csv": {
+      "path": "/home/user/Programming/hidden_gems/steam_games_clean.csv",
+      "mtime_ns": 1773647870075731138,
+      "size": 434050416
+    },
+    "reviews_csv": {
+      "path": "/home/user/Programming/hidden_gems/steam_reviews_clean.csv",
+      "mtime_ns": 1773647903867716617,
+      "size": 696637147
+    }
+  },
+  "params": {
+    "topic_count": 8,
+    "topic_method": "lda",
+    "topic_max_features": 5000,
+    "anomaly_contamination": 0.1
+  },
+  "artifact_files": {
+    "reviews_sentiment": "reviews_sentiment.pkl",
+    "sentiment_per_game": "sentiment_per_game.pkl",
+    "topic_result": "topic_result.pkl",
+    "features": "features.pkl",
+    "gem_scores": "gem_scores.pkl",
+    "anomaly_labels": "anomaly_labels.npy",
+    "manifest": "manifest.json"
+  }
+}
