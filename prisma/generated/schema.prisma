@@ -140,3 +140,10 @@ model Review {
   @@index([gameId])
   @@index([authorSteamId])
 }
+
+/// Manual gem / not-gem labels for training (Steam app id may exist before scrape).
+model CuratedSteamLabel {
+  appId     Int      @id
+  isGem     Boolean
+  updatedAt DateTime @updatedAt
+}

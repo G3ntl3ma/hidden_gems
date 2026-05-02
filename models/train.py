@@ -11,7 +11,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 def train(df: pd.DataFrame, *, target_col: str) -> tuple[Pipeline, dict]:
@@ -27,10 +27,12 @@ def train(df: pd.DataFrame, *, target_col: str) -> tuple[Pipeline, dict]:
     pre = ColumnTransformer(
         transformers=[
             ("cat", OneHotEncoder(handle_unknown="ignore"), cat_cols),
-            ("num", "passthrough", num_cols),
+            # Standardize numeric features to help LogisticRegression converge.
+            # with_mean=False keeps it compatible with sparse matrices from OneHotEncoder.
+            ("num", StandardScaler(with_mean=False), num_cols),
         ]
     )
-    model = LogisticRegression(max_iter=500)
+    model = LogisticRegression(max_iter=3000)
     pipe = Pipeline([("pre", pre), ("model", model)])
 
     X_train, X_test, y_train, y_test = train_test_split(

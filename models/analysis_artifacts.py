@@ -14,13 +14,14 @@ import pandas as pd
 from models.clustering import build_feature_matrix
 from models.hidden_gems import compute_hidden_gem_score, detect_anomalies
 from models.sentiment import add_sentiment_to_reviews, aggregate_sentiment_per_game
-from models.topic_model import build_review_topics_pipeline
+from models.topic_model import TOPIC_EXTRA_STOP_WORDS, build_review_topics_pipeline
 
 
 DEFAULT_TOPIC_COUNT = 8
 DEFAULT_TOPIC_METHOD = "lda"
 DEFAULT_TOPIC_MAX_FEATURES = 5000
 DEFAULT_ANOMALY_CONTAMINATION = 0.1
+DEFAULT_HIDDEN_GEM_SCORING_VERSION = "longevity_v3"
 
 
 ARTIFACT_FILENAMES = {
@@ -84,7 +85,9 @@ def _build_manifest(games_csv: Path, reviews_csv: Path) -> dict[str, Any]:
             "topic_count": DEFAULT_TOPIC_COUNT,
             "topic_method": DEFAULT_TOPIC_METHOD,
             "topic_max_features": DEFAULT_TOPIC_MAX_FEATURES,
+            "topic_extra_stop_words": sorted(TOPIC_EXTRA_STOP_WORDS),
             "anomaly_contamination": DEFAULT_ANOMALY_CONTAMINATION,
+            "hidden_gem_scoring_version": DEFAULT_HIDDEN_GEM_SCORING_VERSION,
         },
         "artifact_files": ARTIFACT_FILENAMES,
     }

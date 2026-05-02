@@ -2697,6 +2697,107 @@ class FindManyReviewArgsFromGameRecursive4(TypedDict, total=False):
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
     
+    
+
+class CuratedSteamLabelIncludeFromGame(TypedDict, total=False):
+    """Relational arguments for Game"""
+
+
+class CuratedSteamLabelIncludeFromGameRecursive1(TypedDict, total=False):
+    """Relational arguments for Game"""
+
+
+class CuratedSteamLabelIncludeFromGameRecursive2(TypedDict, total=False):
+    """Relational arguments for Game"""
+
+
+class CuratedSteamLabelIncludeFromGameRecursive3(TypedDict, total=False):
+    """Relational arguments for Game"""
+
+
+class CuratedSteamLabelIncludeFromGameRecursive4(TypedDict, total=False):
+    """Relational arguments for Game"""
+
+    
+
+class CuratedSteamLabelArgsFromGame(TypedDict, total=False):
+    """Arguments for Game"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromGameRecursive1(TypedDict, total=False):
+    """Arguments for Game"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromGameRecursive2(TypedDict, total=False):
+    """Arguments for Game"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromGameRecursive3(TypedDict, total=False):
+    """Arguments for Game"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromGameRecursive4(TypedDict, total=False):
+    """Arguments for Game"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromGame(TypedDict, total=False):
+    """Arguments for Game"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromGameRecursive1(TypedDict, total=False):
+    """Arguments for Game"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromGameRecursive2(TypedDict, total=False):
+    """Arguments for Game"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromGameRecursive3(TypedDict, total=False):
+    """Arguments for Game"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromGameRecursive4(TypedDict, total=False):
+    """Arguments for Game"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    
 
 
 FindManyGameArgs = FindManyGameArgsFromGame
@@ -4645,6 +4746,107 @@ class FindManyReviewArgsFromCategoryRecursive4(TypedDict, total=False):
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
     
+    
+
+class CuratedSteamLabelIncludeFromCategory(TypedDict, total=False):
+    """Relational arguments for Category"""
+
+
+class CuratedSteamLabelIncludeFromCategoryRecursive1(TypedDict, total=False):
+    """Relational arguments for Category"""
+
+
+class CuratedSteamLabelIncludeFromCategoryRecursive2(TypedDict, total=False):
+    """Relational arguments for Category"""
+
+
+class CuratedSteamLabelIncludeFromCategoryRecursive3(TypedDict, total=False):
+    """Relational arguments for Category"""
+
+
+class CuratedSteamLabelIncludeFromCategoryRecursive4(TypedDict, total=False):
+    """Relational arguments for Category"""
+
+    
+
+class CuratedSteamLabelArgsFromCategory(TypedDict, total=False):
+    """Arguments for Category"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromCategoryRecursive1(TypedDict, total=False):
+    """Arguments for Category"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromCategoryRecursive2(TypedDict, total=False):
+    """Arguments for Category"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromCategoryRecursive3(TypedDict, total=False):
+    """Arguments for Category"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromCategoryRecursive4(TypedDict, total=False):
+    """Arguments for Category"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromCategory(TypedDict, total=False):
+    """Arguments for Category"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromCategoryRecursive1(TypedDict, total=False):
+    """Arguments for Category"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromCategoryRecursive2(TypedDict, total=False):
+    """Arguments for Category"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromCategoryRecursive3(TypedDict, total=False):
+    """Arguments for Category"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromCategoryRecursive4(TypedDict, total=False):
+    """Arguments for Category"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    
 
 
 FindManyCategoryArgs = FindManyCategoryArgsFromCategory
@@ -6089,6 +6291,107 @@ class FindManyReviewArgsFromGameCategoryRecursive4(TypedDict, total=False):
     where: 'ReviewWhereInput'
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
+    
+    
+
+class CuratedSteamLabelIncludeFromGameCategory(TypedDict, total=False):
+    """Relational arguments for GameCategory"""
+
+
+class CuratedSteamLabelIncludeFromGameCategoryRecursive1(TypedDict, total=False):
+    """Relational arguments for GameCategory"""
+
+
+class CuratedSteamLabelIncludeFromGameCategoryRecursive2(TypedDict, total=False):
+    """Relational arguments for GameCategory"""
+
+
+class CuratedSteamLabelIncludeFromGameCategoryRecursive3(TypedDict, total=False):
+    """Relational arguments for GameCategory"""
+
+
+class CuratedSteamLabelIncludeFromGameCategoryRecursive4(TypedDict, total=False):
+    """Relational arguments for GameCategory"""
+
+    
+
+class CuratedSteamLabelArgsFromGameCategory(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromGameCategoryRecursive1(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromGameCategoryRecursive2(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromGameCategoryRecursive3(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromGameCategoryRecursive4(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromGameCategory(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromGameCategoryRecursive1(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromGameCategoryRecursive2(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromGameCategoryRecursive3(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromGameCategoryRecursive4(TypedDict, total=False):
+    """Arguments for GameCategory"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
     
 
 
@@ -7537,6 +7840,107 @@ class FindManyReviewArgsFromGenreRecursive4(TypedDict, total=False):
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
     
+    
+
+class CuratedSteamLabelIncludeFromGenre(TypedDict, total=False):
+    """Relational arguments for Genre"""
+
+
+class CuratedSteamLabelIncludeFromGenreRecursive1(TypedDict, total=False):
+    """Relational arguments for Genre"""
+
+
+class CuratedSteamLabelIncludeFromGenreRecursive2(TypedDict, total=False):
+    """Relational arguments for Genre"""
+
+
+class CuratedSteamLabelIncludeFromGenreRecursive3(TypedDict, total=False):
+    """Relational arguments for Genre"""
+
+
+class CuratedSteamLabelIncludeFromGenreRecursive4(TypedDict, total=False):
+    """Relational arguments for Genre"""
+
+    
+
+class CuratedSteamLabelArgsFromGenre(TypedDict, total=False):
+    """Arguments for Genre"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromGenreRecursive1(TypedDict, total=False):
+    """Arguments for Genre"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromGenreRecursive2(TypedDict, total=False):
+    """Arguments for Genre"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromGenreRecursive3(TypedDict, total=False):
+    """Arguments for Genre"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromGenreRecursive4(TypedDict, total=False):
+    """Arguments for Genre"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromGenre(TypedDict, total=False):
+    """Arguments for Genre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromGenreRecursive1(TypedDict, total=False):
+    """Arguments for Genre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromGenreRecursive2(TypedDict, total=False):
+    """Arguments for Genre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromGenreRecursive3(TypedDict, total=False):
+    """Arguments for Genre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromGenreRecursive4(TypedDict, total=False):
+    """Arguments for Genre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    
 
 
 FindManyGenreArgs = FindManyGenreArgsFromGenre
@@ -8981,6 +9385,107 @@ class FindManyReviewArgsFromGameGenreRecursive4(TypedDict, total=False):
     where: 'ReviewWhereInput'
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
+    
+    
+
+class CuratedSteamLabelIncludeFromGameGenre(TypedDict, total=False):
+    """Relational arguments for GameGenre"""
+
+
+class CuratedSteamLabelIncludeFromGameGenreRecursive1(TypedDict, total=False):
+    """Relational arguments for GameGenre"""
+
+
+class CuratedSteamLabelIncludeFromGameGenreRecursive2(TypedDict, total=False):
+    """Relational arguments for GameGenre"""
+
+
+class CuratedSteamLabelIncludeFromGameGenreRecursive3(TypedDict, total=False):
+    """Relational arguments for GameGenre"""
+
+
+class CuratedSteamLabelIncludeFromGameGenreRecursive4(TypedDict, total=False):
+    """Relational arguments for GameGenre"""
+
+    
+
+class CuratedSteamLabelArgsFromGameGenre(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromGameGenreRecursive1(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromGameGenreRecursive2(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromGameGenreRecursive3(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromGameGenreRecursive4(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromGameGenre(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromGameGenreRecursive1(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromGameGenreRecursive2(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromGameGenreRecursive3(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromGameGenreRecursive4(TypedDict, total=False):
+    """Arguments for GameGenre"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
     
 
 
@@ -10429,6 +10934,107 @@ class FindManyReviewArgsFromDeveloperRecursive4(TypedDict, total=False):
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
     
+    
+
+class CuratedSteamLabelIncludeFromDeveloper(TypedDict, total=False):
+    """Relational arguments for Developer"""
+
+
+class CuratedSteamLabelIncludeFromDeveloperRecursive1(TypedDict, total=False):
+    """Relational arguments for Developer"""
+
+
+class CuratedSteamLabelIncludeFromDeveloperRecursive2(TypedDict, total=False):
+    """Relational arguments for Developer"""
+
+
+class CuratedSteamLabelIncludeFromDeveloperRecursive3(TypedDict, total=False):
+    """Relational arguments for Developer"""
+
+
+class CuratedSteamLabelIncludeFromDeveloperRecursive4(TypedDict, total=False):
+    """Relational arguments for Developer"""
+
+    
+
+class CuratedSteamLabelArgsFromDeveloper(TypedDict, total=False):
+    """Arguments for Developer"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromDeveloperRecursive1(TypedDict, total=False):
+    """Arguments for Developer"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromDeveloperRecursive2(TypedDict, total=False):
+    """Arguments for Developer"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromDeveloperRecursive3(TypedDict, total=False):
+    """Arguments for Developer"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromDeveloperRecursive4(TypedDict, total=False):
+    """Arguments for Developer"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromDeveloper(TypedDict, total=False):
+    """Arguments for Developer"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromDeveloperRecursive1(TypedDict, total=False):
+    """Arguments for Developer"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromDeveloperRecursive2(TypedDict, total=False):
+    """Arguments for Developer"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromDeveloperRecursive3(TypedDict, total=False):
+    """Arguments for Developer"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromDeveloperRecursive4(TypedDict, total=False):
+    """Arguments for Developer"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    
 
 
 FindManyDeveloperArgs = FindManyDeveloperArgsFromDeveloper
@@ -11865,6 +12471,107 @@ class FindManyReviewArgsFromPublisherRecursive4(TypedDict, total=False):
     where: 'ReviewWhereInput'
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
+    
+    
+
+class CuratedSteamLabelIncludeFromPublisher(TypedDict, total=False):
+    """Relational arguments for Publisher"""
+
+
+class CuratedSteamLabelIncludeFromPublisherRecursive1(TypedDict, total=False):
+    """Relational arguments for Publisher"""
+
+
+class CuratedSteamLabelIncludeFromPublisherRecursive2(TypedDict, total=False):
+    """Relational arguments for Publisher"""
+
+
+class CuratedSteamLabelIncludeFromPublisherRecursive3(TypedDict, total=False):
+    """Relational arguments for Publisher"""
+
+
+class CuratedSteamLabelIncludeFromPublisherRecursive4(TypedDict, total=False):
+    """Relational arguments for Publisher"""
+
+    
+
+class CuratedSteamLabelArgsFromPublisher(TypedDict, total=False):
+    """Arguments for Publisher"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromPublisherRecursive1(TypedDict, total=False):
+    """Arguments for Publisher"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromPublisherRecursive2(TypedDict, total=False):
+    """Arguments for Publisher"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromPublisherRecursive3(TypedDict, total=False):
+    """Arguments for Publisher"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromPublisherRecursive4(TypedDict, total=False):
+    """Arguments for Publisher"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromPublisher(TypedDict, total=False):
+    """Arguments for Publisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromPublisherRecursive1(TypedDict, total=False):
+    """Arguments for Publisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromPublisherRecursive2(TypedDict, total=False):
+    """Arguments for Publisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromPublisherRecursive3(TypedDict, total=False):
+    """Arguments for Publisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromPublisherRecursive4(TypedDict, total=False):
+    """Arguments for Publisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
     
 
 
@@ -13310,6 +14017,107 @@ class FindManyReviewArgsFromGameDeveloperRecursive4(TypedDict, total=False):
     where: 'ReviewWhereInput'
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
+    
+    
+
+class CuratedSteamLabelIncludeFromGameDeveloper(TypedDict, total=False):
+    """Relational arguments for GameDeveloper"""
+
+
+class CuratedSteamLabelIncludeFromGameDeveloperRecursive1(TypedDict, total=False):
+    """Relational arguments for GameDeveloper"""
+
+
+class CuratedSteamLabelIncludeFromGameDeveloperRecursive2(TypedDict, total=False):
+    """Relational arguments for GameDeveloper"""
+
+
+class CuratedSteamLabelIncludeFromGameDeveloperRecursive3(TypedDict, total=False):
+    """Relational arguments for GameDeveloper"""
+
+
+class CuratedSteamLabelIncludeFromGameDeveloperRecursive4(TypedDict, total=False):
+    """Relational arguments for GameDeveloper"""
+
+    
+
+class CuratedSteamLabelArgsFromGameDeveloper(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromGameDeveloperRecursive1(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromGameDeveloperRecursive2(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromGameDeveloperRecursive3(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromGameDeveloperRecursive4(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromGameDeveloper(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromGameDeveloperRecursive1(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromGameDeveloperRecursive2(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromGameDeveloperRecursive3(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromGameDeveloperRecursive4(TypedDict, total=False):
+    """Arguments for GameDeveloper"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
     
 
 
@@ -14762,6 +15570,107 @@ class FindManyReviewArgsFromGamePublisherRecursive4(TypedDict, total=False):
     where: 'ReviewWhereInput'
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
+    
+    
+
+class CuratedSteamLabelIncludeFromGamePublisher(TypedDict, total=False):
+    """Relational arguments for GamePublisher"""
+
+
+class CuratedSteamLabelIncludeFromGamePublisherRecursive1(TypedDict, total=False):
+    """Relational arguments for GamePublisher"""
+
+
+class CuratedSteamLabelIncludeFromGamePublisherRecursive2(TypedDict, total=False):
+    """Relational arguments for GamePublisher"""
+
+
+class CuratedSteamLabelIncludeFromGamePublisherRecursive3(TypedDict, total=False):
+    """Relational arguments for GamePublisher"""
+
+
+class CuratedSteamLabelIncludeFromGamePublisherRecursive4(TypedDict, total=False):
+    """Relational arguments for GamePublisher"""
+
+    
+
+class CuratedSteamLabelArgsFromGamePublisher(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromGamePublisherRecursive1(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromGamePublisherRecursive2(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromGamePublisherRecursive3(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromGamePublisherRecursive4(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromGamePublisher(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromGamePublisherRecursive1(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromGamePublisherRecursive2(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromGamePublisherRecursive3(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromGamePublisherRecursive4(TypedDict, total=False):
+    """Arguments for GamePublisher"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
     
 
 
@@ -16374,6 +17283,107 @@ class FindManyReviewArgsFromReviewRecursive4(TypedDict, total=False):
     cursor: 'ReviewWhereUniqueInput'
     distinct: List['ReviewScalarFieldKeys']
     
+    
+
+class CuratedSteamLabelIncludeFromReview(TypedDict, total=False):
+    """Relational arguments for Review"""
+
+
+class CuratedSteamLabelIncludeFromReviewRecursive1(TypedDict, total=False):
+    """Relational arguments for Review"""
+
+
+class CuratedSteamLabelIncludeFromReviewRecursive2(TypedDict, total=False):
+    """Relational arguments for Review"""
+
+
+class CuratedSteamLabelIncludeFromReviewRecursive3(TypedDict, total=False):
+    """Relational arguments for Review"""
+
+
+class CuratedSteamLabelIncludeFromReviewRecursive4(TypedDict, total=False):
+    """Relational arguments for Review"""
+
+    
+
+class CuratedSteamLabelArgsFromReview(TypedDict, total=False):
+    """Arguments for Review"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromReviewRecursive1(TypedDict, total=False):
+    """Arguments for Review"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromReviewRecursive2(TypedDict, total=False):
+    """Arguments for Review"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromReviewRecursive3(TypedDict, total=False):
+    """Arguments for Review"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromReviewRecursive4(TypedDict, total=False):
+    """Arguments for Review"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromReview(TypedDict, total=False):
+    """Arguments for Review"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromReviewRecursive1(TypedDict, total=False):
+    """Arguments for Review"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromReviewRecursive2(TypedDict, total=False):
+    """Arguments for Review"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromReviewRecursive3(TypedDict, total=False):
+    """Arguments for Review"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromReviewRecursive4(TypedDict, total=False):
+    """Arguments for Review"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    
 
 
 FindManyReviewArgs = FindManyReviewArgsFromReview
@@ -16829,6 +17839,1564 @@ ReviewScalarFieldKeysT = TypeVar('ReviewScalarFieldKeysT', bound=ReviewScalarFie
 ReviewRelationalFieldKeys = Literal[
         'game',
     ]
+
+# CuratedSteamLabel types
+
+class CuratedSteamLabelOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the CuratedSteamLabel create method"""
+    updatedAt: datetime.datetime
+
+
+class CuratedSteamLabelCreateInput(CuratedSteamLabelOptionalCreateInput):
+    """Required arguments to the CuratedSteamLabel create method"""
+    appId: _int
+    isGem: _bool
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class CuratedSteamLabelOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the CuratedSteamLabel create method, without relations"""
+    updatedAt: datetime.datetime
+
+
+class CuratedSteamLabelCreateWithoutRelationsInput(CuratedSteamLabelOptionalCreateWithoutRelationsInput):
+    """Required arguments to the CuratedSteamLabel create method, without relations"""
+    appId: _int
+    isGem: _bool
+
+class CuratedSteamLabelConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'CuratedSteamLabelCreateWithoutRelationsInput'
+    where: 'CuratedSteamLabelWhereUniqueInput'
+
+class CuratedSteamLabelCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'CuratedSteamLabelCreateWithoutRelationsInput'
+    connect: 'CuratedSteamLabelWhereUniqueInput'
+    connect_or_create: 'CuratedSteamLabelConnectOrCreateWithoutRelationsInput'
+
+
+class CuratedSteamLabelCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['CuratedSteamLabelCreateWithoutRelationsInput', List['CuratedSteamLabelCreateWithoutRelationsInput']]
+    connect: Union['CuratedSteamLabelWhereUniqueInput', List['CuratedSteamLabelWhereUniqueInput']]
+    connect_or_create: Union['CuratedSteamLabelConnectOrCreateWithoutRelationsInput', List['CuratedSteamLabelConnectOrCreateWithoutRelationsInput']]
+
+_CuratedSteamLabelWhereUnique_appId_Input = TypedDict(
+    '_CuratedSteamLabelWhereUnique_appId_Input',
+    {
+        'appId': '_int',
+    },
+    total=True
+)
+
+CuratedSteamLabelWhereUniqueInput = _CuratedSteamLabelWhereUnique_appId_Input
+
+
+class CuratedSteamLabelUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    appId: Union[AtomicIntInput, _int]
+    isGem: _bool
+    updatedAt: datetime.datetime
+
+
+class CuratedSteamLabelUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    appId: Union[AtomicIntInput, _int]
+    isGem: _bool
+    updatedAt: datetime.datetime
+
+
+class CuratedSteamLabelUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['CuratedSteamLabelCreateWithoutRelationsInput']
+    connect: List['CuratedSteamLabelWhereUniqueInput']
+    connect_or_create: List['CuratedSteamLabelConnectOrCreateWithoutRelationsInput']
+    set: List['CuratedSteamLabelWhereUniqueInput']
+    disconnect: List['CuratedSteamLabelWhereUniqueInput']
+    delete: List['CuratedSteamLabelWhereUniqueInput']
+
+    # TODO
+    # update: List['CuratedSteamLabelUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['CuratedSteamLabelUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['CuratedSteamLabelScalarWhereInput']
+    # upsert: List['CuratedSteamLabelUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class CuratedSteamLabelUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'CuratedSteamLabelCreateWithoutRelationsInput'
+    connect: 'CuratedSteamLabelWhereUniqueInput'
+    connect_or_create: 'CuratedSteamLabelConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'CuratedSteamLabelUpdateInput'
+    # upsert: 'CuratedSteamLabelUpsertWithoutRelationsInput'
+
+
+class CuratedSteamLabelUpsertInput(TypedDict):
+    create: 'CuratedSteamLabelCreateInput'
+    update: 'CuratedSteamLabelUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_CuratedSteamLabel_appId_OrderByInput = TypedDict(
+    '_CuratedSteamLabel_appId_OrderByInput',
+    {
+        'appId': 'SortOrder',
+    },
+    total=True
+)
+
+_CuratedSteamLabel_isGem_OrderByInput = TypedDict(
+    '_CuratedSteamLabel_isGem_OrderByInput',
+    {
+        'isGem': 'SortOrder',
+    },
+    total=True
+)
+
+_CuratedSteamLabel_updatedAt_OrderByInput = TypedDict(
+    '_CuratedSteamLabel_updatedAt_OrderByInput',
+    {
+        'updatedAt': 'SortOrder',
+    },
+    total=True
+)
+
+CuratedSteamLabelOrderByInput = Union[
+    '_CuratedSteamLabel_appId_OrderByInput',
+    '_CuratedSteamLabel_isGem_OrderByInput',
+    '_CuratedSteamLabel_updatedAt_OrderByInput',
+]
+
+
+
+# recursive CuratedSteamLabel types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+CuratedSteamLabelRelationFilter = TypedDict(
+    'CuratedSteamLabelRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class CuratedSteamLabelListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class CuratedSteamLabelInclude(TypedDict, total=False):
+    """CuratedSteamLabel relational arguments"""
+
+
+    
+
+class GameIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    gameDevelopers: Union[bool, 'FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive1']
+    gamePublishers: Union[bool, 'FindManyGamePublisherArgsFromCuratedSteamLabelRecursive1']
+    categories: Union[bool, 'FindManyGameCategoryArgsFromCuratedSteamLabelRecursive1']
+    genres: Union[bool, 'FindManyGameGenreArgsFromCuratedSteamLabelRecursive1']
+    reviews: Union[bool, 'FindManyReviewArgsFromCuratedSteamLabelRecursive1']
+
+
+class GameIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    gameDevelopers: Union[bool, 'FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive2']
+    gamePublishers: Union[bool, 'FindManyGamePublisherArgsFromCuratedSteamLabelRecursive2']
+    categories: Union[bool, 'FindManyGameCategoryArgsFromCuratedSteamLabelRecursive2']
+    genres: Union[bool, 'FindManyGameGenreArgsFromCuratedSteamLabelRecursive2']
+    reviews: Union[bool, 'FindManyReviewArgsFromCuratedSteamLabelRecursive2']
+
+
+class GameIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    gameDevelopers: Union[bool, 'FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive3']
+    gamePublishers: Union[bool, 'FindManyGamePublisherArgsFromCuratedSteamLabelRecursive3']
+    categories: Union[bool, 'FindManyGameCategoryArgsFromCuratedSteamLabelRecursive3']
+    genres: Union[bool, 'FindManyGameGenreArgsFromCuratedSteamLabelRecursive3']
+    reviews: Union[bool, 'FindManyReviewArgsFromCuratedSteamLabelRecursive3']
+
+
+class GameIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    gameDevelopers: Union[bool, 'FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive4']
+    gamePublishers: Union[bool, 'FindManyGamePublisherArgsFromCuratedSteamLabelRecursive4']
+    categories: Union[bool, 'FindManyGameCategoryArgsFromCuratedSteamLabelRecursive4']
+    genres: Union[bool, 'FindManyGameGenreArgsFromCuratedSteamLabelRecursive4']
+    reviews: Union[bool, 'FindManyReviewArgsFromCuratedSteamLabelRecursive4']
+
+
+class GameIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class GameArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameIncludeFromGameRecursive1'
+
+
+class GameArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameIncludeFromGameRecursive2'
+
+
+class GameArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameIncludeFromGameRecursive3'
+
+
+class GameArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameIncludeFromGameRecursive4'
+
+
+class GameArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyGameArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameOrderByInput', List['GameOrderByInput']]
+    where: 'GameWhereInput'
+    cursor: 'GameWhereUniqueInput'
+    distinct: List['GameScalarFieldKeys']
+    include: 'GameIncludeFromGameRecursive1'
+
+
+class FindManyGameArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameOrderByInput', List['GameOrderByInput']]
+    where: 'GameWhereInput'
+    cursor: 'GameWhereUniqueInput'
+    distinct: List['GameScalarFieldKeys']
+    include: 'GameIncludeFromGameRecursive2'
+
+
+class FindManyGameArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameOrderByInput', List['GameOrderByInput']]
+    where: 'GameWhereInput'
+    cursor: 'GameWhereUniqueInput'
+    distinct: List['GameScalarFieldKeys']
+    include: 'GameIncludeFromGameRecursive3'
+
+
+class FindManyGameArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameOrderByInput', List['GameOrderByInput']]
+    where: 'GameWhereInput'
+    cursor: 'GameWhereUniqueInput'
+    distinct: List['GameScalarFieldKeys']
+    include: 'GameIncludeFromGameRecursive4'
+
+
+class FindManyGameArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameOrderByInput', List['GameOrderByInput']]
+    where: 'GameWhereInput'
+    cursor: 'GameWhereUniqueInput'
+    distinct: List['GameScalarFieldKeys']
+    
+    
+
+class CategoryIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameCategoryArgsFromCuratedSteamLabelRecursive1']
+
+
+class CategoryIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameCategoryArgsFromCuratedSteamLabelRecursive2']
+
+
+class CategoryIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameCategoryArgsFromCuratedSteamLabelRecursive3']
+
+
+class CategoryIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameCategoryArgsFromCuratedSteamLabelRecursive4']
+
+
+class CategoryIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class CategoryArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'CategoryIncludeFromCategoryRecursive1'
+
+
+class CategoryArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'CategoryIncludeFromCategoryRecursive2'
+
+
+class CategoryArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'CategoryIncludeFromCategoryRecursive3'
+
+
+class CategoryArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'CategoryIncludeFromCategoryRecursive4'
+
+
+class CategoryArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyCategoryArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CategoryOrderByInput', List['CategoryOrderByInput']]
+    where: 'CategoryWhereInput'
+    cursor: 'CategoryWhereUniqueInput'
+    distinct: List['CategoryScalarFieldKeys']
+    include: 'CategoryIncludeFromCategoryRecursive1'
+
+
+class FindManyCategoryArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CategoryOrderByInput', List['CategoryOrderByInput']]
+    where: 'CategoryWhereInput'
+    cursor: 'CategoryWhereUniqueInput'
+    distinct: List['CategoryScalarFieldKeys']
+    include: 'CategoryIncludeFromCategoryRecursive2'
+
+
+class FindManyCategoryArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CategoryOrderByInput', List['CategoryOrderByInput']]
+    where: 'CategoryWhereInput'
+    cursor: 'CategoryWhereUniqueInput'
+    distinct: List['CategoryScalarFieldKeys']
+    include: 'CategoryIncludeFromCategoryRecursive3'
+
+
+class FindManyCategoryArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CategoryOrderByInput', List['CategoryOrderByInput']]
+    where: 'CategoryWhereInput'
+    cursor: 'CategoryWhereUniqueInput'
+    distinct: List['CategoryScalarFieldKeys']
+    include: 'CategoryIncludeFromCategoryRecursive4'
+
+
+class FindManyCategoryArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CategoryOrderByInput', List['CategoryOrderByInput']]
+    where: 'CategoryWhereInput'
+    cursor: 'CategoryWhereUniqueInput'
+    distinct: List['CategoryScalarFieldKeys']
+    
+    
+
+class GameCategoryIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive1']
+    category: Union[bool, 'CategoryArgsFromCuratedSteamLabelRecursive1']
+
+
+class GameCategoryIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive2']
+    category: Union[bool, 'CategoryArgsFromCuratedSteamLabelRecursive2']
+
+
+class GameCategoryIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive3']
+    category: Union[bool, 'CategoryArgsFromCuratedSteamLabelRecursive3']
+
+
+class GameCategoryIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive4']
+    category: Union[bool, 'CategoryArgsFromCuratedSteamLabelRecursive4']
+
+
+class GameCategoryIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class GameCategoryArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameCategoryIncludeFromGameCategoryRecursive1'
+
+
+class GameCategoryArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameCategoryIncludeFromGameCategoryRecursive2'
+
+
+class GameCategoryArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameCategoryIncludeFromGameCategoryRecursive3'
+
+
+class GameCategoryArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameCategoryIncludeFromGameCategoryRecursive4'
+
+
+class GameCategoryArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyGameCategoryArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameCategoryOrderByInput', List['GameCategoryOrderByInput']]
+    where: 'GameCategoryWhereInput'
+    cursor: 'GameCategoryWhereUniqueInput'
+    distinct: List['GameCategoryScalarFieldKeys']
+    include: 'GameCategoryIncludeFromGameCategoryRecursive1'
+
+
+class FindManyGameCategoryArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameCategoryOrderByInput', List['GameCategoryOrderByInput']]
+    where: 'GameCategoryWhereInput'
+    cursor: 'GameCategoryWhereUniqueInput'
+    distinct: List['GameCategoryScalarFieldKeys']
+    include: 'GameCategoryIncludeFromGameCategoryRecursive2'
+
+
+class FindManyGameCategoryArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameCategoryOrderByInput', List['GameCategoryOrderByInput']]
+    where: 'GameCategoryWhereInput'
+    cursor: 'GameCategoryWhereUniqueInput'
+    distinct: List['GameCategoryScalarFieldKeys']
+    include: 'GameCategoryIncludeFromGameCategoryRecursive3'
+
+
+class FindManyGameCategoryArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameCategoryOrderByInput', List['GameCategoryOrderByInput']]
+    where: 'GameCategoryWhereInput'
+    cursor: 'GameCategoryWhereUniqueInput'
+    distinct: List['GameCategoryScalarFieldKeys']
+    include: 'GameCategoryIncludeFromGameCategoryRecursive4'
+
+
+class FindManyGameCategoryArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameCategoryOrderByInput', List['GameCategoryOrderByInput']]
+    where: 'GameCategoryWhereInput'
+    cursor: 'GameCategoryWhereUniqueInput'
+    distinct: List['GameCategoryScalarFieldKeys']
+    
+    
+
+class GenreIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameGenreArgsFromCuratedSteamLabelRecursive1']
+
+
+class GenreIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameGenreArgsFromCuratedSteamLabelRecursive2']
+
+
+class GenreIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameGenreArgsFromCuratedSteamLabelRecursive3']
+
+
+class GenreIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameGenreArgsFromCuratedSteamLabelRecursive4']
+
+
+class GenreIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class GenreArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GenreIncludeFromGenreRecursive1'
+
+
+class GenreArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GenreIncludeFromGenreRecursive2'
+
+
+class GenreArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GenreIncludeFromGenreRecursive3'
+
+
+class GenreArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GenreIncludeFromGenreRecursive4'
+
+
+class GenreArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyGenreArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GenreOrderByInput', List['GenreOrderByInput']]
+    where: 'GenreWhereInput'
+    cursor: 'GenreWhereUniqueInput'
+    distinct: List['GenreScalarFieldKeys']
+    include: 'GenreIncludeFromGenreRecursive1'
+
+
+class FindManyGenreArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GenreOrderByInput', List['GenreOrderByInput']]
+    where: 'GenreWhereInput'
+    cursor: 'GenreWhereUniqueInput'
+    distinct: List['GenreScalarFieldKeys']
+    include: 'GenreIncludeFromGenreRecursive2'
+
+
+class FindManyGenreArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GenreOrderByInput', List['GenreOrderByInput']]
+    where: 'GenreWhereInput'
+    cursor: 'GenreWhereUniqueInput'
+    distinct: List['GenreScalarFieldKeys']
+    include: 'GenreIncludeFromGenreRecursive3'
+
+
+class FindManyGenreArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GenreOrderByInput', List['GenreOrderByInput']]
+    where: 'GenreWhereInput'
+    cursor: 'GenreWhereUniqueInput'
+    distinct: List['GenreScalarFieldKeys']
+    include: 'GenreIncludeFromGenreRecursive4'
+
+
+class FindManyGenreArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GenreOrderByInput', List['GenreOrderByInput']]
+    where: 'GenreWhereInput'
+    cursor: 'GenreWhereUniqueInput'
+    distinct: List['GenreScalarFieldKeys']
+    
+    
+
+class GameGenreIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive1']
+    genre: Union[bool, 'GenreArgsFromCuratedSteamLabelRecursive1']
+
+
+class GameGenreIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive2']
+    genre: Union[bool, 'GenreArgsFromCuratedSteamLabelRecursive2']
+
+
+class GameGenreIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive3']
+    genre: Union[bool, 'GenreArgsFromCuratedSteamLabelRecursive3']
+
+
+class GameGenreIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive4']
+    genre: Union[bool, 'GenreArgsFromCuratedSteamLabelRecursive4']
+
+
+class GameGenreIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class GameGenreArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameGenreIncludeFromGameGenreRecursive1'
+
+
+class GameGenreArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameGenreIncludeFromGameGenreRecursive2'
+
+
+class GameGenreArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameGenreIncludeFromGameGenreRecursive3'
+
+
+class GameGenreArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameGenreIncludeFromGameGenreRecursive4'
+
+
+class GameGenreArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyGameGenreArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameGenreOrderByInput', List['GameGenreOrderByInput']]
+    where: 'GameGenreWhereInput'
+    cursor: 'GameGenreWhereUniqueInput'
+    distinct: List['GameGenreScalarFieldKeys']
+    include: 'GameGenreIncludeFromGameGenreRecursive1'
+
+
+class FindManyGameGenreArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameGenreOrderByInput', List['GameGenreOrderByInput']]
+    where: 'GameGenreWhereInput'
+    cursor: 'GameGenreWhereUniqueInput'
+    distinct: List['GameGenreScalarFieldKeys']
+    include: 'GameGenreIncludeFromGameGenreRecursive2'
+
+
+class FindManyGameGenreArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameGenreOrderByInput', List['GameGenreOrderByInput']]
+    where: 'GameGenreWhereInput'
+    cursor: 'GameGenreWhereUniqueInput'
+    distinct: List['GameGenreScalarFieldKeys']
+    include: 'GameGenreIncludeFromGameGenreRecursive3'
+
+
+class FindManyGameGenreArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameGenreOrderByInput', List['GameGenreOrderByInput']]
+    where: 'GameGenreWhereInput'
+    cursor: 'GameGenreWhereUniqueInput'
+    distinct: List['GameGenreScalarFieldKeys']
+    include: 'GameGenreIncludeFromGameGenreRecursive4'
+
+
+class FindManyGameGenreArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameGenreOrderByInput', List['GameGenreOrderByInput']]
+    where: 'GameGenreWhereInput'
+    cursor: 'GameGenreWhereUniqueInput'
+    distinct: List['GameGenreScalarFieldKeys']
+    
+    
+
+class DeveloperIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive1']
+
+
+class DeveloperIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive2']
+
+
+class DeveloperIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive3']
+
+
+class DeveloperIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive4']
+
+
+class DeveloperIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class DeveloperArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'DeveloperIncludeFromDeveloperRecursive1'
+
+
+class DeveloperArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'DeveloperIncludeFromDeveloperRecursive2'
+
+
+class DeveloperArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'DeveloperIncludeFromDeveloperRecursive3'
+
+
+class DeveloperArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'DeveloperIncludeFromDeveloperRecursive4'
+
+
+class DeveloperArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyDeveloperArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['DeveloperOrderByInput', List['DeveloperOrderByInput']]
+    where: 'DeveloperWhereInput'
+    cursor: 'DeveloperWhereUniqueInput'
+    distinct: List['DeveloperScalarFieldKeys']
+    include: 'DeveloperIncludeFromDeveloperRecursive1'
+
+
+class FindManyDeveloperArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['DeveloperOrderByInput', List['DeveloperOrderByInput']]
+    where: 'DeveloperWhereInput'
+    cursor: 'DeveloperWhereUniqueInput'
+    distinct: List['DeveloperScalarFieldKeys']
+    include: 'DeveloperIncludeFromDeveloperRecursive2'
+
+
+class FindManyDeveloperArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['DeveloperOrderByInput', List['DeveloperOrderByInput']]
+    where: 'DeveloperWhereInput'
+    cursor: 'DeveloperWhereUniqueInput'
+    distinct: List['DeveloperScalarFieldKeys']
+    include: 'DeveloperIncludeFromDeveloperRecursive3'
+
+
+class FindManyDeveloperArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['DeveloperOrderByInput', List['DeveloperOrderByInput']]
+    where: 'DeveloperWhereInput'
+    cursor: 'DeveloperWhereUniqueInput'
+    distinct: List['DeveloperScalarFieldKeys']
+    include: 'DeveloperIncludeFromDeveloperRecursive4'
+
+
+class FindManyDeveloperArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['DeveloperOrderByInput', List['DeveloperOrderByInput']]
+    where: 'DeveloperWhereInput'
+    cursor: 'DeveloperWhereUniqueInput'
+    distinct: List['DeveloperScalarFieldKeys']
+    
+    
+
+class PublisherIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGamePublisherArgsFromCuratedSteamLabelRecursive1']
+
+
+class PublisherIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGamePublisherArgsFromCuratedSteamLabelRecursive2']
+
+
+class PublisherIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGamePublisherArgsFromCuratedSteamLabelRecursive3']
+
+
+class PublisherIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    games: Union[bool, 'FindManyGamePublisherArgsFromCuratedSteamLabelRecursive4']
+
+
+class PublisherIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class PublisherArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'PublisherIncludeFromPublisherRecursive1'
+
+
+class PublisherArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'PublisherIncludeFromPublisherRecursive2'
+
+
+class PublisherArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'PublisherIncludeFromPublisherRecursive3'
+
+
+class PublisherArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'PublisherIncludeFromPublisherRecursive4'
+
+
+class PublisherArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyPublisherArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['PublisherOrderByInput', List['PublisherOrderByInput']]
+    where: 'PublisherWhereInput'
+    cursor: 'PublisherWhereUniqueInput'
+    distinct: List['PublisherScalarFieldKeys']
+    include: 'PublisherIncludeFromPublisherRecursive1'
+
+
+class FindManyPublisherArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['PublisherOrderByInput', List['PublisherOrderByInput']]
+    where: 'PublisherWhereInput'
+    cursor: 'PublisherWhereUniqueInput'
+    distinct: List['PublisherScalarFieldKeys']
+    include: 'PublisherIncludeFromPublisherRecursive2'
+
+
+class FindManyPublisherArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['PublisherOrderByInput', List['PublisherOrderByInput']]
+    where: 'PublisherWhereInput'
+    cursor: 'PublisherWhereUniqueInput'
+    distinct: List['PublisherScalarFieldKeys']
+    include: 'PublisherIncludeFromPublisherRecursive3'
+
+
+class FindManyPublisherArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['PublisherOrderByInput', List['PublisherOrderByInput']]
+    where: 'PublisherWhereInput'
+    cursor: 'PublisherWhereUniqueInput'
+    distinct: List['PublisherScalarFieldKeys']
+    include: 'PublisherIncludeFromPublisherRecursive4'
+
+
+class FindManyPublisherArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['PublisherOrderByInput', List['PublisherOrderByInput']]
+    where: 'PublisherWhereInput'
+    cursor: 'PublisherWhereUniqueInput'
+    distinct: List['PublisherScalarFieldKeys']
+    
+    
+
+class GameDeveloperIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive1']
+    developer: Union[bool, 'DeveloperArgsFromCuratedSteamLabelRecursive1']
+
+
+class GameDeveloperIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive2']
+    developer: Union[bool, 'DeveloperArgsFromCuratedSteamLabelRecursive2']
+
+
+class GameDeveloperIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive3']
+    developer: Union[bool, 'DeveloperArgsFromCuratedSteamLabelRecursive3']
+
+
+class GameDeveloperIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive4']
+    developer: Union[bool, 'DeveloperArgsFromCuratedSteamLabelRecursive4']
+
+
+class GameDeveloperIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class GameDeveloperArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameDeveloperIncludeFromGameDeveloperRecursive1'
+
+
+class GameDeveloperArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameDeveloperIncludeFromGameDeveloperRecursive2'
+
+
+class GameDeveloperArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameDeveloperIncludeFromGameDeveloperRecursive3'
+
+
+class GameDeveloperArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GameDeveloperIncludeFromGameDeveloperRecursive4'
+
+
+class GameDeveloperArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyGameDeveloperArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameDeveloperOrderByInput', List['GameDeveloperOrderByInput']]
+    where: 'GameDeveloperWhereInput'
+    cursor: 'GameDeveloperWhereUniqueInput'
+    distinct: List['GameDeveloperScalarFieldKeys']
+    include: 'GameDeveloperIncludeFromGameDeveloperRecursive1'
+
+
+class FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameDeveloperOrderByInput', List['GameDeveloperOrderByInput']]
+    where: 'GameDeveloperWhereInput'
+    cursor: 'GameDeveloperWhereUniqueInput'
+    distinct: List['GameDeveloperScalarFieldKeys']
+    include: 'GameDeveloperIncludeFromGameDeveloperRecursive2'
+
+
+class FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameDeveloperOrderByInput', List['GameDeveloperOrderByInput']]
+    where: 'GameDeveloperWhereInput'
+    cursor: 'GameDeveloperWhereUniqueInput'
+    distinct: List['GameDeveloperScalarFieldKeys']
+    include: 'GameDeveloperIncludeFromGameDeveloperRecursive3'
+
+
+class FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameDeveloperOrderByInput', List['GameDeveloperOrderByInput']]
+    where: 'GameDeveloperWhereInput'
+    cursor: 'GameDeveloperWhereUniqueInput'
+    distinct: List['GameDeveloperScalarFieldKeys']
+    include: 'GameDeveloperIncludeFromGameDeveloperRecursive4'
+
+
+class FindManyGameDeveloperArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GameDeveloperOrderByInput', List['GameDeveloperOrderByInput']]
+    where: 'GameDeveloperWhereInput'
+    cursor: 'GameDeveloperWhereUniqueInput'
+    distinct: List['GameDeveloperScalarFieldKeys']
+    
+    
+
+class GamePublisherIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive1']
+    publisher: Union[bool, 'PublisherArgsFromCuratedSteamLabelRecursive1']
+
+
+class GamePublisherIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive2']
+    publisher: Union[bool, 'PublisherArgsFromCuratedSteamLabelRecursive2']
+
+
+class GamePublisherIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive3']
+    publisher: Union[bool, 'PublisherArgsFromCuratedSteamLabelRecursive3']
+
+
+class GamePublisherIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive4']
+    publisher: Union[bool, 'PublisherArgsFromCuratedSteamLabelRecursive4']
+
+
+class GamePublisherIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class GamePublisherArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GamePublisherIncludeFromGamePublisherRecursive1'
+
+
+class GamePublisherArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GamePublisherIncludeFromGamePublisherRecursive2'
+
+
+class GamePublisherArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GamePublisherIncludeFromGamePublisherRecursive3'
+
+
+class GamePublisherArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'GamePublisherIncludeFromGamePublisherRecursive4'
+
+
+class GamePublisherArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyGamePublisherArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GamePublisherOrderByInput', List['GamePublisherOrderByInput']]
+    where: 'GamePublisherWhereInput'
+    cursor: 'GamePublisherWhereUniqueInput'
+    distinct: List['GamePublisherScalarFieldKeys']
+    include: 'GamePublisherIncludeFromGamePublisherRecursive1'
+
+
+class FindManyGamePublisherArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GamePublisherOrderByInput', List['GamePublisherOrderByInput']]
+    where: 'GamePublisherWhereInput'
+    cursor: 'GamePublisherWhereUniqueInput'
+    distinct: List['GamePublisherScalarFieldKeys']
+    include: 'GamePublisherIncludeFromGamePublisherRecursive2'
+
+
+class FindManyGamePublisherArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GamePublisherOrderByInput', List['GamePublisherOrderByInput']]
+    where: 'GamePublisherWhereInput'
+    cursor: 'GamePublisherWhereUniqueInput'
+    distinct: List['GamePublisherScalarFieldKeys']
+    include: 'GamePublisherIncludeFromGamePublisherRecursive3'
+
+
+class FindManyGamePublisherArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GamePublisherOrderByInput', List['GamePublisherOrderByInput']]
+    where: 'GamePublisherWhereInput'
+    cursor: 'GamePublisherWhereUniqueInput'
+    distinct: List['GamePublisherScalarFieldKeys']
+    include: 'GamePublisherIncludeFromGamePublisherRecursive4'
+
+
+class FindManyGamePublisherArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['GamePublisherOrderByInput', List['GamePublisherOrderByInput']]
+    where: 'GamePublisherWhereInput'
+    cursor: 'GamePublisherWhereUniqueInput'
+    distinct: List['GamePublisherScalarFieldKeys']
+    
+    
+
+class ReviewIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive1']
+
+
+class ReviewIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive2']
+
+
+class ReviewIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive3']
+
+
+class ReviewIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+    game: Union[bool, 'GameArgsFromCuratedSteamLabelRecursive4']
+
+
+class ReviewIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class ReviewArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'ReviewIncludeFromReviewRecursive1'
+
+
+class ReviewArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'ReviewIncludeFromReviewRecursive2'
+
+
+class ReviewArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'ReviewIncludeFromReviewRecursive3'
+
+
+class ReviewArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'ReviewIncludeFromReviewRecursive4'
+
+
+class ReviewArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyReviewArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['ReviewOrderByInput', List['ReviewOrderByInput']]
+    where: 'ReviewWhereInput'
+    cursor: 'ReviewWhereUniqueInput'
+    distinct: List['ReviewScalarFieldKeys']
+    include: 'ReviewIncludeFromReviewRecursive1'
+
+
+class FindManyReviewArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['ReviewOrderByInput', List['ReviewOrderByInput']]
+    where: 'ReviewWhereInput'
+    cursor: 'ReviewWhereUniqueInput'
+    distinct: List['ReviewScalarFieldKeys']
+    include: 'ReviewIncludeFromReviewRecursive2'
+
+
+class FindManyReviewArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['ReviewOrderByInput', List['ReviewOrderByInput']]
+    where: 'ReviewWhereInput'
+    cursor: 'ReviewWhereUniqueInput'
+    distinct: List['ReviewScalarFieldKeys']
+    include: 'ReviewIncludeFromReviewRecursive3'
+
+
+class FindManyReviewArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['ReviewOrderByInput', List['ReviewOrderByInput']]
+    where: 'ReviewWhereInput'
+    cursor: 'ReviewWhereUniqueInput'
+    distinct: List['ReviewScalarFieldKeys']
+    include: 'ReviewIncludeFromReviewRecursive4'
+
+
+class FindManyReviewArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['ReviewOrderByInput', List['ReviewOrderByInput']]
+    where: 'ReviewWhereInput'
+    cursor: 'ReviewWhereUniqueInput'
+    distinct: List['ReviewScalarFieldKeys']
+    
+    
+
+class CuratedSteamLabelIncludeFromCuratedSteamLabel(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+
+class CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+
+class CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+
+class CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+
+class CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Relational arguments for CuratedSteamLabel"""
+
+    
+
+class CuratedSteamLabelArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class CuratedSteamLabelArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class CuratedSteamLabelArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class CuratedSteamLabelArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class CuratedSteamLabelArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    
+    
+
+class FindManyCuratedSteamLabelArgsFromCuratedSteamLabel(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive1'
+
+
+class FindManyCuratedSteamLabelArgsFromCuratedSteamLabelRecursive1(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive2'
+
+
+class FindManyCuratedSteamLabelArgsFromCuratedSteamLabelRecursive2(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive3'
+
+
+class FindManyCuratedSteamLabelArgsFromCuratedSteamLabelRecursive3(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    include: 'CuratedSteamLabelIncludeFromCuratedSteamLabelRecursive4'
+
+
+class FindManyCuratedSteamLabelArgsFromCuratedSteamLabelRecursive4(TypedDict, total=False):
+    """Arguments for CuratedSteamLabel"""
+    take: int
+    skip: int
+    order_by: Union['CuratedSteamLabelOrderByInput', List['CuratedSteamLabelOrderByInput']]
+    where: 'CuratedSteamLabelWhereInput'
+    cursor: 'CuratedSteamLabelWhereUniqueInput'
+    distinct: List['CuratedSteamLabelScalarFieldKeys']
+    
+
+
+FindManyCuratedSteamLabelArgs = FindManyCuratedSteamLabelArgsFromCuratedSteamLabel
+FindFirstCuratedSteamLabelArgs = FindManyCuratedSteamLabelArgsFromCuratedSteamLabel
+
+
+    
+
+class CuratedSteamLabelWhereInput(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntFilter']
+    isGem: Union[_bool, 'types.BooleanFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['CuratedSteamLabelWhereInputRecursive1', List['CuratedSteamLabelWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['CuratedSteamLabelWhereInputRecursive1']
+    OR: List['CuratedSteamLabelWhereInputRecursive1']
+    NOT: List['CuratedSteamLabelWhereInputRecursive1']
+
+
+class CuratedSteamLabelWhereInputRecursive1(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntFilter']
+    isGem: Union[_bool, 'types.BooleanFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['CuratedSteamLabelWhereInputRecursive2', List['CuratedSteamLabelWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['CuratedSteamLabelWhereInputRecursive2']
+    OR: List['CuratedSteamLabelWhereInputRecursive2']
+    NOT: List['CuratedSteamLabelWhereInputRecursive2']
+
+
+class CuratedSteamLabelWhereInputRecursive2(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntFilter']
+    isGem: Union[_bool, 'types.BooleanFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['CuratedSteamLabelWhereInputRecursive3', List['CuratedSteamLabelWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['CuratedSteamLabelWhereInputRecursive3']
+    OR: List['CuratedSteamLabelWhereInputRecursive3']
+    NOT: List['CuratedSteamLabelWhereInputRecursive3']
+
+
+class CuratedSteamLabelWhereInputRecursive3(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntFilter']
+    isGem: Union[_bool, 'types.BooleanFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['CuratedSteamLabelWhereInputRecursive4', List['CuratedSteamLabelWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['CuratedSteamLabelWhereInputRecursive4']
+    OR: List['CuratedSteamLabelWhereInputRecursive4']
+    NOT: List['CuratedSteamLabelWhereInputRecursive4']
+
+
+class CuratedSteamLabelWhereInputRecursive4(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntFilter']
+    isGem: Union[_bool, 'types.BooleanFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+
+
+# aggregate CuratedSteamLabel types
+
+
+    
+
+class CuratedSteamLabelScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntWithAggregatesFilter']
+    isGem: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive1']
+    OR: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive1']
+
+
+class CuratedSteamLabelScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntWithAggregatesFilter']
+    isGem: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive2']
+    OR: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive2']
+
+
+class CuratedSteamLabelScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntWithAggregatesFilter']
+    isGem: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive3']
+    OR: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive3']
+
+
+class CuratedSteamLabelScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntWithAggregatesFilter']
+    isGem: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive4']
+    OR: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['CuratedSteamLabelScalarWhereWithAggregatesInputRecursive4']
+
+
+class CuratedSteamLabelScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """CuratedSteamLabel arguments for searching"""
+    appId: Union[_int, 'types.IntWithAggregatesFilter']
+    isGem: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    updatedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+
+
+class CuratedSteamLabelGroupByOutput(TypedDict, total=False):
+    appId: _int
+    isGem: _bool
+    updatedAt: datetime.datetime
+    _sum: 'CuratedSteamLabelSumAggregateOutput'
+    _avg: 'CuratedSteamLabelAvgAggregateOutput'
+    _min: 'CuratedSteamLabelMinAggregateOutput'
+    _max: 'CuratedSteamLabelMaxAggregateOutput'
+    _count: 'CuratedSteamLabelCountAggregateOutput'
+
+
+class CuratedSteamLabelAvgAggregateOutput(TypedDict, total=False):
+    """CuratedSteamLabel output for aggregating averages"""
+    appId: float
+
+
+class CuratedSteamLabelSumAggregateOutput(TypedDict, total=False):
+    """CuratedSteamLabel output for aggregating sums"""
+    appId: _int
+
+
+class CuratedSteamLabelScalarAggregateOutput(TypedDict, total=False):
+    """CuratedSteamLabel output including scalar fields"""
+    appId: _int
+    isGem: _bool
+    updatedAt: datetime.datetime
+
+
+CuratedSteamLabelMinAggregateOutput = CuratedSteamLabelScalarAggregateOutput
+CuratedSteamLabelMaxAggregateOutput = CuratedSteamLabelScalarAggregateOutput
+
+
+class CuratedSteamLabelMaxAggregateInput(TypedDict, total=False):
+    """CuratedSteamLabel input for aggregating by max"""
+    appId: bool
+    isGem: bool
+    updatedAt: bool
+
+
+class CuratedSteamLabelMinAggregateInput(TypedDict, total=False):
+    """CuratedSteamLabel input for aggregating by min"""
+    appId: bool
+    isGem: bool
+    updatedAt: bool
+
+
+class CuratedSteamLabelNumberAggregateInput(TypedDict, total=False):
+    """CuratedSteamLabel input for aggregating numbers"""
+    appId: bool
+
+
+CuratedSteamLabelAvgAggregateInput = CuratedSteamLabelNumberAggregateInput
+CuratedSteamLabelSumAggregateInput = CuratedSteamLabelNumberAggregateInput
+
+
+CuratedSteamLabelCountAggregateInput = TypedDict(
+    'CuratedSteamLabelCountAggregateInput',
+    {
+        'appId': bool,
+        'isGem': bool,
+        'updatedAt': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+CuratedSteamLabelCountAggregateOutput = TypedDict(
+    'CuratedSteamLabelCountAggregateOutput',
+    {
+        'appId': int,
+        'isGem': int,
+        'updatedAt': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+CuratedSteamLabelKeys = Literal[
+    'appId',
+    'isGem',
+    'updatedAt',
+]
+CuratedSteamLabelScalarFieldKeys = Literal[
+    'appId',
+    'isGem',
+    'updatedAt',
+]
+CuratedSteamLabelScalarFieldKeysT = TypeVar('CuratedSteamLabelScalarFieldKeysT', bound=CuratedSteamLabelScalarFieldKeys)
+
+CuratedSteamLabelRelationalFieldKeys = _NoneType
 
 
 

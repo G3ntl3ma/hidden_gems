@@ -1402,6 +1402,113 @@ class Review(bases.BaseReview):
         _created_partial_types.add(name)
 
 
+class CuratedSteamLabel(bases.BaseCuratedSteamLabel):
+    """Manual gem / not-gem labels for training (Steam app id may exist before scrape).
+    """
+
+    appId: _int
+    isGem: _bool
+    updatedAt: datetime.datetime
+
+    # take *args and **kwargs so that other metaclasses can define arguments
+    def __init_subclass__(
+        cls,
+        *args: Any,
+        warn_subclass: Optional[bool] = None,
+        **kwargs: Any,
+    ) -> None:
+        super().__init_subclass__()
+        if warn_subclass is not None:
+            warnings.warn(
+                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
+                DeprecationWarning,
+                stacklevel=3,
+            )
+
+
+    @staticmethod
+    def create_partial(
+        name: str,
+        include: Optional[Iterable['types.CuratedSteamLabelKeys']] = None,
+        exclude: Optional[Iterable['types.CuratedSteamLabelKeys']] = None,
+        required: Optional[Iterable['types.CuratedSteamLabelKeys']] = None,
+        optional: Optional[Iterable['types.CuratedSteamLabelKeys']] = None,
+        relations: Optional[Mapping['types.CuratedSteamLabelRelationalFieldKeys', str]] = None,
+        exclude_relational_fields: bool = False,
+    ) -> None:
+        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
+            raise RuntimeError(
+                'Attempted to create a partial type outside of client generation.'
+            )
+
+        if name in _created_partial_types:
+            raise ValueError(f'Partial type "{name}" has already been created.')
+
+        if include is not None:
+            if exclude is not None:
+                raise TypeError('Exclude and include are mutually exclusive.')
+            if exclude_relational_fields is True:
+                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
+
+        if required and optional:
+            shared = set(required) & set(optional)
+            if shared:
+                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
+
+        if exclude_relational_fields and relations:
+            raise ValueError(
+                'exclude_relational_fields and relations are mutually exclusive'
+            )
+
+        fields: Dict['types.CuratedSteamLabelKeys', PartialModelField] = OrderedDict()
+
+        try:
+            if include:
+                for field in include:
+                    fields[field] = _CuratedSteamLabel_fields[field].copy()
+            elif exclude:
+                for field in exclude:
+                    if field not in _CuratedSteamLabel_fields:
+                        raise KeyError(field)
+
+                fields = {
+                    key: data.copy()
+                    for key, data in _CuratedSteamLabel_fields.items()
+                    if key not in exclude
+                }
+            else:
+                fields = {
+                    key: data.copy()
+                    for key, data in _CuratedSteamLabel_fields.items()
+                }
+
+            if required:
+                for field in required:
+                    fields[field]['optional'] = False
+
+            if optional:
+                for field in optional:
+                    fields[field]['optional'] = True
+
+
+            if relations:
+                raise ValueError('Model: "CuratedSteamLabel" has no relational fields.')
+        except KeyError as exc:
+            raise ValueError(
+                f'{exc.args[0]} is not a valid CuratedSteamLabel / {name} field.'
+            ) from None
+
+        models = partial_models_ctx.get()
+        models.append(
+            {
+                'name': name,
+                'fields': cast(Mapping[str, PartialModelField], fields),
+                'from_model': 'CuratedSteamLabel',
+            }
+        )
+        _created_partial_types.add(name)
+
+
 
 _Game_relational_fields: Set[str] = {
         'gameDevelopers',
@@ -2099,6 +2206,36 @@ _Review_fields: Dict['types.ReviewKeys', PartialModelField] = OrderedDict(
     ],
 )
 
+_CuratedSteamLabel_relational_fields: Set[str] = set()  # pyright: ignore[reportUnusedVariable]
+_CuratedSteamLabel_fields: Dict['types.CuratedSteamLabelKeys', PartialModelField] = OrderedDict(
+    [
+        ('appId', {
+            'name': 'appId',
+            'is_list': False,
+            'optional': False,
+            'type': '_int',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('isGem', {
+            'name': 'isGem',
+            'is_list': False,
+            'optional': False,
+            'type': '_bool',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('updatedAt', {
+            'name': 'updatedAt',
+            'is_list': False,
+            'optional': False,
+            'type': 'datetime.datetime',
+            'is_relational': False,
+            'documentation': None,
+        }),
+    ],
+)
+
 
 
 # we have to import ourselves as relation types are namespaced to models
@@ -2116,3 +2253,4 @@ model_rebuild(Publisher)
 model_rebuild(GameDeveloper)
 model_rebuild(GamePublisher)
 model_rebuild(Review)
+model_rebuild(CuratedSteamLabel)

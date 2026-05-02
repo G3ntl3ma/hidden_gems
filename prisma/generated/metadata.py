@@ -16,6 +16,7 @@ PRISMA_MODELS: set[str] = {
     'GameDeveloper',
     'GamePublisher',
     'Review',
+    'CuratedSteamLabel',
 }
 
 RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
@@ -56,6 +57,8 @@ RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
     },
     'Review': {
         'game': 'Game',
+    },
+    'CuratedSteamLabel': {
     },
 }
 

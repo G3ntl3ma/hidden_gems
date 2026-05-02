@@ -7,7 +7,14 @@ from typing import Any
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import LatentDirichletAllocation, NMF
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
+
+# Extra tokens beyond sklearn's English list (domain boilerplate in Steam reviews).
+TOPIC_EXTRA_STOP_WORDS: tuple[str, ...] = ("game", "games")
+
+
+def _topic_tfidf_stop_words() -> list[str]:
+    return sorted(ENGLISH_STOP_WORDS.union(TOPIC_EXTRA_STOP_WORDS))
 
 
 def fit_tfidf(
@@ -19,7 +26,7 @@ def fit_tfidf(
     """Fit a TF-IDF vectorizer and return (vectorizer, tfidf_matrix)."""
     vectorizer = TfidfVectorizer(
         max_features=max_features,
-        stop_words="english",
+        stop_words=_topic_tfidf_stop_words(),
         min_df=min_df,
         max_df=max_df,
     )

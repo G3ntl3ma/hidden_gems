@@ -1,0 +1,30 @@
+{
+  "title": "Overhyped flops on Steam (curated list)",
+  "generated_for": "hidden_gems project — manual/web-curated App IDs",
+  "criteria": "High pre-release hype / marketing exposure, then notably disappointing launch or reception (subjective). Steam-only entries.",
+  "notes": "App IDs are taken from the Steam store URL: https://store.steampowered.com/app/<id>/. Some games may be delisted or shut down but can still retain an app ID.",
+  "games": [
+    { "name": "Artifact", "steam_app_id": 583950 },
+    { "name": "Back 4 Blood", "steam_app_id": 924970 },
+    { "name": "Babylon's Fall", "steam_app_id": 889750 },
+    { "name": "BALAN WONDERWORLD", "steam_app_id": 1341050 },
+    { "name": "Battleborn", "steam_app_id": 394230 },
+    { "name": "BRINK", "steam_app_id": 22350 },
+    { "name": "Concord™", "steam_app_id": 2443720 },
+    { "name": "Cyberpunk 2077", "steam_app_id": 1091500 },
+    { "name": "Fallout 76", "steam_app_id": 1151340 },
+    { "name": "Highguard", "steam_app_id": 4128260 },
+    { "name": "LawBreakers", "steam_app_id": 350280 },
+    { "name": "Marvel's Avengers - The Definitive Edition", "steam_app_id": 997070 },
+    { "name": "No Man's Sky", "steam_app_id": 275850 },
+    { "name": "Overwatch® 2", "steam_app_id": 2357570 },
+    { "name": "OVERKILL's The Walking Dead", "steam_app_id": 717690 },
+    { "name": "PAYDAY 3", "steam_app_id": 1272080 },
+    { "name": "Redfall", "steam_app_id": 1294810 },
+    { "name": "Skull and Bones", "steam_app_id": 2853730 },
+    { "name": "Suicide Squad: Kill the Justice League", "steam_app_id": 315210 },
+    { "name": "The Callisto Protocol™", "steam_app_id": 1544020 },
+    { "name": "The Day Before", "steam_app_id": 1372880 },
+    { "name": "The Lord of the Rings: Gollum™", "steam_app_id": 1265780 }
+  ]
+}

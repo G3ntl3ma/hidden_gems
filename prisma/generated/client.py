@@ -104,6 +104,7 @@ class Prisma(SyncBasePrisma):
     gamedeveloper: 'actions.GameDeveloperActions[models.GameDeveloper]'
     gamepublisher: 'actions.GamePublisherActions[models.GamePublisher]'
     review: 'actions.ReviewActions[models.Review]'
+    curatedsteamlabel: 'actions.CuratedSteamLabelActions[models.CuratedSteamLabel]'
 
     __slots__ = (
         'game',
@@ -116,6 +117,7 @@ class Prisma(SyncBasePrisma):
         'gamedeveloper',
         'gamepublisher',
         'review',
+        'curatedsteamlabel',
     )
 
     def __init__(
@@ -156,6 +158,7 @@ class Prisma(SyncBasePrisma):
         self.gamedeveloper = actions.GameDeveloperActions[models.GameDeveloper](self, models.GameDeveloper)
         self.gamepublisher = actions.GamePublisherActions[models.GamePublisher](self, models.GamePublisher)
         self.review = actions.ReviewActions[models.Review](self, models.Review)
+        self.curatedsteamlabel = actions.CuratedSteamLabelActions[models.CuratedSteamLabel](self, models.CuratedSteamLabel)
 
         if auto_register:
             register(self)
@@ -316,6 +319,7 @@ class Batch:
     gamedeveloper: 'GameDeveloperBatchActions'
     gamepublisher: 'GamePublisherBatchActions'
     review: 'ReviewBatchActions'
+    curatedsteamlabel: 'CuratedSteamLabelBatchActions'
 
     def __init__(self, client: Prisma) -> None:
         self.__client = client
@@ -331,6 +335,7 @@ class Batch:
         self.gamedeveloper = GameDeveloperBatchActions(self)
         self.gamepublisher = GamePublisherBatchActions(self)
         self.review = ReviewBatchActions(self)
+        self.curatedsteamlabel = CuratedSteamLabelBatchActions(self)
 
     def _add(self, **kwargs: Any) -> None:
         builder = QueryBuilder(
@@ -1487,6 +1492,117 @@ class ReviewBatchActions:
         self._batcher._add(
             method='delete_many',
             model=models.Review,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class CuratedSteamLabelBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.CuratedSteamLabelCreateInput,
+        include: Optional[types.CuratedSteamLabelInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.CuratedSteamLabel,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.CuratedSteamLabelCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.CuratedSteamLabel,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.CuratedSteamLabelWhereUniqueInput,
+        include: Optional[types.CuratedSteamLabelInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.CuratedSteamLabel,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.CuratedSteamLabelUpdateInput,
+        where: types.CuratedSteamLabelWhereUniqueInput,
+        include: Optional[types.CuratedSteamLabelInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.CuratedSteamLabel,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.CuratedSteamLabelWhereUniqueInput,
+        data: types.CuratedSteamLabelUpsertInput,
+        include: Optional[types.CuratedSteamLabelInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.CuratedSteamLabel,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.CuratedSteamLabelUpdateManyMutationInput,
+        where: types.CuratedSteamLabelWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.CuratedSteamLabel,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.CuratedSteamLabelWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.CuratedSteamLabel,
             arguments={'where': where},
             root_selection=['count'],
         )

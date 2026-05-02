@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-03-17T10:54:28.151337+00:00",
+  "generated_at_utc": "2026-05-01T16:46:40.185872+00:00",
   "inputs": {
     "games_csv": {
       "path": "/home/user/Programming/hidden_gems/steam_games_clean.csv",
@@ -16,7 +16,12 @@
     "topic_count": 8,
     "topic_method": "lda",
     "topic_max_features": 5000,
-    "anomaly_contamination": 0.1
+    "topic_extra_stop_words": [
+      "game",
+      "games"
+    ],
+    "anomaly_contamination": 0.1,
+    "hidden_gem_scoring_version": "longevity_v3"
   },
   "artifact_files": {
     "reviews_sentiment": "reviews_sentiment.pkl",

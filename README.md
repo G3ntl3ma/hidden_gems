@@ -46,6 +46,8 @@ source .venv/bin/activate && python -m prisma generate --schema prisma/schema.pr
 streamlit run view/app.py
 ```
 
+The sidebar includes **Label curator** (`view/pages/3_Label_Curator.py`): enter a Steam app ID and whether it is a gem or not. Labels are stored in SQLite as the `CuratedSteamLabel` table. After changing [`prisma/schema.prisma`](prisma/schema.prisma), run step 3 again (`db push` and `python -m prisma generate`). The local `dev.db` file is gitignored, so use the page’s **Download labels as CSV** export for backups and for merging with training features (for example with [`models/train.py`](models/train.py)).
+
 ---
 
 ## Steam data pipeline
@@ -71,7 +73,7 @@ Outputs:
 
 - **steam_games_full.csv** — one row per game
 - **steam_reviews_full.csv** — one row per review (max 100 per game)
-- **Prisma DB** (`dev.db`) — `Game`, `Review`, and related tables
+- **Prisma DB** (`dev.db`) — `Game`, `Review`, `CuratedSteamLabel` (manual training labels), and related tables
 
 `steam_games_full.csv` now includes `genre_names` and `category_names` as
 semicolon-separated fields for dashboard filtering.
@@ -120,6 +122,37 @@ Default outputs:
 - **data_quality_report.json** — counters and warnings about detected data quality issues
 
 `steam_games_clean.csv` preserves `genre_names` and `category_names`.
+
+---
+
+## Training a gem / not-gem classifier (supervised)
+
+This project’s training labels come from the Streamlit **Label curator** page, exported as `curated_steam_labels.csv` (columns: `appid`, `is_gem`).
+
+**1) Export labels from Streamlit**
+
+Run the dashboard and use **Label curator → Download labels as CSV** to save `curated_steam_labels.csv` in the project root.
+
+**2) Build a training dataset by joining labels to cleaned data**
+
+This step merges:
+- `steam_games_clean.csv` (game metadata)
+- `steam_reviews_clean.csv` (reviews, used to compute per-game sentiment aggregates)
+- `curated_steam_labels.csv` (the target labels)
+
+```bash
+python scripts/build_training_dataset.py \
+  --games-csv steam_games_clean.csv \
+  --reviews-csv steam_reviews_clean.csv \
+  --labels-csv curated_steam_labels.csv \
+  --out-csv training_dataset.csv
+```
+
+**3) Train**
+
+```bash
+python -m models.train --csv training_dataset.csv --target is_gem
+```
 
 ### Step 4: Precompute analysis artifacts (recommended)
 
@@ -171,7 +204,9 @@ The easiest way to run the full pipeline is the interactive dashboard. It loads 
 streamlit run view/app.py
 ```
 
-Navigate to **Analysis** in the sidebar. The page has five tabs:
+Open **Analysis** in the sidebar for the five-tab pipeline, or **Label curator** to record gem / not-gem labels per Steam app ID (stored in the database; export CSV from that page for backups and training).
+
+**Analysis** tabs:
 
 | Tab | What it does |
 |-----|--------------|
@@ -266,7 +301,13 @@ X_2d, pca = reduce_pca(X)
 
 **5. Hidden-Gem Scoring** (`models/hidden_gems.py`)
 
-Composite score combining quality signals (sentiment, positive ratio, playtime) with inverse-visibility signals (low owner count, few reviews, no metacritic).
+Composite score combining:
+
+- **Quality core**: positivity ratio, sentiment aggregates, review score, metacritic, lifetime engagement
+- **Longevity**: game age + age-adjusted engagement/review activity + persistence of recent playtime
+- **Inverse visibility**: low review/activity footprint and low external coverage, with `owners_min` / `owners_max` treated as lower-weight rough signals
+
+The final hidden-gem ranking is quality-dominant, then adjusted by inverse visibility to surface underrated titles.
 
 ```python
 from models.hidden_gems import compute_hidden_gem_score, detect_anomalies

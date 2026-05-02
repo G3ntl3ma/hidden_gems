@@ -174,3 +174,13 @@ class BaseReview(_PrismaModel):
         return actions.ReviewActions[_PrismaModelT](client or get_client(), cls)
 
 
+class BaseCuratedSteamLabel(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['CuratedSteamLabel']] = 'CuratedSteamLabel'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.CuratedSteamLabelActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.CuratedSteamLabelActions[_PrismaModelT](client or get_client(), cls)
+
+

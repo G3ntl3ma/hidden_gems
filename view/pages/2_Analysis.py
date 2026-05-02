@@ -5,8 +5,6 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-import json
-import time
 
 _PROJECT_ROOT = str(Path(__file__).resolve().parents[2])
 if _PROJECT_ROOT not in sys.path:
@@ -46,36 +44,16 @@ from models.analysis_artifacts import (
     load_or_precompute,
 )
 
-# region agent log
-_DEBUG_LOG_PATH = Path("/home/user/Programming/hidden_gems/.cursor/debug-7882d0.log")
 
-
-def _agent_log(*, run_id: str, hypothesis_id: str, location: str, message: str, data: dict) -> None:
-    try:
-        payload = {
-            "sessionId": "7882d0",
-            "runId": run_id,
-            "hypothesisId": hypothesis_id,
-            "location": location,
-            "message": message,
-            "data": data,
-            "timestamp": int(time.time() * 1000),
-        }
-        _DEBUG_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-        with _DEBUG_LOG_PATH.open("a", encoding="utf-8") as f:
-            f.write(json.dumps(payload, ensure_ascii=False) + "\n")
-    except Exception:
-        pass
-
-
-def _isfinite_series(s: pd.Series) -> bool:
-    try:
-        arr = pd.to_numeric(s, errors="coerce").to_numpy(dtype=float)
-        return bool(np.isfinite(arr).all())
-    except Exception:
-        return False
-
-# endregion agent log
+def _ascii_label(value: object, max_len: int = 20) -> str:
+    """Matplotlib default fonts may not include CJK/Hangul/emoji glyphs in some environments.
+    Strip to ASCII to avoid noisy 'Glyph ... missing from font' warnings in plot annotations.
+    """
+    text = "" if value is None else str(value)
+    safe = text.encode("ascii", "ignore").decode("ascii").strip()
+    if not safe:
+        safe = "?"
+    return safe[:max_len]
 
 
 st.set_page_config(page_title="Game Analysis", layout="wide")
@@ -85,20 +63,6 @@ st.title("Game Analysis Pipeline")
 
 GAMES_CSV = Path("steam_games_clean.csv")
 REVIEWS_CSV = Path("steam_reviews_clean.csv")
-
-# region agent log
-_agent_log(
-    run_id="pre-fix",
-    hypothesis_id="A",
-    location="view/pages/2_Analysis.py:page_entry",
-    message="Analysis page entry",
-    data={
-        "server.baseUrlPath": st.get_option("server.baseUrlPath"),
-        "server.enableCORS": st.get_option("server.enableCORS"),
-        "server.enableXsrfProtection": st.get_option("server.enableXsrfProtection"),
-    },
-)
-# endregion agent log
 
 
 @st.cache_data(show_spinner="Loading games …")
@@ -132,34 +96,10 @@ if not GAMES_CSV.exists() or not REVIEWS_CSV.exists():
         "and ensure `steam_games_clean.csv` and `steam_reviews_clean.csv` exist "
         "in the project root."
     )
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="C",
-        location="view/pages/2_Analysis.py:missing_csv",
-        message="Required cleaned CSVs missing; stopping",
-        data={"games_csv_exists": GAMES_CSV.exists(), "reviews_csv_exists": REVIEWS_CSV.exists()},
-    )
-    # endregion agent log
     st.stop()
 
 games_df = load_games()
 reviews_df = load_reviews()
-
-# region agent log
-_agent_log(
-    run_id="pre-fix",
-    hypothesis_id="C",
-    location="view/pages/2_Analysis.py:loaded_csv",
-    message="Loaded cleaned CSVs",
-    data={
-        "games_rows": int(len(games_df)),
-        "games_cols": int(len(games_df.columns)),
-        "reviews_rows": int(len(reviews_df)),
-        "reviews_cols": int(len(reviews_df.columns)),
-    },
-)
-# endregion agent log
 
 artifacts: dict | None = None
 artifacts_loaded_from_cache = False
@@ -172,22 +112,6 @@ try:
     )
 except Exception as exc:
     artifacts_error = str(exc)
-
-# region agent log
-_agent_log(
-    run_id="pre-fix",
-    hypothesis_id="C",
-    location="view/pages/2_Analysis.py:artifacts_status",
-    message="Artifact load status",
-    data={
-        "artifacts_ok": artifacts_error is None and artifacts is not None,
-        "loaded_from_cache": bool(artifacts_loaded_from_cache),
-        "cache_dir": str(artifacts_cache_dir),
-        "error": artifacts_error,
-        "keys": sorted(list(artifacts.keys())) if isinstance(artifacts, dict) else None,
-    },
-)
-# endregion agent log
 
 st.sidebar.metric("Games", len(games_df))
 st.sidebar.metric("Reviews", len(reviews_df))
@@ -261,16 +185,6 @@ tab_eda, tab_sent, tab_topics, tab_clusters, tab_gems = st.tabs(
     ["EDA Overview", "Sentiment", "Topics", "Clusters", "Hidden Gems"],
 )
 
-# region agent log
-_agent_log(
-    run_id="pre-fix",
-    hypothesis_id="D",
-    location="view/pages/2_Analysis.py:tabs_created",
-    message="Tabs created; about to render tab contents",
-    data={},
-)
-# endregion agent log
-
 # ═══════════════════════════════════════════════════════════════════════════
 # TAB 1 – Exploratory Data Analysis
 # ═══════════════════════════════════════════════════════════════════════════
@@ -278,27 +192,7 @@ with tab_eda:
     st.header("Exploratory Data Analysis")
 
     st.subheader("Numeric summary — Games")
-    # region agent log
-    _t0 = time.time()
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="D",
-        location="view/pages/2_Analysis.py:eda_numeric_summary_start",
-        message="Starting numeric_summary(games_df)",
-        data={"games_rows": int(len(games_df)), "games_cols": int(len(games_df.columns))},
-    )
-    # endregion agent log
-    _num_summary = numeric_summary(games_df)
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="D",
-        location="view/pages/2_Analysis.py:eda_numeric_summary_end",
-        message="Finished numeric_summary(games_df)",
-        data={"elapsed_s": round(time.time() - _t0, 3), "rows": int(len(_num_summary))},
-    )
-    # endregion agent log
-    st.dataframe(_num_summary, use_container_width=True)
+    st.dataframe(numeric_summary(games_df), use_container_width=True)
 
     st.subheader("Missing data audit")
     audit = missing_data_audit(games_df)
@@ -336,26 +230,7 @@ with tab_eda:
         st.bar_chart(tiers)
 
     st.subheader("Correlation matrix")
-    # region agent log
-    _t1 = time.time()
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="D",
-        location="view/pages/2_Analysis.py:eda_corr_start",
-        message="Starting correlation_matrix(games_df)",
-        data={},
-    )
-    # endregion agent log
     corr = correlation_matrix(games_df)
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="D",
-        location="view/pages/2_Analysis.py:eda_corr_end",
-        message="Finished correlation_matrix(games_df)",
-        data={"elapsed_s": round(time.time() - _t1, 3), "empty": bool(getattr(corr, "empty", True))},
-    )
-    # endregion agent log
     if not corr.empty:
         fig, ax = plt.subplots(figsize=(10, 8))
         sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm", ax=ax)
@@ -367,15 +242,6 @@ with tab_eda:
 # ═══════════════════════════════════════════════════════════════════════════
 with tab_sent:
     st.header("Sentiment Analysis (VADER)")
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="E",
-        location="view/pages/2_Analysis.py:tab_sent_entry",
-        message="Entered Sentiment tab block",
-        data={},
-    )
-    # endregion agent log
 
     if artifacts is not None:
         reviews_sent = artifacts["reviews_sentiment"]
@@ -433,15 +299,6 @@ with tab_sent:
 # ═══════════════════════════════════════════════════════════════════════════
 with tab_topics:
     st.header("Topic Modeling")
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="E",
-        location="view/pages/2_Analysis.py:tab_topics_entry",
-        message="Entered Topics tab block",
-        data={},
-    )
-    # endregion agent log
 
     n_topics = st.slider("Number of topics", 3, 20, 8, key="n_topics")
     topic_method = st.selectbox("Method", ["lda", "nmf"], key="topic_method")
@@ -476,15 +333,6 @@ with tab_topics:
 # ═══════════════════════════════════════════════════════════════════════════
 with tab_clusters:
     st.header("Unsupervised Clustering")
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="E",
-        location="view/pages/2_Analysis.py:tab_clusters_entry",
-        message="Entered Clusters tab block",
-        data={},
-    )
-    # endregion agent log
 
     if len(games_df) < 4:
         st.warning("Need at least 4 games to run meaningful clustering.")
@@ -525,52 +373,15 @@ with tab_clusters:
         Xc = X[idx]
         merged_df_c = merged_df.iloc[idx].reset_index(drop=True)
         st.info(f"Clustering is running on a random sample of **{max_cluster_rows}** games.")
-        # region agent log
-        _agent_log(
-            run_id="post-fix",
-            hypothesis_id="G",
-            location="view/pages/2_Analysis.py:clusters_sampling",
-            message="Downsampled for clustering",
-            data={"full_rows": int(X.shape[0]), "cluster_rows": int(Xc.shape[0]), "cluster_cols": int(Xc.shape[1])},
-        )
-        # endregion agent log
     else:
         Xc = X
         merged_df_c = merged_df.reset_index(drop=True)
-        # region agent log
-        _agent_log(
-            run_id="post-fix",
-            hypothesis_id="G",
-            location="view/pages/2_Analysis.py:clusters_sampling",
-            message="Using full matrix for clustering",
-            data={"full_rows": int(X.shape[0]), "cluster_rows": int(Xc.shape[0]), "cluster_cols": int(Xc.shape[1])},
-        )
-        # endregion agent log
 
     # ── K-Means ───────────────────────────────────────────────────────────
     st.subheader("K-Means")
     max_k = min(10, Xc.shape[0] - 1)
     if max_k >= 2:
-        # region agent log
-        _t_km = time.time()
-        _agent_log(
-            run_id="pre-fix",
-            hypothesis_id="F",
-            location="view/pages/2_Analysis.py:clusters_kmeans_start",
-            message="Starting run_kmeans",
-            data={"n_samples": int(Xc.shape[0]), "n_features": int(Xc.shape[1]), "max_k": int(max_k)},
-        )
-        # endregion agent log
         km_results = run_kmeans(Xc, k_range=range(2, max_k + 1))
-        # region agent log
-        _agent_log(
-            run_id="pre-fix",
-            hypothesis_id="F",
-            location="view/pages/2_Analysis.py:clusters_kmeans_end",
-            message="Finished run_kmeans",
-            data={"elapsed_s": round(time.time() - _t_km, 3)},
-        )
-        # endregion agent log
 
         col1, col2 = st.columns(2)
         with col1:
@@ -603,26 +414,7 @@ with tab_clusters:
     st.subheader("DBSCAN")
     eps = st.slider("eps", 0.1, 5.0, 1.5, 0.1, key="dbscan_eps")
     min_samp = st.slider("min_samples", 2, 10, 2, key="dbscan_min")
-    # region agent log
-    _t_db = time.time()
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="F",
-        location="view/pages/2_Analysis.py:clusters_dbscan_start",
-        message="Starting run_dbscan",
-        data={"eps": float(eps), "min_samples": int(min_samp)},
-    )
-    # endregion agent log
     db_result = run_dbscan(Xc, eps=eps, min_samples=min_samp)
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="F",
-        location="view/pages/2_Analysis.py:clusters_dbscan_end",
-        message="Finished run_dbscan",
-        data={"elapsed_s": round(time.time() - _t_db, 3)},
-    )
-    # endregion agent log
     st.write(
         f"Clusters: **{db_result['n_clusters']}** | "
         f"Noise points: **{db_result['n_noise']}** | "
@@ -635,26 +427,7 @@ with tab_clusters:
         "n_clusters", 2, min(10, Xc.shape[0] - 1), min(3, Xc.shape[0] - 1),
         key="hier_k",
     )
-    # region agent log
-    _t_hc = time.time()
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="F",
-        location="view/pages/2_Analysis.py:clusters_hier_start",
-        message="Starting run_hierarchical",
-        data={"n_clusters": int(n_clust)},
-    )
-    # endregion agent log
     hc_result = run_hierarchical(Xc, n_clusters=n_clust)
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="F",
-        location="view/pages/2_Analysis.py:clusters_hier_end",
-        message="Finished run_hierarchical",
-        data={"elapsed_s": round(time.time() - _t_hc, 3)},
-    )
-    # endregion agent log
     st.write(f"Silhouette: **{hc_result['silhouette']:.3f}**")
 
     # ── Visualisation ─────────────────────────────────────────────────────
@@ -662,48 +435,10 @@ with tab_clusters:
     viz_method = st.selectbox("Reduction method", ["PCA", "UMAP"], key="viz_method")
 
     if viz_method == "PCA":
-        # region agent log
-        _t_red = time.time()
-        _agent_log(
-            run_id="pre-fix",
-            hypothesis_id="F",
-            location="view/pages/2_Analysis.py:clusters_reduce_pca_start",
-            message="Starting reduce_pca",
-            data={},
-        )
-        # endregion agent log
         X_2d, _ = reduce_pca(Xc)
-        # region agent log
-        _agent_log(
-            run_id="pre-fix",
-            hypothesis_id="F",
-            location="view/pages/2_Analysis.py:clusters_reduce_pca_end",
-            message="Finished reduce_pca",
-            data={"elapsed_s": round(time.time() - _t_red, 3)},
-        )
-        # endregion agent log
     else:
         try:
-            # region agent log
-            _t_red = time.time()
-            _agent_log(
-                run_id="pre-fix",
-                hypothesis_id="F",
-                location="view/pages/2_Analysis.py:clusters_reduce_umap_start",
-                message="Starting reduce_umap",
-                data={},
-            )
-            # endregion agent log
             X_2d, _ = reduce_umap(Xc)
-            # region agent log
-            _agent_log(
-                run_id="pre-fix",
-                hypothesis_id="F",
-                location="view/pages/2_Analysis.py:clusters_reduce_umap_end",
-                message="Finished reduce_umap",
-                data={"elapsed_s": round(time.time() - _t_red, 3)},
-            )
-            # endregion agent log
         except Exception:
             st.warning("UMAP failed; falling back to PCA.")
             X_2d, _ = reduce_pca(Xc)
@@ -733,7 +468,7 @@ with tab_clusters:
     if "name" in merged_df_c.columns:
         for i, name in enumerate(merged_df_c["name"]):
             ax.annotate(
-                str(name)[:20],
+                _ascii_label(name, 20),
                 (X_2d[i, 0], X_2d[i, 1]),
                 fontsize=7,
                 alpha=0.7,
@@ -747,38 +482,17 @@ with tab_clusters:
 # TAB 5 – Hidden Gems
 # ═══════════════════════════════════════════════════════════════════════════
 with tab_gems:
-    st.header("Hidden Gem Ranking")
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="E",
-        location="view/pages/2_Analysis.py:tab_gems_entry",
-        message="Entered Hidden Gems tab block",
-        data={},
+    st.header("Hidden Gem Ranking (Longevity-Aware)")
+    st.caption(
+        "Ranking favors sustained quality over time (retention + sentiment + reviews), "
+        "then boosts less-visible titles. Owner estimates are intentionally lower-weight signals."
     )
-    # endregion agent log
 
     if artifacts is not None:
         gem_scores = artifacts["gem_scores"].copy()
     else:
         sent_for_gems = _sentiment_per_game(reviews_df)
         gem_scores = _gem_scores(games_df, sent_for_gems)
-
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="B",
-        location="view/pages/2_Analysis.py:tab_gems_scores",
-        message="Computed/loaded gem_scores",
-        data={
-            "gem_scores_rows": int(len(gem_scores)) if hasattr(gem_scores, "__len__") else None,
-            "gem_scores_cols": int(len(getattr(gem_scores, "columns", []))),
-            "has_hidden_gem_score": bool(getattr(gem_scores, "columns", []) is not None and "hidden_gem_score" in gem_scores.columns),
-            "has_quality_score": bool(getattr(gem_scores, "columns", []) is not None and "quality_score" in gem_scores.columns),
-            "has_visibility_score": bool(getattr(gem_scores, "columns", []) is not None and "visibility_score" in gem_scores.columns),
-        },
-    )
-    # endregion agent log
 
     meta_cols = [
         c
@@ -826,28 +540,12 @@ with tab_gems:
 
     v_min = float(gem_df["visibility_score"].min())
     v_max = float(gem_df["visibility_score"].max())
-    v_range = st.slider("Visibility score range", v_min, v_max, (v_min, v_max))
-
-    # region agent log
-    _agent_log(
-        run_id="pre-fix",
-        hypothesis_id="B",
-        location="view/pages/2_Analysis.py:tab_gems_ranges",
-        message="Hidden gem slider ranges",
-        data={
-            "hg_min": hg_min,
-            "hg_max": hg_max,
-            "q_min": q_min,
-            "q_max": q_max,
-            "v_min": v_min,
-            "v_max": v_max,
-            "hg_all_finite": _isfinite_series(gem_df["hidden_gem_score"]),
-            "q_all_finite": _isfinite_series(gem_df["quality_score"]),
-            "v_all_finite": _isfinite_series(gem_df["visibility_score"]),
-            "gem_df_rows": int(len(gem_df)),
-        },
+    v_range = st.slider(
+        "Visibility score range (higher = more hidden)",
+        v_min,
+        v_max,
+        (v_min, v_max),
     )
-    # endregion agent log
 
     rs_range = None
     if "reviewScore" in gem_df.columns:
@@ -922,21 +620,43 @@ with tab_gems:
 
     st.subheader("Top hidden gems")
     st.caption(f"{len(filtered_df)} games after filters")
-    st.dataframe(filtered_df, use_container_width=True)
+    score_cols = [
+        c
+        for c in [
+            "name",
+            "hidden_gem_score",
+            "quality_score",
+            "quality_core_component",
+            "longevity_component",
+            "visibility_score",
+            "visibility_component",
+            "feat_longevity_age_adjusted_engagement",
+            "feat_longevity_engagement_persistence",
+            "feat_visibility_owner_hiddenness",
+            "feat_visibility_low_review_volume",
+        ]
+        if c in filtered_df.columns
+    ]
+    display_cols = [
+        c
+        for c in ["id", "release_date", "genre_names", "category_names", "reviewScore", "metacritic"]
+        if c in filtered_df.columns
+    ]
+    st.dataframe(filtered_df[score_cols + display_cols], use_container_width=True)
 
     st.subheader("Score distributions")
     col1, col2 = st.columns(2)
     with col1:
         fig, ax = plt.subplots()
         ax.hist(filtered_df["quality_score"], bins=20, edgecolor="black")
-        ax.set_xlabel("Quality score")
+        ax.set_xlabel("Quality score (includes longevity/persistence)")
         ax.set_ylabel("Games")
         st.pyplot(fig)
         plt.close(fig)
     with col2:
         fig, ax = plt.subplots()
         ax.hist(filtered_df["visibility_score"], bins=20, edgecolor="black")
-        ax.set_xlabel("Visibility score (higher = more hidden)")
+        ax.set_xlabel("Visibility score (higher = more hidden, owners de-emphasized)")
         ax.set_ylabel("Games")
         st.pyplot(fig)
         plt.close(fig)
@@ -952,14 +672,14 @@ with tab_gems:
     if "name" in filtered_df.columns:
         for _, row in filtered_df.iterrows():
             ax.annotate(
-                str(row["name"])[:20],
+                _ascii_label(row["name"], 20),
                 (row["quality_score"], row["visibility_score"]),
                 fontsize=7,
                 alpha=0.7,
             )
-    ax.set_xlabel("Quality")
+    ax.set_xlabel("Quality (longevity-aware)")
     ax.set_ylabel("Hidden-ness (inverse visibility)")
-    ax.set_title("Quality vs. Visibility — top-right = hidden gem")
+    ax.set_title("Quality vs. Visibility — top-right = underrated hidden gem")
     st.pyplot(fig)
     plt.close(fig)
 
