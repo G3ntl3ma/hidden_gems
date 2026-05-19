@@ -30,8 +30,11 @@ htmlcov/
 *.db
 *.db-journal
 
-# --- Data files (never track CSVs) ---
+# --- Data files ---
 *.csv
+data/local/
+!data/reference/**/*.csv
+!data/reference/**/*.json
 
 # --- Logs ---
 *.log
@@ -39,6 +42,8 @@ htmlcov/
 # --- Model / analysis artifacts ---
 models/artifacts/*
 !models/artifacts/.gitkeep
+artifacts/
+.cache/
 mlruns/
 **/*.pkl
 **/*.joblib
@@ -48,5 +53,5 @@ mlruns/
 **/*.pt
 **/*.pth
 
-# --- Prisma (generated code) ---
-prisma/generated/
+# --- Prisma ---
+# Generated client is intentionally tracked in this repository.

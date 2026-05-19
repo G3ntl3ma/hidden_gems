@@ -6,6 +6,7 @@ from typing import Any
 
 import requests
 
+from api.clients.json_http import JsonHttpClient
 from .config import get_api_config
 
 
@@ -14,9 +15,7 @@ class HttpClient:
     timeout_s: float = get_api_config().http_timeout_s
 
     def get_json(self, url: str, *, params: dict[str, Any] | None = None) -> Any:
-        resp = requests.get(url, params=params, timeout=self.timeout_s)
-        resp.raise_for_status()
-        return resp.json()
+        return JsonHttpClient(timeout_s=self.timeout_s).get_json(url, params=params)
 
 
 class SteamSpyClient:

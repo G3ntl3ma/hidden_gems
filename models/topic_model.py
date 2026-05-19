@@ -6,7 +6,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
-from sklearn.decomposition import LatentDirichletAllocation, NMF
+from sklearn.decomposition import LatentDirichletAllocation, NMF, TruncatedSVD
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
 
 # Extra tokens beyond sklearn's English list (domain boilerplate in Steam reviews).
@@ -40,23 +40,34 @@ def fit_topic_model(
     method: str = "lda",
     random_state: int = 42,
 ) -> tuple[Any, np.ndarray]:
-    """Fit LDA or NMF and return (model, topic_distributions)."""
+    """Fit LDA/NMF/LSA and return (model, topic_distributions)."""
     if method == "lda":
         model = LatentDirichletAllocation(
             n_components=n_topics,
             random_state=random_state,
             max_iter=20,
         )
+        topic_distributions = model.fit_transform(tfidf_matrix)
     elif method == "nmf":
         model = NMF(
             n_components=n_topics,
             random_state=random_state,
             max_iter=200,
         )
+        topic_distributions = model.fit_transform(tfidf_matrix)
+    elif method == "lsa":
+        model = TruncatedSVD(
+            n_components=n_topics,
+            random_state=random_state,
+        )
+        transformed = model.fit_transform(tfidf_matrix)
+        # LSA components can be signed; map to non-negative topic-like strengths.
+        transformed = np.abs(transformed)
+        denom = transformed.sum(axis=1, keepdims=True)
+        denom[denom == 0.0] = 1.0
+        topic_distributions = transformed / denom
     else:
-        raise ValueError(f"Unknown method '{method}'. Use 'lda' or 'nmf'.")
-
-    topic_distributions = model.fit_transform(tfidf_matrix)
+        raise ValueError(f"Unknown method '{method}'. Use 'lda', 'nmf', or 'lsa'.")
     return model, topic_distributions
 
 
@@ -67,6 +78,8 @@ def get_top_words(
 ) -> dict[int, list[str]]:
     """Extract the top-N words for each topic."""
     names = vectorizer.get_feature_names_out()
+    if not hasattr(model, "components_"):
+        raise ValueError("Model does not expose components_ for top-word extraction.")
     return {
         i: [names[j] for j in comp.argsort()[-n_words:][::-1]]
         for i, comp in enumerate(model.components_)

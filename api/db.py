@@ -23,7 +23,9 @@ def _load_generated_prisma() -> type["Prisma"]:
     prisma_dir = repo_root / "prisma"
     # The generated client lives in `prisma/generated/` and is importable
     # as a top-level package named `generated` when `prisma/` is on sys.path.
-    sys.path.insert(0, str(prisma_dir))
+    prisma_dir_str = str(prisma_dir)
+    if prisma_dir_str not in sys.path:
+        sys.path.insert(0, prisma_dir_str)
 
     from generated import Prisma  # type: ignore
 

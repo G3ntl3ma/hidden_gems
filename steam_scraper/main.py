@@ -11,13 +11,13 @@ def main() -> None:
         "--appid-csv",
         dest="appid_csv",
         default=None,
-        help="Path to steam_appids.csv (default: steam_appids.csv in project root)",
+        help="Path to steam_appids.csv (default: data/local/steam_appids.csv)",
     )
     parser.add_argument(
         "--output-csv",
         dest="output_csv",
         default=None,
-        help="Path to output CSV file (default: steam_games_full.csv in project root)",
+        help="Path to output CSV file (default: data/local/steam_games_full.csv)",
     )
     parser.add_argument(
         "--limit",

@@ -2,13 +2,12 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-import sys
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
+from scripts._runtime import ANALYSIS_CACHE, bootstrap_project_root, local_data_file
 
-from models.analysis_artifacts import default_cache_dir, load_or_precompute
+bootstrap_project_root()
+
+from models.analysis_artifacts import load_or_precompute
 
 
 def parse_args() -> argparse.Namespace:
@@ -17,18 +16,18 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--games-in",
-        default="steam_games_clean.csv",
-        help="Path to cleaned games CSV input (default: steam_games_clean.csv).",
+        default=local_data_file("steam_games_clean.csv"),
+        help="Path to cleaned games CSV input (default: data/local/steam_games_clean.csv).",
     )
     parser.add_argument(
         "--reviews-in",
-        default="steam_reviews_clean.csv",
-        help="Path to cleaned reviews CSV input (default: steam_reviews_clean.csv).",
+        default=local_data_file("steam_reviews_clean.csv"),
+        help="Path to cleaned reviews CSV input (default: data/local/steam_reviews_clean.csv).",
     )
     parser.add_argument(
         "--cache-dir",
-        default=str(default_cache_dir()),
-        help="Directory to store analysis artifacts (default: .cache/analysis).",
+        default=str(ANALYSIS_CACHE),
+        help="Directory to store analysis artifacts (default: artifacts/analysis).",
     )
     parser.add_argument(
         "--force",

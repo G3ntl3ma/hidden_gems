@@ -12,16 +12,39 @@ import numpy as np
 import pandas as pd
 
 from models.clustering import build_feature_matrix
-from models.hidden_gems import compute_hidden_gem_score, detect_anomalies
-from models.sentiment import add_sentiment_to_reviews, aggregate_sentiment_per_game
+from models.hidden_gems import (
+    compute_hidden_gem_score,
+    default_weight_profile,
+    detect_anomalies,
+    load_weight_profile,
+)
+from models.sentiment import (
+    DEFAULT_SENTIMENT_BACKEND,
+    DEFAULT_SENTIMENT_MODEL,
+    add_sentiment_to_reviews,
+    aggregate_sentiment_per_game,
+)
 from models.topic_model import TOPIC_EXTRA_STOP_WORDS, build_review_topics_pipeline
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+ARTIFACTS_DIR = REPO_ROOT / "artifacts"
+ANALYSIS_CACHE_DIR = ARTIFACTS_DIR / "analysis"
+HIDDEN_GEM_WEIGHT_PATH = ARTIFACTS_DIR / "models" / "hidden_gem_weights.json"
 
 
 DEFAULT_TOPIC_COUNT = 8
-DEFAULT_TOPIC_METHOD = "lda"
+DEFAULT_TOPIC_METHOD = os.getenv("TOPIC_METHOD", "lda")
 DEFAULT_TOPIC_MAX_FEATURES = 5000
 DEFAULT_ANOMALY_CONTAMINATION = 0.1
 DEFAULT_HIDDEN_GEM_SCORING_VERSION = "longevity_v3"
+DEFAULT_SENTIMENT_BACKEND_NAME = DEFAULT_SENTIMENT_BACKEND
+DEFAULT_SENTIMENT_MODEL_NAME = DEFAULT_SENTIMENT_MODEL
+DEFAULT_ANOMALY_METHOD = os.getenv("ANOMALY_METHOD", "isolation_forest").strip().lower()
+DEFAULT_HIDDEN_GEM_WEIGHT_MODE = os.getenv("HIDDEN_GEM_WEIGHT_MODE", "hand_tuned").strip().lower()
+DEFAULT_HIDDEN_GEM_WEIGHT_PATH = os.getenv(
+    "HIDDEN_GEM_WEIGHT_PATH",
+    str(HIDDEN_GEM_WEIGHT_PATH),
+).strip()
 
 
 ARTIFACT_FILENAMES = {
@@ -36,7 +59,7 @@ ARTIFACT_FILENAMES = {
 
 
 def default_cache_dir() -> Path:
-    return Path(os.getenv("ANALYSIS_CACHE_DIR", ".cache/analysis"))
+    return Path(os.getenv("ANALYSIS_CACHE_DIR", str(ANALYSIS_CACHE_DIR)))
 
 
 def _source_signature(path: Path) -> dict[str, Any]:
@@ -86,8 +109,13 @@ def _build_manifest(games_csv: Path, reviews_csv: Path) -> dict[str, Any]:
             "topic_method": DEFAULT_TOPIC_METHOD,
             "topic_max_features": DEFAULT_TOPIC_MAX_FEATURES,
             "topic_extra_stop_words": sorted(TOPIC_EXTRA_STOP_WORDS),
+            "sentiment_backend": DEFAULT_SENTIMENT_BACKEND_NAME,
+            "sentiment_model": DEFAULT_SENTIMENT_MODEL_NAME,
+            "anomaly_method": DEFAULT_ANOMALY_METHOD,
             "anomaly_contamination": DEFAULT_ANOMALY_CONTAMINATION,
             "hidden_gem_scoring_version": DEFAULT_HIDDEN_GEM_SCORING_VERSION,
+            "hidden_gem_weight_mode": DEFAULT_HIDDEN_GEM_WEIGHT_MODE,
+            "hidden_gem_weight_path": DEFAULT_HIDDEN_GEM_WEIGHT_PATH,
         },
         "artifact_files": ARTIFACT_FILENAMES,
     }
@@ -103,15 +131,43 @@ def _manifest_is_fresh(cache_dir: Path, games_csv: Path, reviews_csv: Path) -> b
         return False
 
     expected = _build_manifest(games_csv, reviews_csv)
-    return (
-        manifest.get("inputs") == expected["inputs"]
-        and manifest.get("params") == expected["params"]
-    )
+    inputs = manifest.get("inputs", {})
+    expected_inputs = expected["inputs"]
+
+    def _sig_compatible(current: dict[str, Any], old: dict[str, Any]) -> bool:
+        # Path rewrites are allowed when source files were relocated but unchanged.
+        return (
+            old.get("mtime_ns") == current.get("mtime_ns")
+            and old.get("size") == current.get("size")
+        )
+
+    if not _sig_compatible(expected_inputs["games_csv"], inputs.get("games_csv", {})):
+        return False
+    if not _sig_compatible(expected_inputs["reviews_csv"], inputs.get("reviews_csv", {})):
+        return False
+
+    params = dict(manifest.get("params", {}))
+    expected_params = dict(expected["params"])
+
+    # Legacy manifests stored the old default path. Ignore it unless learned mode uses it.
+    if expected_params.get("hidden_gem_weight_mode") != "learned":
+        params.pop("hidden_gem_weight_path", None)
+        expected_params.pop("hidden_gem_weight_path", None)
+
+    return params == expected_params
 
 
 def _compute_artifacts(games_df: pd.DataFrame, reviews_df: pd.DataFrame) -> dict[str, Any]:
-    reviews_sent = add_sentiment_to_reviews(reviews_df)
-    sent_per_game = aggregate_sentiment_per_game(reviews_sent)
+    reviews_sent = add_sentiment_to_reviews(
+        reviews_df,
+        backend=DEFAULT_SENTIMENT_BACKEND_NAME,
+        model_name=DEFAULT_SENTIMENT_MODEL_NAME,
+    )
+    sent_per_game = aggregate_sentiment_per_game(
+        reviews_sent,
+        backend=DEFAULT_SENTIMENT_BACKEND_NAME,
+        model_name=DEFAULT_SENTIMENT_MODEL_NAME,
+    )
 
     english_reviews = reviews_df[
         reviews_df["language"].fillna("").astype(str).str.lower() == "english"
@@ -136,11 +192,19 @@ def _compute_artifacts(games_df: pd.DataFrame, reviews_df: pd.DataFrame) -> dict
     gems_input = games_df.copy()
     if sent_per_game is not None:
         gems_input = gems_input.merge(sent_per_game, left_on="id", right_on="gameId", how="left")
-    gem_scores = compute_hidden_gem_score(gems_input)
+    if DEFAULT_HIDDEN_GEM_WEIGHT_MODE == "learned":
+        profile = load_weight_profile(DEFAULT_HIDDEN_GEM_WEIGHT_PATH)
+    else:
+        profile = default_weight_profile()
+    gem_scores = compute_hidden_gem_score(gems_input, profile=profile)
 
     anomaly_labels = np.array([], dtype=int)
     if len(games_df) >= 5:
-        anomaly_labels = detect_anomalies(X, contamination=DEFAULT_ANOMALY_CONTAMINATION)
+        anomaly_labels = detect_anomalies(
+            X,
+            contamination=DEFAULT_ANOMALY_CONTAMINATION,
+            method=DEFAULT_ANOMALY_METHOD,
+        )
 
     return {
         "reviews_sentiment": reviews_sent,
@@ -153,6 +217,8 @@ def _compute_artifacts(games_df: pd.DataFrame, reviews_df: pd.DataFrame) -> dict
         },
         "gem_scores": gem_scores,
         "anomaly_labels": anomaly_labels,
+        "anomaly_method": DEFAULT_ANOMALY_METHOD,
+        "hidden_gem_weight_profile": profile.profile_name,
     }
 
 

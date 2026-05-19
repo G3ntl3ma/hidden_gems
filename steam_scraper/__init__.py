@@ -1,7 +1,7 @@
 """
 Steam data ingestion pipeline.
 
-This package reads Steam app IDs from `steam_appids.csv`, fetches data from:
+This package reads Steam app IDs from `data/local/steam_appids.csv`, fetches data from:
 - Steam Store appdetails API
 - SteamSpy appdetails API
 - Steam Store reviews summary API

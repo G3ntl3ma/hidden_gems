@@ -2,14 +2,12 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-import sys
 
 import pandas as pd
 
-# Make project root importable when executing this script directly.
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
+from scripts._runtime import bootstrap_project_root, local_data_file
+
+bootstrap_project_root()
 
 from models.data_cleaning import clean_datasets, report_to_json
 
@@ -20,28 +18,28 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--games-in",
-        default="steam_games_full.csv",
-        help="Path to raw games CSV (default: steam_games_full.csv).",
+        default=local_data_file("steam_games_full.csv"),
+        help="Path to raw games CSV (default: data/local/steam_games_full.csv).",
     )
     parser.add_argument(
         "--reviews-in",
-        default="steam_reviews_full.csv",
-        help="Path to raw reviews CSV (default: steam_reviews_full.csv).",
+        default=local_data_file("steam_reviews_full.csv"),
+        help="Path to raw reviews CSV (default: data/local/steam_reviews_full.csv).",
     )
     parser.add_argument(
         "--games-out",
-        default="steam_games_clean.csv",
-        help="Path to cleaned games CSV output (default: steam_games_clean.csv).",
+        default=local_data_file("steam_games_clean.csv"),
+        help="Path to cleaned games CSV output (default: data/local/steam_games_clean.csv).",
     )
     parser.add_argument(
         "--reviews-out",
-        default="steam_reviews_clean.csv",
-        help="Path to cleaned reviews CSV output (default: steam_reviews_clean.csv).",
+        default=local_data_file("steam_reviews_clean.csv"),
+        help="Path to cleaned reviews CSV output (default: data/local/steam_reviews_clean.csv).",
     )
     parser.add_argument(
         "--report-out",
-        default="data_quality_report.json",
-        help="Path to JSON quality report output (default: data_quality_report.json).",
+        default=local_data_file("data_quality_report.json"),
+        help="Path to JSON quality report output (default: data/local/data_quality_report.json).",
     )
     return parser.parse_args()
 

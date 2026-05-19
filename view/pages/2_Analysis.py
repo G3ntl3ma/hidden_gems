@@ -3,12 +3,16 @@ and hidden-gem scoring."""
 
 from __future__ import annotations
 
-import sys
+import importlib.util
 from pathlib import Path
 
-_PROJECT_ROOT = str(Path(__file__).resolve().parents[2])
-if _PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, _PROJECT_ROOT)
+_BOOTSTRAP_PATH = Path(__file__).resolve().parents[1] / "_bootstrap.py"
+_BOOTSTRAP_SPEC = importlib.util.spec_from_file_location("view_bootstrap", _BOOTSTRAP_PATH)
+if _BOOTSTRAP_SPEC is None or _BOOTSTRAP_SPEC.loader is None:
+    raise ImportError(f"Could not load bootstrap helper from {_BOOTSTRAP_PATH}")
+_BOOTSTRAP_MODULE = importlib.util.module_from_spec(_BOOTSTRAP_SPEC)
+_BOOTSTRAP_SPEC.loader.exec_module(_BOOTSTRAP_MODULE)
+PROJECT_ROOT = _BOOTSTRAP_MODULE.ensure_project_root(Path(__file__))
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -25,6 +29,8 @@ from models.eda import (
     review_score_distribution,
 )
 from models.sentiment import (
+    DEFAULT_SENTIMENT_BACKEND,
+    DEFAULT_SENTIMENT_MODEL,
     add_sentiment_to_reviews,
     aggregate_sentiment_per_game,
 )
@@ -39,6 +45,8 @@ from models.clustering import (
 )
 from models.hidden_gems import compute_hidden_gem_score, detect_anomalies
 from models.analysis_artifacts import (
+    DEFAULT_ANOMALY_METHOD,
+    DEFAULT_SENTIMENT_BACKEND_NAME,
     DEFAULT_TOPIC_COUNT,
     DEFAULT_TOPIC_METHOD,
     load_or_precompute,
@@ -56,13 +64,12 @@ def _ascii_label(value: object, max_len: int = 20) -> str:
     return safe[:max_len]
 
 
-st.set_page_config(page_title="Game Analysis", layout="wide")
 st.title("Game Analysis Pipeline")
 
 # ── data loading ──────────────────────────────────────────────────────────
 
-GAMES_CSV = Path("steam_games_clean.csv")
-REVIEWS_CSV = Path("steam_reviews_clean.csv")
+GAMES_CSV = PROJECT_ROOT / "data" / "local" / "steam_games_clean.csv"
+REVIEWS_CSV = PROJECT_ROOT / "data" / "local" / "steam_reviews_clean.csv"
 
 
 @st.cache_data(show_spinner="Loading games …")
@@ -92,9 +99,9 @@ def _load_analysis_artifacts(
 
 if not GAMES_CSV.exists() or not REVIEWS_CSV.exists():
     st.warning(
-        "Cleaned CSV data files not found. Run `python scripts/clean_collected_data.py` "
-        "and ensure `steam_games_clean.csv` and `steam_reviews_clean.csv` exist "
-        "in the project root."
+        "Cleaned CSV data files not found. Run `python -m scripts.clean_collected_data` "
+        "and ensure `data/local/steam_games_clean.csv` and "
+        "`data/local/steam_reviews_clean.csv` exist."
     )
     st.stop()
 
@@ -117,6 +124,10 @@ st.sidebar.metric("Games", len(games_df))
 st.sidebar.metric("Reviews", len(reviews_df))
 if artifacts_error:
     st.sidebar.warning("Analysis artifacts unavailable; using live compute.")
+    st.sidebar.caption(
+        "Tip: run `python -m scripts.precompute_analysis --force` "
+        "to refresh artifacts."
+    )
 else:
     source = "precomputed cache" if artifacts_loaded_from_cache else "freshly recomputed"
     st.sidebar.caption(f"Analysis artifacts: {source}")
@@ -126,13 +137,13 @@ else:
 # ── shared cached helpers (used across multiple tabs) ─────────────────────
 
 @st.cache_data(show_spinner="Running sentiment analysis …")
-def _sentiment_reviews(df: pd.DataFrame) -> pd.DataFrame:
-    return add_sentiment_to_reviews(df)
+def _sentiment_reviews(df: pd.DataFrame, backend: str, model_name: str) -> pd.DataFrame:
+    return add_sentiment_to_reviews(df, backend=backend, model_name=model_name)
 
 
 @st.cache_data(show_spinner="Aggregating sentiment per game …")
-def _sentiment_per_game(df: pd.DataFrame) -> pd.DataFrame:
-    return aggregate_sentiment_per_game(df)
+def _sentiment_per_game(df: pd.DataFrame, backend: str, model_name: str) -> pd.DataFrame:
+    return aggregate_sentiment_per_game(df, backend=backend, model_name=model_name)
 
 
 @st.cache_data(show_spinner="Fitting topic model …")
@@ -241,14 +252,30 @@ with tab_eda:
 # TAB 2 – Sentiment Analysis
 # ═══════════════════════════════════════════════════════════════════════════
 with tab_sent:
-    st.header("Sentiment Analysis (VADER)")
+    st.header("Sentiment Analysis")
+    sent_backend = st.selectbox(
+        "Sentiment backend",
+        ["vader", "transformer"],
+        index=0 if DEFAULT_SENTIMENT_BACKEND == "vader" else 1,
+        key="sent_backend",
+    )
+    sent_model = st.text_input(
+        "Transformer model (used only when backend=transformer)",
+        value=DEFAULT_SENTIMENT_MODEL,
+        key="sent_model",
+    )
 
-    if artifacts is not None:
+    use_precomputed_sentiment = (
+        artifacts is not None
+        and sent_backend == DEFAULT_SENTIMENT_BACKEND_NAME
+    )
+    if use_precomputed_sentiment:
         reviews_sent = artifacts["reviews_sentiment"]
         game_sentiment = artifacts["sentiment_per_game"]
+        st.caption("Using precomputed sentiment output.")
     else:
-        reviews_sent = _sentiment_reviews(reviews_df)
-        game_sentiment = _sentiment_per_game(reviews_sent)
+        reviews_sent = _sentiment_reviews(reviews_df, sent_backend, sent_model)
+        game_sentiment = _sentiment_per_game(reviews_sent, sent_backend, sent_model)
 
     col1, col2 = st.columns(2)
     with col1:
@@ -301,7 +328,7 @@ with tab_topics:
     st.header("Topic Modeling")
 
     n_topics = st.slider("Number of topics", 3, 20, 8, key="n_topics")
-    topic_method = st.selectbox("Method", ["lda", "nmf"], key="topic_method")
+    topic_method = st.selectbox("Method", ["lda", "nmf", "lsa"], key="topic_method")
 
     topic_result = None
     use_precomputed_topics = (
@@ -345,7 +372,11 @@ with tab_clusters:
         feature_names = features["feature_names"]
         st.caption("Using precomputed feature matrix.")
     else:
-        sent_agg = _sentiment_per_game(reviews_df)
+        sent_agg = _sentiment_per_game(
+            reviews_df,
+            DEFAULT_SENTIMENT_BACKEND,
+            DEFAULT_SENTIMENT_MODEL,
+        )
         english_for_topics = _get_english_reviews(reviews_df)
         topic_agg = None
         if len(english_for_topics) >= 10:
@@ -491,7 +522,11 @@ with tab_gems:
     if artifacts is not None:
         gem_scores = artifacts["gem_scores"].copy()
     else:
-        sent_for_gems = _sentiment_per_game(reviews_df)
+        sent_for_gems = _sentiment_per_game(
+            reviews_df,
+            DEFAULT_SENTIMENT_BACKEND,
+            DEFAULT_SENTIMENT_MODEL,
+        )
         gem_scores = _gem_scores(games_df, sent_for_gems)
 
     meta_cols = [
@@ -684,14 +719,26 @@ with tab_gems:
     plt.close(fig)
 
     # Anomaly detection
-    st.subheader("Anomaly detection (Isolation Forest)")
+    st.subheader(f"Anomaly detection ({DEFAULT_ANOMALY_METHOD})")
     if len(games_df) >= 5:
         if artifacts is not None and len(artifacts["anomaly_labels"]) == len(games_df):
             anomaly_labels = artifacts["anomaly_labels"]
         else:
-            sent_for_anom = _sentiment_per_game(reviews_df)
-            _, X_anom, _ = _build_features(games_df, sent_for_anom, None)
-            anomaly_labels = detect_anomalies(X_anom)
+            sent_for_anom = _sentiment_per_game(
+                reviews_df,
+                DEFAULT_SENTIMENT_BACKEND,
+                DEFAULT_SENTIMENT_MODEL,
+            )
+            english_for_topics = _get_english_reviews(reviews_df)
+            topic_for_anom = None
+            if len(english_for_topics) >= 10:
+                topic_for_anom = _run_topics(
+                    english_for_topics,
+                    DEFAULT_TOPIC_COUNT,
+                    DEFAULT_TOPIC_METHOD,
+                )["game_topics"]
+            _, X_anom, _ = _build_features(games_df, sent_for_anom, topic_for_anom)
+            anomaly_labels = detect_anomalies(X_anom, method=DEFAULT_ANOMALY_METHOD)
         anomaly_df = (
             games_df[["id", "name"]].copy()
             if "name" in games_df.columns

@@ -2,10 +2,16 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+import json
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
+from sklearn.neighbors import LocalOutlierFactor
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.svm import OneClassSVM
 
 
 QUALITY_CORE_WEIGHTS = {
@@ -38,6 +44,47 @@ VISIBILITY_WEIGHTS = {
 
 QUALITY_LONGEVITY_MIX = {"quality_core": 0.65, "longevity": 0.35}
 HIDDEN_GEM_MIX = {"quality": 0.72, "visibility": 0.28}
+
+
+@dataclass(frozen=True)
+class HiddenGemWeightProfile:
+    quality_core_weights: dict[str, float]
+    longevity_weights: dict[str, float]
+    visibility_weights: dict[str, float]
+    quality_longevity_mix: dict[str, float]
+    hidden_gem_mix: dict[str, float]
+    profile_name: str = "hand_tuned"
+
+
+def _normalize_weights(weights: dict[str, float]) -> dict[str, float]:
+    cleaned = {k: float(max(v, 0.0)) for k, v in weights.items()}
+    total = sum(cleaned.values())
+    if total <= 0:
+        return {k: 1.0 / max(len(cleaned), 1) for k in cleaned}
+    return {k: float(v / total) for k, v in cleaned.items()}
+
+
+def default_weight_profile() -> HiddenGemWeightProfile:
+    return HiddenGemWeightProfile(
+        quality_core_weights=_normalize_weights(QUALITY_CORE_WEIGHTS),
+        longevity_weights=_normalize_weights(LONGEVITY_WEIGHTS),
+        visibility_weights=_normalize_weights(VISIBILITY_WEIGHTS),
+        quality_longevity_mix=_normalize_weights(QUALITY_LONGEVITY_MIX),
+        hidden_gem_mix=_normalize_weights(HIDDEN_GEM_MIX),
+        profile_name="hand_tuned",
+    )
+
+
+def load_weight_profile(path: str | Path) -> HiddenGemWeightProfile:
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    return HiddenGemWeightProfile(
+        quality_core_weights=_normalize_weights(payload["quality_core_weights"]),
+        longevity_weights=_normalize_weights(payload["longevity_weights"]),
+        visibility_weights=_normalize_weights(payload["visibility_weights"]),
+        quality_longevity_mix=_normalize_weights(payload["quality_longevity_mix"]),
+        hidden_gem_mix=_normalize_weights(payload["hidden_gem_mix"]),
+        profile_name=str(payload.get("profile_name", "learned_profile")),
+    )
 
 
 def _safe_scale(values: np.ndarray) -> np.ndarray:
@@ -114,7 +161,11 @@ def _weighted_blend(signals: dict[str, np.ndarray], weights: dict[str, float]) -
     return total / denom
 
 
-def _compute_quality_core(games_df: pd.DataFrame) -> tuple[np.ndarray, dict[str, np.ndarray]]:
+def _compute_quality_core(
+    games_df: pd.DataFrame,
+    *,
+    profile: HiddenGemWeightProfile,
+) -> tuple[np.ndarray, dict[str, np.ndarray]]:
     reviews = _get_numeric_column(games_df, "reviewTotalReviews", default=0.0)
     positives = _get_numeric_column(games_df, "reviewTotalPositive", default=0.0)
     positive_ratio_wilson = _wilson_lower_bound(positives, reviews)
@@ -148,12 +199,19 @@ def _compute_quality_core(games_df: pd.DataFrame) -> tuple[np.ndarray, dict[str,
         "lifetime_engagement": lifetime_engagement,
         "review_volume": review_volume,
     }
-    quality_core = _weighted_blend(signals, QUALITY_CORE_WEIGHTS)
+    quality_core = _weighted_blend(signals, profile.quality_core_weights)
     return quality_core, signals
 
 
-def _compute_longevity(games_df: pd.DataFrame) -> tuple[np.ndarray, dict[str, np.ndarray]]:
-    release = pd.to_datetime(games_df.get("release_date"), errors="coerce")
+def _compute_longevity(
+    games_df: pd.DataFrame,
+    *,
+    profile: HiddenGemWeightProfile,
+) -> tuple[np.ndarray, dict[str, np.ndarray]]:
+    if "release_date" in games_df.columns:
+        release = pd.to_datetime(games_df["release_date"], errors="coerce")
+    else:
+        release = pd.Series(pd.NaT, index=games_df.index)
     now = pd.Timestamp.now(tz="UTC").tz_localize(None)
     age_days = ((now - release).dt.total_seconds() / 86_400.0).fillna(0.0).to_numpy(dtype=float)
     age_days = np.clip(age_days, 0.0, None)
@@ -180,22 +238,31 @@ def _compute_longevity(games_df: pd.DataFrame) -> tuple[np.ndarray, dict[str, np
         "age_adjusted_review_activity": age_adjusted_review_activity,
         "engagement_persistence": engagement_persistence,
     }
-    longevity = _weighted_blend(signals, LONGEVITY_WEIGHTS)
+    longevity = _weighted_blend(signals, profile.longevity_weights)
     return longevity, signals
 
 
-def compute_quality_score(games_df: pd.DataFrame) -> pd.Series:
+def compute_quality_score(
+    games_df: pd.DataFrame,
+    *,
+    profile: HiddenGemWeightProfile | None = None,
+) -> pd.Series:
     """Composite quality signal (0-1) with longevity-aware retention factors."""
-    quality_core, _ = _compute_quality_core(games_df)
-    longevity, _ = _compute_longevity(games_df)
+    resolved = profile or default_weight_profile()
+    quality_core, _ = _compute_quality_core(games_df, profile=resolved)
+    longevity, _ = _compute_longevity(games_df, profile=resolved)
     score = (
-        quality_core * QUALITY_LONGEVITY_MIX["quality_core"]
-        + longevity * QUALITY_LONGEVITY_MIX["longevity"]
+        quality_core * resolved.quality_longevity_mix["quality_core"]
+        + longevity * resolved.quality_longevity_mix["longevity"]
     )
     return pd.Series(score, index=games_df.index)
 
 
-def _compute_visibility(games_df: pd.DataFrame) -> tuple[np.ndarray, dict[str, np.ndarray]]:
+def _compute_visibility(
+    games_df: pd.DataFrame,
+    *,
+    profile: HiddenGemWeightProfile,
+) -> tuple[np.ndarray, dict[str, np.ndarray]]:
     """Build inverse-visibility signals and score."""
     reviews = _get_numeric_column(games_df, "reviewTotalReviews", default=0.0)
     low_review_volume = 1.0 - _safe_scale(_winsorized(np.log1p(reviews)))
@@ -222,29 +289,39 @@ def _compute_visibility(games_df: pd.DataFrame) -> tuple[np.ndarray, dict[str, n
         "owner_uncertainty": owner_uncertainty,
         "no_metacritic_coverage": no_metacritic_coverage,
     }
-    return _weighted_blend(signals, VISIBILITY_WEIGHTS), signals
+    return _weighted_blend(signals, profile.visibility_weights), signals
 
 
-def compute_visibility_score(games_df: pd.DataFrame) -> pd.Series:
+def compute_visibility_score(
+    games_df: pd.DataFrame,
+    *,
+    profile: HiddenGemWeightProfile | None = None,
+) -> pd.Series:
     """Inverse-visibility (0 = very visible, 1 = very hidden)."""
-    score, _ = _compute_visibility(games_df)
+    resolved = profile or default_weight_profile()
+    score, _ = _compute_visibility(games_df, profile=resolved)
     return pd.Series(score, index=games_df.index)
 
 
-def compute_hidden_gem_score(games_df: pd.DataFrame) -> pd.DataFrame:
+def compute_hidden_gem_score(
+    games_df: pd.DataFrame,
+    *,
+    profile: HiddenGemWeightProfile | None = None,
+) -> pd.DataFrame:
     """Return a DataFrame with quality, visibility, and overall hidden-gem
     scores sorted by the combined score descending."""
-    quality_core, quality_signals = _compute_quality_core(games_df)
-    longevity, longevity_signals = _compute_longevity(games_df)
+    resolved = profile or default_weight_profile()
+    quality_core, quality_signals = _compute_quality_core(games_df, profile=resolved)
+    longevity, longevity_signals = _compute_longevity(games_df, profile=resolved)
     quality = (
-        quality_core * QUALITY_LONGEVITY_MIX["quality_core"]
-        + longevity * QUALITY_LONGEVITY_MIX["longevity"]
+        quality_core * resolved.quality_longevity_mix["quality_core"]
+        + longevity * resolved.quality_longevity_mix["longevity"]
     )
 
-    visibility, visibility_signals = _compute_visibility(games_df)
+    visibility, visibility_signals = _compute_visibility(games_df, profile=resolved)
     combined = (
-        quality * HIDDEN_GEM_MIX["quality"]
-        + visibility * HIDDEN_GEM_MIX["visibility"]
+        quality * resolved.hidden_gem_mix["quality"]
+        + visibility * resolved.hidden_gem_mix["visibility"]
     )
 
     cols = ["id"]
@@ -257,6 +334,7 @@ def compute_hidden_gem_score(games_df: pd.DataFrame) -> pd.DataFrame:
     result["quality_core_component"] = quality_core
     result["longevity_component"] = longevity
     result["visibility_component"] = visibility
+    result["weight_profile"] = resolved.profile_name
 
     for key, values in quality_signals.items():
         result[f"feat_quality_{key}"] = values
@@ -271,10 +349,31 @@ def compute_hidden_gem_score(games_df: pd.DataFrame) -> pd.DataFrame:
 def detect_anomalies(
     X: np.ndarray,
     contamination: float = 0.1,
+    *,
+    method: str = "isolation_forest",
+    random_state: int = 42,
+    n_neighbors: int = 20,
+    nu: float = 0.1,
 ) -> np.ndarray:
-    """Isolation Forest anomaly detection.
+    """Anomaly detection.
 
     Returns an array of labels: 1 = inlier, -1 = outlier (potential gem).
     """
-    iso = IsolationForest(contamination=contamination, random_state=42)
-    return iso.fit_predict(X)
+    method_key = method.strip().lower()
+    if method_key == "isolation_forest":
+        iso = IsolationForest(contamination=contamination, random_state=random_state)
+        return iso.fit_predict(X)
+    if method_key == "lof":
+        lof = LocalOutlierFactor(
+            contamination=contamination,
+            n_neighbors=max(2, min(n_neighbors, len(X) - 1)),
+        )
+        return lof.fit_predict(X)
+    if method_key == "one_class_svm":
+        svm = OneClassSVM(
+            nu=max(min(nu, 0.9), 0.001),
+            kernel="rbf",
+            gamma="scale",
+        )
+        return svm.fit_predict(X)
+    raise ValueError("Unknown anomaly method. Use 'isolation_forest', 'lof', or 'one_class_svm'.")

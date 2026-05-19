@@ -4,23 +4,27 @@ from __future__ import annotations
 
 import csv
 import io
-import sys
+import importlib.util
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
 
-_PROJECT_ROOT = str(Path(__file__).resolve().parents[2])
-if _PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, _PROJECT_ROOT)
+_BOOTSTRAP_PATH = Path(__file__).resolve().parents[1] / "_bootstrap.py"
+_BOOTSTRAP_SPEC = importlib.util.spec_from_file_location("view_bootstrap", _BOOTSTRAP_PATH)
+if _BOOTSTRAP_SPEC is None or _BOOTSTRAP_SPEC.loader is None:
+    raise ImportError(f"Could not load bootstrap helper from {_BOOTSTRAP_PATH}")
+_BOOTSTRAP_MODULE = importlib.util.module_from_spec(_BOOTSTRAP_SPEC)
+_BOOTSTRAP_SPEC.loader.exec_module(_BOOTSTRAP_MODULE)
+PROJECT_ROOT = _BOOTSTRAP_MODULE.ensure_project_root(Path(__file__))
 
 from api.db import db_session
 
-st.set_page_config(page_title="Label curator", layout="wide")
 st.title("Training label curator")
 st.caption(
     "Record whether each Steam app ID is a hidden gem or not. Labels are stored in "
-    "the Prisma database (`CuratedSteamLabel`). Export CSV for backups and training scripts."
+    "the Prisma database (`CuratedSteamLabel`). Download CSV for backups and save it "
+    "as `data/local/curated_steam_labels.csv` for training scripts."
 )
 
 
@@ -114,7 +118,10 @@ else:
         data=_labels_to_csv_bytes(exp),
         file_name="curated_steam_labels.csv",
         mime="text/csv",
-        help="Columns: appid, is_gem. Use for backups (dev.db is gitignored) or merging into training data.",
+        help=(
+            "Columns: appid, is_gem. Save as data/local/curated_steam_labels.csv "
+            "for `python -m scripts.build_training_dataset`."
+        ),
     )
 
 st.subheader("Delete a label")

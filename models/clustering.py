@@ -56,6 +56,10 @@ def build_feature_matrix(
         c for c in df.columns
         if c.startswith("sentiment_") or c == "avg_review_length"
     ]
+    sentiment_cols = [
+        c for c in sentiment_cols
+        if pd.api.types.is_numeric_dtype(df[c])
+    ]
     topic_cols = [c for c in df.columns if c.startswith("topic_")]
 
     all_cols = num_cols + bool_cols + sentiment_cols + topic_cols

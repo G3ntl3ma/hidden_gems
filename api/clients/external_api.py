@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-import requests
+from .json_http import JsonHttpClient
 
 
 @dataclass(frozen=True)
@@ -13,7 +13,5 @@ class ExternalApiClient:
 
     def get_json(self, path: str, *, params: dict[str, Any] | None = None) -> Any:
         url = self.base_url.rstrip("/") + "/" + path.lstrip("/")
-        resp = requests.get(url, params=params, timeout=self.timeout_s)
-        resp.raise_for_status()
-        return resp.json()
+        return JsonHttpClient(timeout_s=self.timeout_s).get_json(url, params=params)
 

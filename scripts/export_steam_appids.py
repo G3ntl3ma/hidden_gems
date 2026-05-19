@@ -1,9 +1,13 @@
 import csv
+import argparse
 import os
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Iterable, Set
 
 import requests
+
+from scripts._runtime import DATA_LOCAL, bootstrap_project_root
 
 
 STEAM_GET_APP_LIST_URL = "https://api.steampowered.com/IStoreService/GetAppList/v1/"
@@ -30,7 +34,6 @@ class SteamStoreClient:
             **params,
         }
         try:
-            print("merged_params: ", merged_params)
             resp = requests.get(
                 STEAM_GET_APP_LIST_URL,
                 params=merged_params,
@@ -95,6 +98,7 @@ def collect_unique_appids(client: SteamStoreClient) -> list[int]:
 
 
 def write_appids_csv(appids: Iterable[int], path: str) -> None:
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["appid"])
@@ -107,14 +111,23 @@ def _get_required_env(name: str) -> str:
     if not value:
         raise SystemExit(
             f"Environment variable {name} is not set. "
-            "Set your Steam Web API key there before running this script."
+            "Set it in your shell or .env before running this script."
         )
     return value
 
 
 def main() -> None:
+    bootstrap_project_root()
+    parser = argparse.ArgumentParser(description="Export Steam app IDs to CSV.")
+    parser.add_argument(
+        "--out",
+        default=str(DATA_LOCAL / "steam_appids.csv"),
+        help="Output CSV path (default: data/local/steam_appids.csv).",
+    )
+    args = parser.parse_args()
+
     api_key = _get_required_env("STEAM_WEB_API_KEY")
-    output_path = "steam_appids.csv"
+    output_path = args.out
 
     client = SteamStoreClient(api_key=api_key)
     appids = collect_unique_appids(client)
